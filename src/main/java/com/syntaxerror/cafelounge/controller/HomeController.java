@@ -21,12 +21,42 @@ public class HomeController {
 	 * For the dashboard page
 	 */
 	@RequestMapping("/")
-	String dashboard(Model model, HttpSession session) {
-		// Tan awn nato daan kung naka login ba
-		if (session.getAttribute("user") == null) return "redirect:/signin";
-	
-		return "dashboard";
+	public String dashboard(Model model, HttpSession session) {
+	    // Check if the user is logged in
+	    if (session.getAttribute("user") == null) {
+	        return "redirect:/signin";
+	    }
+	    
+	    // Set dynamic body content
+	    model.addAttribute("bodyContent", "home");
+
+	    return "viewTemplate";
 	}
+
+	@RequestMapping("/dashboard")
+	public String dashboard(Model model) {
+	    // Set dynamic body content
+	    model.addAttribute("bodyContent", "dashboard");
+
+	    return "viewTemplate";
+	}
+	
+	@RequestMapping("/menulist")
+	public String menulist(Model model) {
+	    // Set dynamic body content
+	    model.addAttribute("bodyContent", "menulist");
+
+	    return "viewTemplate";
+	}
+	
+	@RequestMapping("/orderlist")
+	public String orderlist(Model model) {
+	    // Set dynamic body content
+	    model.addAttribute("bodyContent", "orderlist");
+
+	    return "viewTemplate";
+	}
+	
 	
 	/**
 	 * For the sign in page
