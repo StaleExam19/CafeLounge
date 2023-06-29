@@ -18,22 +18,17 @@
                 <div>
                     <img src="<c:url value="/resources/image/logo.png" />" alt="" class="h-56 cursor-pointer">
                 </div>
-                	<div class="flex pr-16 gap-2">
-	                      <div class="relative group">
-		                        <img src="resources/image/Notif-removebg-preview.png" alt="" id="notifBell" class="h-10 cursor-pointer">
-		                        <!-- Notification container -->
-		                        <div class="bg-white hidden h-64 w-80 absolute -left-72" id="notifContainer">
-		                            <div class="w-full cursor-pointer p-3 border border-transparent hover:border hover:border-black">
-		                                <p class="text-center font-bold underline text-lg">You have new order!</p>
-		                                <p>Cedar-Plank Salmon x1 - Seabreeze Cocktail x1</p>
-                            </div>
-                        </div>
-                    </div>
-	                    <img src="<c:url value="/resources/image/Untitled_design__7_-removebg-preview.png"/>" alt="" class="h-10 cursor-pointer">
-                 	</div>
+               <div class="flex pr-16 gap-2">
+	             <div class="relative group">
+                    <img src="resources/image/Notif-removebg-preview.png" alt="" id="notifBell" class="h-10 cursor-pointer">
+                    <!-- Notification container -->
+                   <%@include file="notifWindow.jsp"%>
+                  </div>
+				<img src="<c:url value="/resources/image/Untitled_design__7_-removebg-preview.png"/>" alt="" class="h-10 cursor-pointer">
+               </div>
             </div>
-            	<br>                    
-   	<div class="flex justify-between w-2 gap-32 ml-8">
+           <br>                    
+   	<div class="flex w-full gap-20">
    	
        <div class="mt-14 ml-10">
            <button class="bg-slate-100/50 hover:bg-orange-500 p-3 rounded-3xl font-semibold w-52 nav-btn" id="CafeLoungedashboard">DASHBOARD</button><br><br><br>
