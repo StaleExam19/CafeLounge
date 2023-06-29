@@ -1,7 +1,7 @@
-    <%@include file="nav.jsp"%>
+    <%@include file="fragments/nav.jsp"%>
 
    <div class="body-content">
-        <jsp:include page="${bodyContent}.jsp" />
+        <jsp:include page="pages/${bodyContent}.jsp" />
     </div>
 
-    <%@include file="footer.jsp"%>
+    <%@include file="fragments/footer.jsp"%>

@@ -22,7 +22,7 @@
                     <h1 class="text-white text-center text-3xl font-semibold">SIGN IN / CHEF</h1>
 					<c:if test="${not empty error}">
 						<div class="bg-red-500 text-white rounded p-3">
-                    		${error }
+                    		${error}
                     	</div>
 					</c:if>
                     <br>

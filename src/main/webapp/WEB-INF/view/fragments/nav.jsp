@@ -12,7 +12,7 @@
 </head>
 <body class="">
 
-   <div class="bg-[url('\/CafeLounge/resources/image/bg.png')] bg-cover bg-no-repeat justify-items-center">
+   <div class="bg-[url('resources/image/bg.png')] bg-cover bg-no-repeat justify-items-center">
         <div class="bg-neutral-950/80 min-h-screen ">
             <div class="flex justify-between items-center h-24 pt-5">
                 <div>
@@ -34,7 +34,6 @@
            <button class="bg-slate-100/50 hover:bg-orange-500 p-3 rounded-3xl font-semibold w-52 nav-btn" id="CafeLoungedashboard">DASHBOARD</button><br><br><br>
            <button class="bg-slate-100/50 hover:bg-orange-500 p-3 rounded-3xl font-semibold w-52 nav-btn" id="CafeLoungemenulist">MENU LIST</button><br><br><br>
            <button class="bg-slate-100/50 hover:bg-orange-500 p-3 rounded-3xl font-semibold w-52 nav-btn" id="CafeLoungeorderlist" >ORDER LIST</button><br><br><br>
-           <a href="logout" class="bg-slate-100/50 hover:bg-orange-500 p-3 rounded-3xl font-semibold w-52">LOGOUT</a><br><br><br>
         </div>
                
            

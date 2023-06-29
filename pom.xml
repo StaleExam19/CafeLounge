@@ -184,7 +184,7 @@
 				<configuration>
 					<hostName>localhost</hostName>
 		            <port>8080</port>
-		            <path>/action</path>
+		            <path>/</path>
 		            <update>true</update>
 				</configuration>
 			</plugin>
