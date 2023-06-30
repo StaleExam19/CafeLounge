@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.syntaxerror.cafelounge.dto.UserDto;
 import com.syntaxerror.cafelounge.model.UserForm;
 import com.syntaxerror.cafelounge.service.UserService;
 import com.syntaxerror.cafelounge.validator.SignInValidator;
@@ -26,11 +27,12 @@ public class SignInController {
 
     @RequestMapping("/signin")
     String signInPage(Model model, HttpSession session) {
-        if (session.getAttribute("user") != null) return "redirect:/";
+        if (session.getAttribute("user") != null)
+            return "redirect:/";
 
         model.addAttribute("userForm", new UserForm());
         return "signin";
-    }    
+    }
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     String signIn(RedirectAttributes redirectAttributes,
@@ -41,19 +43,25 @@ public class SignInController {
         validator.validate(userForm, bindingResult);
         FieldError fieldError = bindingResult.getFieldError();
         String error = fieldError == null ? "" : fieldError.getDefaultMessage();
-        
+
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("error", error);
             return "redirect:/signin";
         }
+        UserDto matchedUser = userService.searchUserByUsername(userForm.getUsername());
+        session.setAttribute("user", matchedUser);
 
-        session.setAttribute("user", userService.searchUserByUsername(userForm.getUsername()));
+        if (matchedUser.getDateUpdated() == null) {
+            redirectAttributes.addFlashAttribute("message", "You logged for the first time, please update your profile");
+            return "redirect:/updateProfile";
+        }
+
         return "redirect:/";
     }
 
-	@RequestMapping("/logout")
-	String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
-	}
+    @RequestMapping("/logout")
+    String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
 }

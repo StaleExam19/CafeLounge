@@ -1,7 +1,5 @@
 package com.syntaxerror.cafelounge.service;
 
-import java.util.Objects;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +12,12 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
-	public UserForm searchUserByUsername(String username) {
-		UserForm user = new UserForm();
-		UserDto matchedUser = userRepository.findUserByUsername(username);
-		
-		if (Objects.isNull(matchedUser)) return null;
-		
-		user.setUsername(matchedUser.getUsername());
-		user.setPassword(matchedUser.getPassword());		
-		
-		return user;
+	public UserDto searchUserByUsername(String username) {
+		return userRepository.findUserByUsername(username);
 	}
+
+	public void updateProfile(int id, UserForm user) {
+		userRepository.updateProfile(id, user);
+	}
+
 }

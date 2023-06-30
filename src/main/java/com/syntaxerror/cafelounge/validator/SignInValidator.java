@@ -6,6 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import com.syntaxerror.cafelounge.dto.UserDto;
 import com.syntaxerror.cafelounge.model.UserForm;
 import com.syntaxerror.cafelounge.service.UserService;
 
@@ -16,7 +17,7 @@ public class SignInValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return 	UserForm.class.isAssignableFrom(clazz);
+		return UserForm.class.isAssignableFrom(clazz);
 	}
 
 	@Override
@@ -26,9 +27,14 @@ public class SignInValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", null, "Please fill all the required fields");
 
 		UserForm user = (UserForm) target;
-		UserForm matchedUser = userService.searchUserByUsername(user.getUsername());
+		UserDto matchedUser = userService.searchUserByUsername(user.getUsername());
 
-		if (matchedUser == null) errors.rejectValue("username", null, "There's no user with that username");
+		if (matchedUser != null) {
+			if (!matchedUser.getPassword().equals(user.getPassword()))
+				errors.rejectValue("password", null, "Incorrect password");
+		} else {
+			errors.rejectValue("username", null, "There's no user with that username");
+		}
 	}
 
 }
