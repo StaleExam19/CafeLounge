@@ -1,6 +1,5 @@
 package com.syntaxerror.cafelounge.repository;
 
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
