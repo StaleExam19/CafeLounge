@@ -22,11 +22,6 @@ public class MenuService {
 		menuDto.setCategory(menuForm.getCategory());
 		menuDto.setImage(menuForm.getImage().getBytes());
 
-		System.out.println(menuDto.getName());
-		System.out.println(menuDto.getPrice());
-		System.out.println(menuDto.getCategory());
-		System.out.println(menuDto.getImage());
-
 		menuRepository.addMenu(menuDto);
 	}
 }
