@@ -20,7 +20,7 @@ public class UserRepository extends NamedParameterJdbcDaoSupport {
 	
 	@PostConstruct
 	private void init() {
-			super.setDataSource(dataSource);
+		super.setDataSource(dataSource);
 	}
 	
 	
@@ -49,7 +49,6 @@ public class UserRepository extends NamedParameterJdbcDaoSupport {
 				user.getUsername(),
 				user.getPassword(),
 				id);
-		System.out.println("Ok update");
 	}
 	
 }

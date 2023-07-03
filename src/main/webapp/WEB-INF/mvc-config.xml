@@ -40,7 +40,10 @@
 	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 	    <property name="paramName" value="lang" />
 	</bean>
-
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="5037876" /> <!-- Set the maximum file size allowed -->
+	</bean>
+	
 <!-- the mvc resources tag does the magic -->
  	<mvc:resources mapping="/resources/**" location="/resources/" />
 
@@ -49,4 +52,3 @@
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"></bean>
 
 </beans>
-

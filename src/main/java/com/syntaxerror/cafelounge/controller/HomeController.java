@@ -18,39 +18,8 @@ public class HomeController {
 	 */
 	@RequestMapping("/")
 	public String dashboard(Model model, HttpSession session) {
-	    // Check if the user is logged in
-	    if (session.getAttribute("user") == null) {
-	        return "redirect:/signin";
-	    }
-	    
-	    // Set dynamic body content
-	    model.addAttribute("bodyContent", "home");
+	    if (session.getAttribute("user") == null) return "redirect:/signin";
 
-	    return "viewTemplate";
+		return "dashboard";
 	}
-
-	@RequestMapping("/dashboard")
-	public String dashboard(Model model) {
-	    // Set dynamic body content
-	    model.addAttribute("bodyContent", "dashboard");
-
-	    return "viewTemplate";
-	}
-	
-	@RequestMapping("/menulist")
-	public String menulist(Model model) {
-	    // Set dynamic body content
-	    model.addAttribute("bodyContent", "menulist");
-
-	    return "viewTemplate";
-	}
-	
-	@RequestMapping("/orderlist")
-	public String orderlist(Model model) {
-	    // Set dynamic body content
-	    model.addAttribute("bodyContent", "orderlist");
-
-	    return "viewTemplate";
-	}
-	
 }
