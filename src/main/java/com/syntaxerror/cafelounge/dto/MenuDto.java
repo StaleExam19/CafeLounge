@@ -5,6 +5,7 @@ public class MenuDto {
     private String name;
     private double price;
     private String category;
+    private String status;
     private byte[] image;   
 
     // Setters
@@ -28,6 +29,10 @@ public class MenuDto {
         this.image = image;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     // Getters
     public int getId() {
         return id;
@@ -45,7 +50,12 @@ public class MenuDto {
         return category;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public byte[] getImage() {
         return image;
     }
+
 }

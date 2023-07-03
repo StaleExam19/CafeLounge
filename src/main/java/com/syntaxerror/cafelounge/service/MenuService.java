@@ -1,6 +1,7 @@
 package com.syntaxerror.cafelounge.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,14 @@ import com.syntaxerror.cafelounge.repository.MenuRepository;
 public class MenuService {
 	@Autowired
 	MenuRepository menuRepository;
+
+	public List<MenuDto> getAllMenu() {
+		return menuRepository.getAllMenu();
+	}
+
+	public MenuDto findById(int id) {
+		return menuRepository.findById(id);
+	}
 
 	public void addMenu(MenuForm menuForm) throws IOException {
 		MenuDto menuDto = new MenuDto();

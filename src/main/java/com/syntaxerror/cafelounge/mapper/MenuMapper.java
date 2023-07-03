@@ -17,6 +17,7 @@ public class MenuMapper implements RowMapper<MenuDto> {
         menu.setName(rs.getString("menu_name"));
         menu.setPrice(rs.getDouble("menu_price"));
         menu.setCategory(rs.getString("menu_category"));
+        menu.setStatus(rs.getString("status"));
         menu.setImage(rs.getBytes("menu_image"));
 
         return menu;

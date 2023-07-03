@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,103 +54,27 @@
                         <button class="bg-slate-100/50   p-3 rounded-3xl font-semibold w-40"><a
                             href="addmenu.html">ADD MENU</a></button>
                     </div>
-                    <div class="bg-slate-100/50 flex-1  flex p-8 h-96 gap-5 rounded-2xl font-semibold">
-                        <div class="w-48 bg-zinc-950/75 flex flex-col justify-evenly flex-1 text-white p-3 rounded-3xl text-center">
-                            <u>APPETIZERS</u>
-                            <div class="flex items-center justify-center">
-                                <img src="resources/image/appetizer1.jpg" alt="" class="w-full h-full">
-                            </div>
-                            <div>
-                                <p>
-                                    Figs with bacon & chile
-                                </p>
-                                <p>
-                                    ₱ 150.00
-                                </p>
-                                <p>
-                                    Status: Live
-                                </p>
-                                <br>
-                                <div class="flex items-center justify-center gap-8">
-                                    <button
-                                        class="font-bold text-center text-white border border-white px-2 hover:bg-orange-400 rounded-3xl p-1">Update</button>
-                                    <button
-                                        class="font-bold text-center text-white border border-white px-2 hover:bg-orange-400 rounded-3xl p-1">Delete</button>
+                    <div class="bg-slate-100/50 flex-1  grid grid-cols-4  p-8 h-96 gap-5 rounded-2xl font-semibold">
+                        <c:forEach var="menu" items="${menuList}">
+                            <div class="w-48 bg-zinc-950/75 flex flex-col justify-evenly text-white p-3 rounded-3xl text-center">
+                                <u class="uppercase">${menu.category}</u>
+                                <div class="flex items-center justify-center">
+                                    <img src="/myImage?id=${menu.id}" alt="" class="w-full h-full">
+                                </div>
+                                <div>
+                                    <p>${menu.name}</p>
+                                    <p>Php ${menu.price}</p>
+                                    <p>Status: ${menu.status}</p>
+                                    <br>
+                                    <div class="flex items-center justify-center gap-8">
+                                        <button
+                                            class="font-bold text-center text-white border border-white px-2 hover:bg-orange-400 rounded-3xl p-1">Update</button>
+                                        <button
+                                            class="font-bold text-center text-white border border-white px-2 hover:bg-orange-400 rounded-3xl p-1">Delete</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="w-48 bg-zinc-950/75 flex flex-col justify-evenly  flex-1 text-white p-3 rounded-3xl text-center">
-                            <u>APPETIZERS</u>
-                            <div class="flex items-center justify-center">
-                                <img src="resources/image/appetizer2.jpg" alt="" class="w-full h-full">
-                            </div>
-                            <div>
-                                <p>
-                                    Phyllo Cup
-                                </p>
-                                <p>
-                                    ₱ 100.00
-                                </p>
-                                <p>
-                                    Status: Sold Out
-                                </p>
-                                <br>
-                                <div class="flex items-center justify-center gap-8">
-                                    <button
-                                        class="font-bold text-center text-white border border-white px-2 hover:bg-orange-400 rounded-3xl p-1">Update</button>
-                                    <button
-                                        class="font-bold text-center text-white border border-white px-2 hover:bg-orange-400 rounded-3xl p-1">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-48 bg-zinc-950/75 flex flex-col justify-evenly  flex-1 text-white p-3 rounded-3xl text-center">
-                            <u>APPETIZERS</u>
-                            <div class="flex items-center justify-center   ">
-                                <img src="resources/image/appetizer3.jpg" alt="" class="w-full h-full">
-                            </div>
-                            <div>
-                                <p>
-                                    Al Lago wines
-                                </p>
-                                <p>
-                                    ₱ 100.00
-                                </p>
-                                <p>
-                                    Status: Live
-                                </p>
-                                <br>
-                                <div class="flex items-center justify-center gap-8">
-                                    <button
-                                        class="font-bold text-center text-white border border-white px-2 hover:bg-orange-400 rounded-3xl p-1">Update</button>
-                                    <button
-                                        class="font-bold text-center text-white border border-white px-2 hover:bg-orange-400 rounded-3xl p-1">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-48 bg-zinc-950/75 flex flex-col justify-evenly  flex-1 text-white p-3 rounded-3xl text-center">
-                            <u>APPETIZERS</u>
-                            <div class="flex items-center justify-center">
-                                <img src="resources/image/appetizer4.jpg" alt="" class="w-full h-full">
-                            </div>
-                            <div>
-                                <p>
-                                    Mushroom puff
-                                </p>
-                                <p>
-                                    ₱ 150.00
-                                </p>
-                                <p>
-                                    Status: Live
-                                </p>
-                                <br>
-                                <div class="flex items-center justify-center gap-8">
-                                    <button
-                                        class="font-bold text-center text-white border border-white px-2 hover:bg-orange-400 rounded-3xl p-1">Update</button>
-                                    <button
-                                        class="font-bold text-center text-white border border-white px-2 hover:bg-orange-400 rounded-3xl p-1">Delete</button>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
