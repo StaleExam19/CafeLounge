@@ -32,14 +32,5 @@ public class HomeController {
 		return "dashboard";
 	}
 
-	@RequestMapping("/menulist")
-	String menuList(Model model, HttpSession session) {
-		if (session.getAttribute("user") == null)
-			return "redirect:/signin";
 
-		List<MenuDto> menuList = menuService.getAllMenu();
-
-		model.addAttribute("menuList", menuList);
-		return "menulist";
-	}
 }
