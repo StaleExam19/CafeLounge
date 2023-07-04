@@ -12,12 +12,14 @@ public class UserMapper implements RowMapper<UserDto> {
 	@Override
 	public UserDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		UserDto user = new UserDto();
-		
+
 		user.setId(rs.getInt("chef_id"));
+		user.setFirstname(rs.getString("chef_firstname"));
+		user.setLastname(rs.getString("chef_lastname"));
 		user.setUsername(rs.getString("chef_username"));
 		user.setPassword(rs.getString("chef_password"));
 		user.setDateUpdated(rs.getDate("date_updated"));
-		
+
 		return user;
 	}
 

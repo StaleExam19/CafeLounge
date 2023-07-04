@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.syntaxerror.cafelounge.dto.UserDto;
 import com.syntaxerror.cafelounge.mapper.UserMapper;
-import com.syntaxerror.cafelounge.model.UserForm;
 
 @Repository
 public class UserRepository extends NamedParameterJdbcDaoSupport {
@@ -35,20 +34,18 @@ public class UserRepository extends NamedParameterJdbcDaoSupport {
 		}
 	}
 
-	public void updateProfile(int id, UserForm user) {
+	public void updateProfile(UserDto user) {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("UPDATE cafelounge_db.chefs SET ")
-		    .append("chef_firstname = ?, chef_lastname = ?, chef_username = ?, chef_password =?, date_updated = date_format(NOW(), '%Y/%c/%e %T') ")
+		    .append("chef_username = ?, chef_password = ?, date_updated = date_format(NOW(), '%Y/%c/%e %T') ")
 		    .append("WHERE chef_id = ?");
 
 	
 		getJdbcTemplate().update(sql.toString(),
-				user.getFirstname(),
-				user.getLastname(),
 				user.getUsername(),
 				user.getPassword(),
-				id);
+				user.getId());
 	}
 	
 }

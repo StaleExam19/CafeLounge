@@ -4,7 +4,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.syntaxerror.cafelounge.dto.UserDto;
 import com.syntaxerror.cafelounge.model.UserForm;
 import com.syntaxerror.cafelounge.service.UserService;
 
@@ -29,9 +28,12 @@ public class UpdateProfileValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", null, "Please fill all the required fields");
 
         UserForm user = (UserForm) target;
-        UserDto matchedUser = userService.searchUserByUsername(user.getUsername());
+        // UserDto matchedUser = userService.searchUserByUsername(user.getUsername());
 
-        if (matchedUser != null)
-            errors.rejectValue("username", null, "Username already exists");
+        // if (matchedUser != null)
+        //     errors.rejectValue("username", null, "Username already exists");
+
+        if (!user.getPassword().equals(user.getConfirmPassword()))
+            errors.rejectValue("password", null, "Password doesn't match");
     }
 }

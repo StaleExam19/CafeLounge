@@ -1,48 +1,42 @@
 package com.syntaxerror.cafelounge.model;
 
 public class UserForm {
-	private String firstname;
-	private String lastname;
 	private String username;
 	private String password;
-	
-	public UserForm() {}
-	public UserForm(String firstname, String lastname, String username, String password) {
-		this.firstname = firstname;
-		this.lastname = lastname;
+	private String confirmPassword;
+
+	public UserForm() {
+	}
+
+	public UserForm(String username, String password, String confirmPassword) {
 		this.username = username;
 		this.password = password;
-	}
-	
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-	
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+		this.confirmPassword = confirmPassword;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public String getFirstname() {
-		return firstname;
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
-	public String getLastname() {
-		return lastname;
-	}
-	
+	// Getters
+
 	public String getUsername() {
 		return this.username;
 	}
-	
+
 	public String getPassword() {
 		return this.password;
 	}
-} 
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+}

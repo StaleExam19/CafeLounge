@@ -33,6 +33,8 @@
                     <br><br>    
                     <form:input type="password" name="password" path="password" placeholder="Password" class="p-2 w-96 items-start rounded-2xl" />
                     <br><br>
+                    <form:input type="password" name="confirmPassword" path="confirmPassword" placeholder="ConfirmPassword" class="p-2 w-96 items-start rounded-2xl" />
+                    <br><br>
                     <div class="flex justify-center">
                         <input type="submit" value="Sign In" class="font-bold text-center text-black bg-orange-500 hover:bg-orange-400 rounded-3xl p-2 w-56" >
                     </div>

@@ -34,18 +34,10 @@ public class UpdateProfileController {
             return "redirect:/signin";
 
         UserDto user = (UserDto) session.getAttribute("user");
+        UserForm userForm = new UserForm();
 
-        if (user.getFirstname() == null)
-            user.setFirstname("");
-        if (user.getLastname() == null)
-            user.setLastname("");
-        
-        UserForm userForm = new UserForm(
-            user.getFirstname().isBlank() ? "" : user.getFirstname(),
-            user.getLastname().isBlank() ? "" : user.getLastname(),
-            user.getUsername(),
-            user.getPassword()
-        );
+        userForm.setUsername(user.getUsername());
+
         model.addAttribute("userForm", userForm);
         return "updateProfile";
     }
@@ -67,8 +59,14 @@ public class UpdateProfileController {
         }
 
         UserDto currentUser = (UserDto) session.getAttribute("user");
+        UserDto newUserData = new UserDto();
 
-        userService.updateProfile(currentUser.getId(), userForm);
+        newUserData.setUsername(userForm.getUsername());
+        newUserData.setPassword(userForm.getPassword());
+        newUserData.setId(currentUser.getId());
+
+        userService.updateProfile(newUserData);
+
         System.out.println("Profile successfully updated");
         return "redirect:/";
     }
