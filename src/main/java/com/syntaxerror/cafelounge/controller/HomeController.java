@@ -1,6 +1,5 @@
 package com.syntaxerror.cafelounge.controller;
 
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.syntaxerror.cafelounge.dto.MenuDto;
 import com.syntaxerror.cafelounge.service.MenuService;
 import com.syntaxerror.cafelounge.service.UserService;
 
