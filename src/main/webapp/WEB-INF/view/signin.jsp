@@ -2,6 +2,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
+<c:url var="imageFolder" value="/resources/image"/>
+<c:url var="signinRoute" value="/signin"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,11 +18,11 @@
         <div class="bg-zinc-950/40 min-h-screen ">
             <div class="flex items-center h-24 pt-5">
                 <nav class="pl-12">
-                    <img class="h-56 cursor-pointer" src="resources/image/logo.png" alt="">
+                    <img class="h-56 cursor-pointer" src="${imageFolder}/logo.png" alt="">
                 </nav>
             </div>
             <div class="flex justify-center items-center pt-32">
-                <form:form action="/signin" method="post" modelAttribute="userForm">
+                <form:form action="${signinRoute}" method="post" modelAttribute="userForm">
                     <h1 class="text-white text-center text-3xl font-semibold">SIGN IN / CHEF</h1>
                     <c:if test="${not empty error}">
                         <div class="bg-red-500 text-white rounded p-3">
