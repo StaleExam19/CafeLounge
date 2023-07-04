@@ -44,10 +44,15 @@ public class MenuController {
 
     @RequestMapping(value = "/addmenu", method = RequestMethod.POST)
     String addMenu(RedirectAttributes redirectAttributes,
-            @ModelAttribute("menuForm") MenuForm menuForm) throws IOException {
+            @ModelAttribute("menuForm") MenuForm menuForm) {
 
-        menuService.addMenu(menuForm);
+        try {
+            menuService.addMenu(menuForm);
+            return "redirect:/menulist";
+        } catch (IOException e) {
+            // e.printStackTrace();
+            return "redirect:/addmenu";
+        }
 
-        return "redirect:/addmenu";
     }
 }
