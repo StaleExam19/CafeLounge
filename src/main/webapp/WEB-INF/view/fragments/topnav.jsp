@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url var="imageFolder" value="/resources/image"/>
+
 <div class="flex justify-between items-center h-24  pt-5 px-12">
     <div class="">
         <img src="${imageFolder}/logo.png" alt="" class="h-56 cursor-pointer ">

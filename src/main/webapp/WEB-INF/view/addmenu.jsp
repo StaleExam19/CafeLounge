@@ -1,9 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:url var="imageFolder" value="/resources/image"/>
-<c:url var="addMenuRoute" value="/addmenu" />
-
 <!DOCTYPE html>
 <html lang="en">
 
