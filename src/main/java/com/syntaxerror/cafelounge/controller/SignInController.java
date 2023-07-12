@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.syntaxerror.cafelounge.dto.UserDto;
-import com.syntaxerror.cafelounge.model.UserForm;
-import com.syntaxerror.cafelounge.service.UserService;
+import com.syntaxerror.cafelounge.dto.ChefDto;
+import com.syntaxerror.cafelounge.model.ChefForm;
+import com.syntaxerror.cafelounge.service.ChefService;
 import com.syntaxerror.cafelounge.validator.SignInValidator;
 
 @Controller
@@ -23,21 +23,21 @@ public class SignInController {
     SignInValidator validator;
 
     @Autowired
-    UserService userService;
+    ChefService userService;
 
     @RequestMapping("/signin")
     String signInPage(Model model, HttpSession session) {
         if (session.getAttribute("user") != null)
             return "redirect:/";
 
-        model.addAttribute("userForm", new UserForm());
+        model.addAttribute("userForm", new ChefForm());
         return "signin";
     }
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     String signIn(RedirectAttributes redirectAttributes,
             HttpSession session,
-            @ModelAttribute("userForm") UserForm userForm,
+            @ModelAttribute("userForm") ChefForm userForm,
             BindingResult bindingResult) {
 
         validator.validate(userForm, bindingResult);
@@ -48,11 +48,12 @@ public class SignInController {
             redirectAttributes.addFlashAttribute("error", error);
             return "redirect:/signin";
         }
-        UserDto matchedUser = userService.searchUserByUsername(userForm.getUsername());
+        ChefDto matchedUser = userService.searchUserByUsername(userForm.getUsername());
         session.setAttribute("user", matchedUser);
 
         if (matchedUser.getDateUpdated() == null) {
-            redirectAttributes.addFlashAttribute("message", "You logged for the first time, please update your profile");
+            redirectAttributes.addFlashAttribute("message",
+                    "You logged for the first time, please update your profile");
             return "redirect:/updateProfile";
         }
 

@@ -1,14 +1,14 @@
 package com.syntaxerror.cafelounge.model;
 
-public class UserForm {
+public class ChefForm {
 	private String username;
 	private String password;
 	private String confirmPassword;
 
-	public UserForm() {
+	public ChefForm() {
 	}
 
-	public UserForm(String username, String password, String confirmPassword) {
+	public ChefForm(String username, String password, String confirmPassword) {
 		this.username = username;
 		this.password = password;
 		this.confirmPassword = confirmPassword;

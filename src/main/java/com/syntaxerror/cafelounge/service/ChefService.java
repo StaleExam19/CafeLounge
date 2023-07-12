@@ -3,19 +3,19 @@ package com.syntaxerror.cafelounge.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.syntaxerror.cafelounge.dto.UserDto;
-import com.syntaxerror.cafelounge.repository.UserRepository;
+import com.syntaxerror.cafelounge.dto.ChefDto;
+import com.syntaxerror.cafelounge.repository.ChefRepository;
 
 @Service
-public class UserService {
+public class ChefService {
 	@Autowired
-	UserRepository userRepository;
+	ChefRepository userRepository;
 	
-	public UserDto searchUserByUsername(String username) {
+	public ChefDto searchUserByUsername(String username) {
 		return userRepository.findUserByUsername(username);
 	}
 
-	public void updateProfile(UserDto user) {
+	public void updateProfile(ChefDto user) {
 		userRepository.updateProfile(user);
 	}
 

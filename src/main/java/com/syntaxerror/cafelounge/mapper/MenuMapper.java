@@ -13,12 +13,18 @@ public class MenuMapper implements RowMapper<MenuDto> {
     public MenuDto mapRow(ResultSet rs, int rowNum) throws SQLException {
         MenuDto menu = new MenuDto();
 
-        menu.setId(rs.getInt("menu_id"));
-        menu.setName(rs.getString("menu_name"));
-        menu.setPrice(rs.getDouble("menu_price"));
-        menu.setCategory(rs.getString("menu_category"));
+        menu.setId(rs.getInt("id"));
+        menu.setName(rs.getString("name"));
+        menu.setDescription(rs.getString("description"));
+        menu.setPrice(rs.getDouble("price"));
         menu.setStatus(rs.getString("status"));
-        menu.setImage(rs.getBytes("menu_image"));
+        menu.setCategory(rs.getString("category"));
+        menu.setImage(rs.getBytes("image"));
+        menu.setAddedBy(rs.getString("added_by"));
+        menu.setUpdatedBy(rs.getString("updated_by"));
+        menu.setDateCreated(rs.getDate("date_created"));
+        menu.setDateUpdated(rs.getDate("date_updated"));
+        menu.setDateDeleted(rs.getDate("date_deleted"));
 
         return menu;
     }

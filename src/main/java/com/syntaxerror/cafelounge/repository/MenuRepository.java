@@ -34,7 +34,7 @@ public class MenuRepository extends NamedParameterJdbcDaoSupport{
 	}
 
     public MenuDto findById(int id) {
-        String sql = "SELECT * FROM cafelounge_db.menu WHERE menu_id = ?";
+        String sql = "SELECT * FROM cafelounge_db.menu WHERE id = ?";
 		
 		try {
 			return getJdbcTemplate().queryForObject(sql, new Object[] {id}, new MenuMapper());
@@ -44,18 +44,29 @@ public class MenuRepository extends NamedParameterJdbcDaoSupport{
 		}
     }
 
+	public List<MenuDto> getFilteredMenu(String category, String status) {
+		String sql = "SELECT * FROM cafelounge_db.menu WHERE category = ? AND status = ?";
+			try {
+		    return getJdbcTemplate().query(sql, new Object[] {category, status}, new MenuMapper());
+		} catch (EmptyResultDataAccessException e) {
+		    return null; // Return null or any other value to indicate no matching rows
+		}
+	}
+
     public void addMenu(MenuDto menu) {
         StringBuilder sql = new StringBuilder();
 
-		sql.append("INSERT INTO cafelounge_db.menu (menu_name, menu_price, menu_category, menu_image) ")
-		    .append("VALUES (?, ?, ?, ?)");
-
+		sql.append("INSERT INTO cafelounge_db.menu (name, description, price, status, category, image, added_by) ")
+		    .append("VALUES (?, ?, ?, ?, ?, ?, ?)");
 	
 		getJdbcTemplate().update(sql.toString(),
             menu.getName(),
+			menu.getDescription(),
             menu.getPrice(),
+			menu.getStatus(),
             menu.getCategory(),
-            menu.getImage());
+            menu.getImage(),
+			menu.getAddedBy());
     }
 
 }

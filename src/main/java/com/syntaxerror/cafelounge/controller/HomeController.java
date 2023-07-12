@@ -9,12 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.syntaxerror.cafelounge.service.MenuService;
-import com.syntaxerror.cafelounge.service.UserService;
+import com.syntaxerror.cafelounge.service.ChefService;
 
 @Controller
 public class HomeController {
 	@Autowired
-	UserService userService;
+	ChefService userService;
 
 	@Autowired
 	MenuService menuService;

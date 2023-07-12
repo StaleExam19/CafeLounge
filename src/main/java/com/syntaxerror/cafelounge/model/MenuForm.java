@@ -4,8 +4,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class MenuForm {
     private String name;
+    private String description;
     private double price;
     private String category;
+    private String status;
     private MultipartFile image;
 
     public MenuForm() {}
@@ -21,12 +23,20 @@ public class MenuForm {
         this.name = name;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public void setPrice(double price) {
         this.price = price;
     }
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setImage(MultipartFile image) {
@@ -38,12 +48,20 @@ public class MenuForm {
         return name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public double getPrice() {
         return price;
     }
 
     public String getCategory() {
         return category;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public MultipartFile getImage() {

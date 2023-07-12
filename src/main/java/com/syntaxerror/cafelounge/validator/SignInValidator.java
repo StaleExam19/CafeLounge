@@ -6,18 +6,18 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.syntaxerror.cafelounge.dto.UserDto;
-import com.syntaxerror.cafelounge.model.UserForm;
-import com.syntaxerror.cafelounge.service.UserService;
+import com.syntaxerror.cafelounge.dto.ChefDto;
+import com.syntaxerror.cafelounge.model.ChefForm;
+import com.syntaxerror.cafelounge.service.ChefService;
 
 @Component
 public class SignInValidator implements Validator {
 	@Autowired
-	UserService userService;
+	ChefService userService;
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return UserForm.class.isAssignableFrom(clazz);
+		return ChefForm.class.isAssignableFrom(clazz);
 	}
 
 	@Override
@@ -26,8 +26,8 @@ public class SignInValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", null, "Please fill all the required fields");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", null, "Please fill all the required fields");
 
-		UserForm user = (UserForm) target;
-		UserDto matchedUser = userService.searchUserByUsername(user.getUsername());
+		ChefForm user = (ChefForm) target;
+		ChefDto matchedUser = userService.searchUserByUsername(user.getUsername());
 
 		if (matchedUser != null) {
 			if (!matchedUser.getPassword().equals(user.getPassword()))

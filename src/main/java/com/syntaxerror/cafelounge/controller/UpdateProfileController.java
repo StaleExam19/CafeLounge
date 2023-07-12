@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.syntaxerror.cafelounge.dto.UserDto;
-import com.syntaxerror.cafelounge.model.UserForm;
-import com.syntaxerror.cafelounge.service.UserService;
+import com.syntaxerror.cafelounge.dto.ChefDto;
+import com.syntaxerror.cafelounge.model.ChefForm;
+import com.syntaxerror.cafelounge.service.ChefService;
 import com.syntaxerror.cafelounge.validator.UpdateProfileValidator;
 
 @Controller
 public class UpdateProfileController {
     @Autowired
-    UserService userService;
+    ChefService userService;
 
     @Autowired
     UpdateProfileValidator validator;
@@ -33,21 +33,26 @@ public class UpdateProfileController {
         if (session.getAttribute("user") == null)
             return "redirect:/signin";
 
-        UserDto user = (UserDto) session.getAttribute("user");
-        UserForm userForm = new UserForm();
+        ChefDto user = (ChefDto) session.getAttribute("user");
+        ChefForm userForm = new ChefForm();
 
         userForm.setUsername(user.getUsername());
 
         model.addAttribute("userForm", userForm);
-        return "updateProfile";
+        return "updateprofile";
     }
 
     @RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
     String update(RedirectAttributes redirectAttribute,
-            @ModelAttribute("userForm") UserForm userForm,
+            @ModelAttribute("userForm") ChefForm userForm,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
             HttpSession session) {
+
+        ChefDto currentUser = (ChefDto) session.getAttribute("user");
+        ChefDto newUserData = new ChefDto();
+
+        userForm.setUsername(currentUser.getUsername());
 
         validator.validate(userForm, bindingResult);
         FieldError fieldError = bindingResult.getFieldError();
@@ -58,8 +63,6 @@ public class UpdateProfileController {
             return "redirect:/updateProfile";
         }
 
-        UserDto currentUser = (UserDto) session.getAttribute("user");
-        UserDto newUserData = new UserDto();
 
         newUserData.setUsername(userForm.getUsername());
         newUserData.setPassword(userForm.getPassword());

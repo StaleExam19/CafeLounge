@@ -2,14 +2,16 @@ package com.syntaxerror.cafelounge.dto;
 
 import java.util.Date;
 
-public class UserDto {
+public class ChefDto {
 
 	private int id;
 	private String firstname;
 	private String lastname;
 	private String username;
 	private String password;
+	private Date dateCreated;
 	private Date dateUpdated;
+	private Date dateDeleted;
 	
 	
 	// Setters
@@ -32,9 +34,17 @@ public class UserDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
 	
 	public void setDateUpdated(Date dateUpdated) {
 		this.dateUpdated = dateUpdated;
+	}
+
+	public void setDateDeleted(Date dateDeleted) {
+		this.dateDeleted = dateDeleted;
 	}
 	
 	// Getters
@@ -57,9 +67,17 @@ public class UserDto {
 	public String getPassword() {
 		return this.password;
 	}
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
 	
 	public Date getDateUpdated() {
 		return this.dateUpdated;
+	}
+
+	public Date getDateDeleted() {
+		return dateDeleted;
 	}
 		
 }
