@@ -14,59 +14,67 @@ import com.syntaxerror.cafelounge.dto.MenuDto;
 import com.syntaxerror.cafelounge.mapper.MenuMapper;
 
 @Repository
-public class MenuRepository extends NamedParameterJdbcDaoSupport{
-    @Autowired
-    protected DataSource dataSource;
+public class MenuRepository extends NamedParameterJdbcDaoSupport {
+	@Autowired
+	protected DataSource dataSource;
 
-    @PostConstruct
-    private void init() {
-        super.setDataSource(dataSource);
-    }
-
+	@PostConstruct
+	private void init() {
+		super.setDataSource(dataSource);
+	}
 
 	public List<MenuDto> getAllMenu() {
 		String sql = "SELECT * FROM cafelounge_db.menu WHERE 1";
 		try {
-		    return getJdbcTemplate().query(sql, new MenuMapper());
+			return getJdbcTemplate().query(sql, new MenuMapper());
 		} catch (EmptyResultDataAccessException e) {
-		    return null; // Return null or any other value to indicate no matching rows
+			return null; // Return null or any other value to indicate no matching rows
 		}
 	}
 
-    public MenuDto findById(int id) {
-        String sql = "SELECT * FROM cafelounge_db.menu WHERE id = ?";
-		
+	public MenuDto findById(int id) {
+		String sql = "SELECT * FROM cafelounge_db.menu WHERE id = ?";
+
 		try {
-			return getJdbcTemplate().queryForObject(sql, new Object[] {id}, new MenuMapper());
-		} catch(EmptyResultDataAccessException e) {
+			return getJdbcTemplate().queryForObject(sql, new Object[] { id }, new MenuMapper());
+		} catch (EmptyResultDataAccessException e) {
 			System.out.println(e.getMessage());
 			return null;
 		}
-    }
+	}
 
-	public List<MenuDto> getFilteredMenu(String category, String status) {
+	public List<MenuDto> getMenuByCategoryAndStatus(String category, String status) {
 		String sql = "SELECT * FROM cafelounge_db.menu WHERE category = ? AND status = ?";
-			try {
-		    return getJdbcTemplate().query(sql, new Object[] {category, status}, new MenuMapper());
+		try {
+			return getJdbcTemplate().query(sql, new Object[] { category, status }, new MenuMapper());
 		} catch (EmptyResultDataAccessException e) {
-		    return null; // Return null or any other value to indicate no matching rows
+			return null; // Return null or any other value to indicate no matching rows
 		}
 	}
 
-    public void addMenu(MenuDto menu) {
-        StringBuilder sql = new StringBuilder();
+	public List<MenuDto> getMenuByStatus(String status) {
+		String sql = "SELECT * FROM cafelounge_db.menu WHERE status = ?";
+		try {
+			return getJdbcTemplate().query(sql, new Object[] { status }, new MenuMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null; // Return null or any other value to indicate no matching rows
+		}
+	}
+
+	public void addMenu(MenuDto menu) {
+		StringBuilder sql = new StringBuilder();
 
 		sql.append("INSERT INTO cafelounge_db.menu (name, description, price, status, category, image, added_by) ")
-		    .append("VALUES (?, ?, ?, ?, ?, ?, ?)");
-	
+				.append("VALUES (?, ?, ?, ?, ?, ?, ?)");
+
 		getJdbcTemplate().update(sql.toString(),
-            menu.getName(),
-			menu.getDescription(),
-            menu.getPrice(),
-			menu.getStatus(),
-            menu.getCategory(),
-            menu.getImage(),
-			menu.getAddedBy());
-    }
+				menu.getName(),
+				menu.getDescription(),
+				menu.getPrice(),
+				menu.getStatus(),
+				menu.getCategory(),
+				menu.getImage(),
+				menu.getAddedBy());
+	}
 
 }

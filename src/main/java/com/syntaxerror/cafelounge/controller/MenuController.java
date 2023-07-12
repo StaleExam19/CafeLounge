@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,14 +42,29 @@ public class MenuController {
 
     @RequestMapping("/menulist")
     String menuList(Model model,
-            HttpSession session,
-            @RequestParam(value = "category", defaultValue = "appetizer") String category,
+            HttpSession session, 
             @RequestParam(value = "status", defaultValue = "live") String status) {
 
         if (session.getAttribute("user") == null)
             return "redirect:/signin";
 
-        List<MenuDto> menuList = menuService.getFilteredMenu(category, status);
+        List<MenuDto> menuList = menuService.getMenuByStatus(status);
+
+        model.addAttribute("menuList", menuList);
+        model.addAttribute("menuForm", new MenuForm());
+        return "menulist";
+    }
+
+    @RequestMapping("/menulist/{category}")
+    String filteredMenuList(Model model,
+            HttpSession session,
+            @PathVariable("category") String category,
+            @RequestParam(value = "status", defaultValue = "live") String status) {
+
+        if (session.getAttribute("user") == null)
+            return "redirect:/signin";
+
+        List<MenuDto> menuList = menuService.getMenuByCategoryAndStatus(category, status);
 
         model.addAttribute("menuList", menuList);
         model.addAttribute("menuForm", new MenuForm());

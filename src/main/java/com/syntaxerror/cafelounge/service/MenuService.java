@@ -23,8 +23,12 @@ public class MenuService {
 		return menuRepository.findById(id);
 	}
 
-	public List<MenuDto> getFilteredMenu(String category, String status) {
-		return menuRepository.getFilteredMenu(category, status);
+	public List<MenuDto> getMenuByCategoryAndStatus(String category, String status) {
+		return menuRepository.getMenuByCategoryAndStatus(category, status);
+	}
+
+	public List<MenuDto> getMenuByStatus(String status) {
+		return menuRepository.getMenuByStatus(status);	
 	}
 
 	public void addMenu(MenuForm menuForm, String addedBy) throws IOException {

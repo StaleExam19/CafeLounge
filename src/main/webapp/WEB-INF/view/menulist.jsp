@@ -11,10 +11,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menulist</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background-image: url("${imageFolder}/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
 </head>
 
 <body class="">
-    <div class="bg-[url('resources/image/background.jpg')] bg-cover bg-no-repeat justify-items-center ">
+    <div class="justify-items-center ">
         <div class="bg-zinc-950/40 min-h-screen ">
             <%@ include file="fragments/topnav.jsp"  %>
             <br>
@@ -30,16 +38,16 @@
 
                         <c:forEach var="category" items="${categories}">
                             <button class="bg-slate-100/50   p-3 rounded-3xl font-semibold w-40"><a
-                                href="${menulistRoute}?category=${category.category}">${category.categoryName}</a></button>
+                                href="${menulistRoute}/${category.category}">${category.categoryName}</a></button>
                         </c:forEach>
                         <button name="" id="dropdown" 
                             class="text-lg  bg-slate-100/50   p-3 rounded-3xl font-semibold w-32 relative ">
                             <span class="flex pl-7"><div>LIVE</div><div class="pl-5 pt-2"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
                                  <path class="w-5 fill-black" fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/> </svg></div></span>
                             <div class=" flex-col absolute left-0 top-full bg-slate-100/50 w-full hidden" id="list">
-                                <a href="" value="Live">Live</a>
-                                <a href="" value="Sold out">Sold Out</a>
-                                <a href="" value="Delisted">Delisted</a>
+                                <a href="?status=live" value="Live">Live</a>
+                                <a href="?status=sold-out" value="Sold out">Sold Out</a>
+                                <a href="?status=delisted" value="Delisted">Delisted</a>
                             </div>
                         </button>
                         <button id="addmenuToggle" class="bg-slate-100/50  relative p-3 rounded-3xl font-semibold w-40">
