@@ -8,9 +8,9 @@
             <img src="${imageFolder}/Notif-removebg-preview.png" alt="" class="h-10 cursor-pointer hover:scale-125 ">
             <div class="h-10 relative">
                 <img src="${imageFolder}/Untitled_design__8_-removebg-preview.png" alt=""
-                    class="h-full cursor-pointer hover:scale-125">
+                    class="h-full cursor-pointer hover:scale-125" data-toggle="paraLogOut">
 
-                <div class="h-[100px] z-30 hidden w-[200px] p-2 top-full -left-[150px] rounded-lg bg-white absolute flex-col">
+                <div id="paraLogOut" class="h-[100px] z-30 hidden w-[200px] p-2 top-full -left-[150px] rounded-lg bg-white absolute flex-col">
                     <div class="flex-1 border-b-2 border-neutral-900 flex justify-center items-center">
                         <p class="text-center w-full">${user.firstname} ${user.lastname}</p>
                     </div>

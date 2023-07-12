@@ -43,6 +43,7 @@
             </div>
         </div>
     </div>
+    <script defer src="${jsRoute}/toggler.js"></script>
    
 </body>
 </html>

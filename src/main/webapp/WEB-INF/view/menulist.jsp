@@ -135,6 +135,8 @@
         </form:form>
     <script defer src="${jsRoute}/dropdown.js"></script>
     <script defer src="${jsRoute}/popup.js"></script>
+    <script defer src="${jsRoute}/toggler.js"></script>
+
 </body>
 
 </html>
