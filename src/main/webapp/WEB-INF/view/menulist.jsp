@@ -59,8 +59,8 @@
                         <c:forEach var="menu" items="${menuList}">
                             <div
                             class="w-48 bg-zinc-950/75 flex flex-col justify-evenly flex-1 text-white p-3 pt-1 rounded-3xl text-center">
-                            <u class="flex justify-between pl-10 pr-1 ">${menu.category} <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path class="fill-white hover:fill-orange-500" d="M12 9.005a4 4 0 1 1 0 8 4 4 0 0 1 0-8ZM12 5.5c4.613 0 8.596 3.15 9.701 7.564a.75.75 0 1 1-1.455.365 8.503 8.503 0 0 0-16.493.004.75.75 0 0 1-1.455-.363A10.003 10.003 0 0 1 12 5.5Z" fill="#212121"/></svg>
+                            <u class="flex justify-between pl-10 pr-1 ">${menu.category} <svg data-info-id="${menu.id}" width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path data-info-id="${menu.id}" class="fill-white hover:fill-orange-500" d="M12 9.005a4 4 0 1 1 0 8 4 4 0 0 1 0-8ZM12 5.5c4.613 0 8.596 3.15 9.701 7.564a.75.75 0 1 1-1.455.365 8.503 8.503 0 0 0-16.493.004.75.75 0 0 1-1.455-.363A10.003 10.003 0 0 1 12 5.5Z" fill="#212121"/></svg>
                             </u>
                             <div class="flex items-center justify-center ">
                                 <img src="${imageControllerRoute}?id=${menu.id}" alt="" class="w-full h-full">
@@ -136,7 +136,7 @@
     <script defer src="${jsRoute}/dropdown.js"></script>
     <script defer src="${jsRoute}/popup.js"></script>
     <script defer src="${jsRoute}/toggler.js"></script>
-
+    <script src="${jsRoute}/infoPopup.js"></script>
 </body>
 
 </html>

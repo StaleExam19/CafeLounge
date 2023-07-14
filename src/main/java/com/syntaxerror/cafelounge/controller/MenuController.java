@@ -42,7 +42,7 @@ public class MenuController {
 
     @RequestMapping("/menulist")
     String menuList(Model model,
-            HttpSession session, 
+            HttpSession session,
             @RequestParam(value = "status", defaultValue = "live") String status) {
 
         if (session.getAttribute("user") == null)
@@ -96,4 +96,6 @@ public class MenuController {
         }
 
     }
+
+
 }
