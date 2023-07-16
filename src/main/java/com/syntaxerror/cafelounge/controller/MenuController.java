@@ -91,7 +91,6 @@ public class MenuController {
             menuService.addMenu(menuForm, currentUser.getFirstname() + " " + currentUser.getLastname());
             return "redirect:/menulist";
         } catch (IOException e) {
-            // e.printStackTrace();
             return "redirect:/addmenu";
         }
 

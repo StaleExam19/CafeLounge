@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.syntaxerror.cafelounge.service.MenuService;
 import com.syntaxerror.cafelounge.service.ChefService;
+import com.syntaxerror.cafelounge.service.MenuService;
 
 @Controller
 public class HomeController {
