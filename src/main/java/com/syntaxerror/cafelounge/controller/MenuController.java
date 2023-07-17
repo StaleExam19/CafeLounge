@@ -1,9 +1,10 @@
 package com.syntaxerror.cafelounge.controller;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.syntaxerror.cafelounge.dto.ChefDto;
 import com.syntaxerror.cafelounge.dto.MenuDto;
-import com.syntaxerror.cafelounge.model.MenuCategory;
 import com.syntaxerror.cafelounge.model.MenuForm;
 import com.syntaxerror.cafelounge.service.MenuService;
+import com.syntaxerror.cafelounge.util.BtnLink;
 
 @Controller
 public class MenuController {
@@ -28,31 +29,26 @@ public class MenuController {
     MenuService menuService;
 
     @ModelAttribute
-    void aso(Model model) {
-        MenuCategory arr[] = {
-                new MenuCategory("appetizer", "APPETIZERS"),
-                new MenuCategory("main-course", "MAIN COURSE"),
-                new MenuCategory("dessert", "DESSERTS"),
-                new MenuCategory("drink", "DRINKS")
-        };
+    void prepare(Model model, HttpServletRequest request) {
+        List<BtnLink> categories = new ArrayList<>();
+        List<BtnLink> btns = new ArrayList<BtnLink>();
 
-        List<MenuCategory> categories = Arrays.asList(arr);
+        categories.add(new BtnLink("appetizer", "appetizers"));
+        categories.add(new BtnLink("main course", "main course"));
+        categories.add(new BtnLink("dessert", "desserts"));
+        categories.add(new BtnLink("drink", "drinks"));
+
+        btns.add(new BtnLink("/", "Dashboard"));
+        btns.add(new BtnLink("/menulist", "Menu List", true));
+        btns.add(new BtnLink("/orderlist", "Order List"));
+
         model.addAttribute("categories", categories);
+        model.addAttribute("sideNavBtn", btns);
     }
 
     @RequestMapping("/menulist")
-    String menuList(Model model,
-            HttpSession session,
-            @RequestParam(value = "status", defaultValue = "live") String status) {
-
-        if (session.getAttribute("user") == null)
-            return "redirect:/signin";
-
-        List<MenuDto> menuList = menuService.getMenuByStatus(status);
-
-        model.addAttribute("menuList", menuList);
-        model.addAttribute("menuForm", new MenuForm());
-        return "menulist";
+    String menuList(Model model) {
+        return "redirect:/menulist/appetizer";
     }
 
     @RequestMapping("/menulist/{category}")
@@ -68,6 +64,9 @@ public class MenuController {
 
         model.addAttribute("menuList", menuList);
         model.addAttribute("menuForm", new MenuForm());
+        model.addAttribute("category", category);
+        model.addAttribute("status", status);
+
         return "menulist";
     }
 
@@ -95,6 +94,5 @@ public class MenuController {
         }
 
     }
-
 
 }

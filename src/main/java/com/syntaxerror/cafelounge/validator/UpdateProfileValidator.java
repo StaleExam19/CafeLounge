@@ -31,10 +31,10 @@ public class UpdateProfileValidator implements Validator {
         ChefForm user = (ChefForm) target;
         ChefDto matchedUser = userService.searchUserByUsername(user.getUsername());
 
-        if (user.getPassword().equals(matchedUser.getPassword()))
-            errors.rejectValue("password", null, "You entered the old password");
-
         if (!user.getPassword().equals(user.getConfirmPassword()))
             errors.rejectValue("password", null, "Password doesn't match");
+
+        if (user.getPassword().equals(matchedUser.getPassword()))
+            errors.rejectValue("password", null, "You entered the old password");
     }
 }

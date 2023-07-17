@@ -23,11 +23,6 @@ public class MenuApiController {
     @Autowired
     MenuService menuService;
 
-    @RequestMapping("/test")
-    String test() {
-        return "test";
-    }
-
     @RequestMapping("/menu")
     ResponseEntity<String> allMenu() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -51,7 +46,6 @@ public class MenuApiController {
     @RequestMapping("/menu/{id}")
     ResponseEntity<String> menuById(@PathVariable("id") int id) {
         ObjectMapper objectMapper = new ObjectMapper();
-        // List<MenuDto> responses = menuService.getAllMenu();
         MenuDto responses = menuService.findById(id);
 
         String jsonResponse;

@@ -1,54 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+						http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- Uncomment and your base-package here:
+	<!-- Uncomment and your base-package here:
          <context:component-scan
             base-package="org.springframework.samples.web"/>  -->
 
 
-    <mvc:annotation-driven />
+	<mvc:annotation-driven />
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
-	        <property name="prefix" value="/WEB-INF/view/"/>
-	        <property name="suffix" value=".jsp"/>
+		<!-- Example: a logical view name of 'showMessage' is mapped to
+		'/WEB-INF/jsp/showMessage.jsp' -->
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
 	</bean>
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
-	   <property name="driverClassName" value="com.mysql.jdbc.Driver" />  
-	   <property name="url" value="jdbc:mysql://localhost:3306/cafelounge_db" />  
-	   <property name="username" value="root" />  
-	   <property name="password" value="" />  
-	 </bean>
-	  
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/cafelounge_db" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+	</bean>
+
 	<context:component-scan base-package="com.syntaxerror.cafelounge"></context:component-scan>
 
-	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="classpath:locale/messages" />
 		<property name="defaultEncoding" value="UTF-8" />
-		<property name="fallbackToSystemLocale" value="false"/>
+		<property name="fallbackToSystemLocale" value="false" />
 	</bean>
-	
+
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-	    <property name="defaultLocale" value="en" />
+		<property name="defaultLocale" value="en" />
 	</bean>
-	 
-	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-	    <property name="paramName" value="lang" />
+
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="lang" />
 	</bean>
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="5037876" /> <!-- Set the maximum file size allowed -->
 	</bean>
-	
-<!-- the mvc resources tag does the magic -->
- 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
-    <!-- also add the following beans to get rid of some exceptions -->
- 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<!-- the mvc resources tag does the magic -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Interceptors -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" /> <!-- URL pattern to intercept -->
+			<mvc:exclude-mapping path="/signin" /> <!-- URL pattern excluded from being intercepted-->
+			<mvc:exclude-mapping path="/resources/**" />
+			<bean class="com.syntaxerror.cafelounge.interceptor.SignInInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- also add the following beans to get rid of some exceptions -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"></bean>
 
 </beans>

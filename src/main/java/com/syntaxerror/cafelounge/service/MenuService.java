@@ -12,4 +12,5 @@ public interface MenuService {
     List<MenuDto> getMenuByCategoryAndStatus(String category, String status);
     List<MenuDto> getMenuByStatus(String status);
     void addMenu(MenuForm menuForm, String addedBy) throws IOException;
+    int countLiveMenu();
 }

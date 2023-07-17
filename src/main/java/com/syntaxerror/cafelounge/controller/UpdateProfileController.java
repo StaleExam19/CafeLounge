@@ -25,6 +25,9 @@ public class UpdateProfileController {
     @Autowired
     UpdateProfileValidator validator;
 
+    /**
+     * For displaying the page
+     */
     @RequestMapping("/updateProfile")
     String page(Model model,
             @ModelAttribute("error") String error,
@@ -42,6 +45,9 @@ public class UpdateProfileController {
         return "updateprofile";
     }
 
+    /**
+     * For update profile
+     */
     @RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
     String update(RedirectAttributes redirectAttribute,
             @ModelAttribute("userForm") ChefForm userForm,
@@ -62,7 +68,6 @@ public class UpdateProfileController {
             redirectAttributes.addFlashAttribute("error", error);
             return "redirect:/updateProfile";
         }
-
 
         newUserData.setUsername(userForm.getUsername());
         newUserData.setPassword(userForm.getPassword());

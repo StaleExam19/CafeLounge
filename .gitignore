@@ -33,3 +33,7 @@ build/
 .vscode/
 .metadata
 .settings
+
+### Node ###
+node_modules
+yarn.lock

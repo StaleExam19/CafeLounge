@@ -52,4 +52,9 @@ public class MenuServiceImpl implements MenuService{
 
 		menuRepository.addMenu(menuDto);
 	}
+
+	@Override
+	public int countLiveMenu() {
+		return menuRepository.countLiveMenu();
+	}
 }

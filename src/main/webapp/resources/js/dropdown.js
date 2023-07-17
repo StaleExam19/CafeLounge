@@ -1,14 +1,13 @@
-const dropdown = document.getElementById("dropdown");
+document.addEventListener("click", evt => {
+    const target = evt.target;
 
+    if (target.matches("[data-toggle]")) {
+        const toggleId = target.getAttribute("data-toggle");
+        const targetToggle = document.getElementById(toggleId);
 
-let hidden = true;
-dropdown.addEventListener("click", evt => {
-    const list = document.getElementById("list");
-    if (hidden) {
-        list.classList.replace("hidden", "flex")
-        hidden = false;
-    } else {
-        list.classList.replace("flex", "hidden");
-        hidden = true;
+        if (targetToggle.classList.contains("hidden"))
+            targetToggle.classList.replace("hidden", "flex");
+        else
+            targetToggle.classList.replace("flex", "hidden");
     }
-})
+});
