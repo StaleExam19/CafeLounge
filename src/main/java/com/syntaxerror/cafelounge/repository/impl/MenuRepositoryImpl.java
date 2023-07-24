@@ -35,7 +35,13 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 
 	@Override
 	public List<MenuDto> getMenuByCategoryAndStatus(String category, String status) {
-		String sql = "SELECT * FROM cafelounge_db.menu WHERE category = ? AND status = ?";
+		String sql;
+
+		if (status == "sold out") {
+			sql = "SELECT * FROM cafelounge_db.menu WHERE category = ? AND status = ? AND quantity = 0";
+		} else {
+			sql = "SELECT * FROM cafelounge_db.menu WHERE category = ? AND status = ?";
+		}
 		try {
 			return getJdbcTemplate().query(sql, new Object[] { category, status }, new MenuMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -72,14 +78,14 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 
 	@Override
 	public int countLiveMenu() {
-		String sql = "SELECT COUNT(*) FROM cafelounge_db.menu WHERE status = \"live\" AND date_deleted IS NULL";
+		String sql = "SELECT COUNT(*) FROM cafelounge_db.menu WHERE status = \"live\" AND date_delisted IS NULL";
 		return getJdbcTemplate().queryForObject(sql, Integer.class);
 	}
 
 	@Override
 	public void deleteById(int id) {
-		String sql = "UPDATE cafelounge_db.menu SET date_deleted = CURRENT_TIMESTAMP, status = ? WHERE id = ?";
-		getJdbcTemplate().update(sql, "delisted", id);
+		String sql = "UPDATE cafelounge_db.menu SET date_delisted = CURRENT_TIMESTAMP, status = \"delisted\" WHERE id = ?";
+		getJdbcTemplate().update(sql, id);
 	}
 
 	@Override
@@ -95,15 +101,30 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 	}
 
 	@Override
-	public void updateMenuById(int id, MenuDto menuDto) {
-		String sql = "UPDATE cafelounge_db.menu SET name = ?, quantity = ?, description = ?, category = ?, price = ?, status = ? WHERE id = ?";
-		getJdbcTemplate().update(sql, 
-		menuDto.getName(),
-		menuDto.getQuantity(),
-		menuDto.getDescription(),
-		menuDto.getCategory(),
-		menuDto.getPrice(),
-		menuDto.getStatus());
+	public void updateMenuById(int id, MenuDto menuDto, String updatedBy) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("UPDATE cafelounge_db.menu")
+				.append(" SET name = ?, quantity = ?, description = ?, ");
+
+		// Update the date_delisted if user set the status to delisted
+		if (menuDto.getStatus() == "delisted")
+			sql.append("date_delisted = CURRENT_TIMESTAMP, ");
+		else
+			sql.append("date_delisted = NULL, ");
+
+		sql.append("category = ?, price = ?, status = ?, updated_by = ? ")
+				.append("WHERE id = ?");
+
+		getJdbcTemplate().update(sql.toString(),
+				menuDto.getName(),
+				menuDto.getQuantity(),
+				menuDto.getDescription(),
+				menuDto.getCategory(),
+				menuDto.getPrice(),
+				menuDto.getStatus(),
+				menuDto.getUpdatedBy(),
+				id);
 	}
 
 }

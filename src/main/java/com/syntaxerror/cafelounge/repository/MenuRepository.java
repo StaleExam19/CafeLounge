@@ -13,7 +13,7 @@ public interface MenuRepository {
 
     void addMenu(MenuDto menuDto);
     void deleteById(int id);
-    void updateMenuById(int id, MenuDto menuDto);
+    void updateMenuById(int id, MenuDto menuDto, String addedBy);
 
     int countLiveMenu();
     MenuDto getMenuById(int id);

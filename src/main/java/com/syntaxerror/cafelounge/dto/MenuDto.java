@@ -16,7 +16,7 @@ public class MenuDto {
 
     private Date dateCreated;
     private Date dateUpdated;
-    private Date dateDeleted;
+    private Date dateDelisted;
     
 
     // Setters
@@ -67,8 +67,8 @@ public class MenuDto {
     public void setDateUpdated(Date dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
-    public void setDateDeleted(Date dateDeleted) {
-        this.dateDeleted = dateDeleted;
+    public void setDateDelisted(Date dateDeleted) {
+        this.dateDelisted = dateDeleted;
     }
 
     // Getters
@@ -120,7 +120,7 @@ public class MenuDto {
         return dateUpdated;
     }
 
-    public Date getDateDeleted() {
-        return dateDeleted;
+    public Date getDateDelisted() {
+        return dateDelisted;
     }
 }

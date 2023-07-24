@@ -17,7 +17,7 @@
         <div class="flex-1">
             <div class="flex gap-2">
                 <c:forEach var="item" items="${categories}">
-                    <c:url var="href" value="/menulist/${item.href}"/>
+                    <c:url var="href" value="/menulist/${item.href}?status=${status}"/>
                     <c:if test="${item.href == category}">
                         <a href="${href}" class="btn active">${item.label}</a>
                     </c:if>

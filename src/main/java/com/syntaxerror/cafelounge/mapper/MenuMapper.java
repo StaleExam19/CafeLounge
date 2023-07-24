@@ -25,7 +25,7 @@ public class MenuMapper implements RowMapper<MenuDto> {
         menu.setUpdatedBy(rs.getString("updated_by"));
         menu.setDateCreated(rs.getDate("date_created"));
         menu.setDateUpdated(rs.getDate("date_updated"));
-        menu.setDateDeleted(rs.getDate("date_deleted"));
+        menu.setDateDelisted(rs.getDate("date_delisted"));
 
         return menu;
     }

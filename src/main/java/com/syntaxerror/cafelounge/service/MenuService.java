@@ -15,6 +15,8 @@ public interface MenuService {
 
     void addMenu(MenuForm menuForm, String addedBy) throws IOException;
     void deleteById(int id);
+    void updateMenuById(int id, MenuForm menuForm, String updatedBy);
+
     MenuDto getMenuById(int id);
 
     int countLiveMenu();

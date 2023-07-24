@@ -15,9 +15,31 @@ function hideAddMenuForm() {
     addmenuForm.classList.replace("flex", "hidden");
 }
 
-function showUpdateForm() {
+/**
+ * 
+ * @param {Menu} data 
+ */
+function showUpdateForm(data) {
     formOverlay.classList.remove("hidden");
     updatemenuForm.classList.replace("hidden", "flex");
+
+    const menuName = document.querySelector(".update-form .menu-name");
+    const description = document.querySelector(".update-form .description");
+    const price = document.querySelector(".update-form .price");
+    const quantity = document.querySelector(".update-form .quantity");
+
+    /**@type {HTMLSelectElement} */
+    const category = document.querySelector(".update-form .category");
+    /**@type {HTMLSelectElement} */
+    const status = document.querySelector(".update-form .status");
+    
+    menuName.value = data.name;
+    description.value = data.description;
+    price.value = data.price;
+    quantity.value = data.quantity;
+
+    category.value = data.category;
+    status.value = data.status;
 }
 
 function hideUpdateForm() {
@@ -62,7 +84,7 @@ function generateBlobUrl(base64String) {
 
     for (let i = 0; i < byteChars.length; i++)
         byteNumbers[i] = byteChars.charCodeAt(i);
-    
+
     const bytes = new Uint8Array(byteNumbers);
     const blob = new Blob([bytes]);
     const blobUrl = URL.createObjectURL(blob);
@@ -104,9 +126,13 @@ document.addEventListener("click", async evt => {
     if (target.matches("[data-update-menu-id]")) {
         /**@type {HTMLFormElement} */
         const form = document.querySelector(".update-form");
-        const id = target.getAttribute("data-update-menu-id");        
+        const id = target.getAttribute("data-update-menu-id");
+        const response = await fetch(`/api/menu/${id}`);
+
+        /**@type {Menu} */
+        const data = await response.json();
 
         form.action = `/updateMenu/${id}`;
-        showUpdateForm();
+        showUpdateForm(data);
     }
 });

@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
+import com.syntaxerror.cafelounge.dto.ChefDto;
+
 public class SignInInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request,
@@ -13,7 +15,7 @@ public class SignInInterceptor extends HandlerInterceptorAdapter {
             Object handler)
             throws Exception {
 
-        Object userSession = WebUtils.getSessionAttribute(request, "user");
+        ChefDto userSession = (ChefDto) WebUtils.getSessionAttribute(request, "user");
         if (userSession == null) {
             response.sendRedirect(request.getContextPath() + "/signin");
             return false;

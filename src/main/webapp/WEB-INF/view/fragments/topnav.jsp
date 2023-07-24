@@ -8,17 +8,36 @@
         <!-- Topnav -->
         <div class="h-24 w-full justify-between flex items-center px-12">
             <img src="${logo}" alt="" class="h-56 pt-5">
+
             <div class="flex gap-5">
+                <c:if test="${naaySearch}">
+                    <div>
+                        <div class="bg-white border-2 flex items-center px-2 border-black rounded-2xl">
+                            <input type="text" placeholder="Search"
+                                class="p-2 w-96 rounded-2xl outline-none placeholder:text-black">
+                            <button>
+                                <svg width="24" height="24" fill="none" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10 2.5a7.5 7.5 0 0 1 5.964 12.048l4.743 4.745a1 1 0 0 1-1.32 1.497l-.094-.083-4.745-4.743A7.5 7.5 0 1 1 10 2.5Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"
+                                        fill="#212121" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </c:if>
                 <div class="">
                     <img src="${notifIcon}" alt="" class="h-10 cursor-pointer hover:scale-105">
                 </div>
+
                 <div class="relative">
-                    <img src="${profileIcon}" alt="" class="h-10 cursor-pointer hover:scale-105" data-toggle="profile-dropdown">
+                    <img src="${profileIcon}" alt="" class="h-10 cursor-pointer hover:scale-105"
+                        data-toggle="profile-dropdown">
 
                     <div class="bg-white w-40 absolute top-full right-0 z-30 p-2 hidden flex-col" id="profile-dropdown">
                         <p>${user.firstname} ${user.lastname}</p>
                         <hr>
-                        <c:url var="logout" value="/logout"/>
+                        <c:url var="logout" value="/logout" />
                         <a href="${logout}" class="flex gap-2 p-2 hover:bg-orange-500 hover:text-white group">
                             <svg width="24" height="24" fill="none" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">

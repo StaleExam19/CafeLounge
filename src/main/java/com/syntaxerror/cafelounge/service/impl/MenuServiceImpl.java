@@ -44,9 +44,10 @@ public class MenuServiceImpl implements MenuService{
 
 		menuDto.setName(menuForm.getName());
 		menuDto.setDescription(menuForm.getDescription());
-		menuDto.setPrice(menuForm.getPrice());
+		menuDto.setPrice(Double.parseDouble(menuForm.getPrice()));
 		menuDto.setCategory(menuForm.getCategory());
 		menuDto.setStatus(menuForm.getStatus());
+		menuDto.setQuantity(Integer.parseInt(menuForm.getQuantity()));
 		menuDto.setImage(menuForm.getImage().getBytes());
 		menuDto.setAddedBy(addedBy);
 
@@ -66,5 +67,26 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public MenuDto getMenuById(int id) {
 		return menuRepository.findById(id);
+	}
+
+	@Override
+	public void updateMenuById(int id, MenuForm menuForm, String updatedBy) {
+		MenuDto menu = menuRepository.findById(id);
+
+		menu.setName(menuForm.getName());
+		menu.setDescription(menuForm.getDescription());
+		menu.setPrice(Double.parseDouble(menuForm.getPrice()));
+		menu.setCategory(menuForm.getCategory());
+		menu.setStatus(menuForm.getStatus());
+
+		menu.setQuantity(Integer.parseInt(menuForm.getQuantity()));
+
+		try {
+			menu.setImage(menuForm.getImage().getBytes());
+		} catch (IOException e) {
+		}
+		menu.setAddedBy(updatedBy);
+		
+		menuRepository.updateMenuById(id, menu, updatedBy);
 	}
 }

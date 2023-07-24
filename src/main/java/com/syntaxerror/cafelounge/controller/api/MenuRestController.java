@@ -65,6 +65,7 @@ public class MenuRestController {
     ResponseEntity<String> deleteById(@PathVariable("id") int id) {
         ObjectMapper objectMapper = new ObjectMapper();
         menuService.deleteById(id);
+        
         MenuDto matchedMenu = menuService.findById(id);
 
         String jsonResponse;

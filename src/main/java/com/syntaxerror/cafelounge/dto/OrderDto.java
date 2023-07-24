@@ -3,59 +3,49 @@ package com.syntaxerror.cafelounge.dto;
 import java.util.Date;
 
 public class OrderDto {
-    private int id;
-    private int customerId;
-    private int menuId;
+    private String customerName;
+    private String menuName;
+    private Date dateOrdered;
+    private int quantity;
+    private String status;
 
-    private Date date_ordered;
-    private Date date_completed;
-    private Date date_deleted;
-
-    public void setId(int id) {
-        this.id = id;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
     }
 
-    public void setMenuId(int menuId) {
-        this.menuId = menuId;
+    public void setDateOrdered(Date dateOrdered) {
+        this.dateOrdered = dateOrdered;
     }
 
-    public void setDate_ordered(Date date_ordered) {
-        this.date_ordered = date_ordered;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public void setDate_completed(Date date_completed) {
-        this.date_completed = date_completed;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public void setDate_deleted(Date date_deleted) {
-        this.date_deleted = date_deleted;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public int getId() {
-        return id;
+    public String getMenuName() {
+        return menuName;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public Date getDateOrdered() {
+        return dateOrdered;
     }
 
-    public int getMenuId() {
-        return menuId;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public Date getDate_ordered() {
-        return date_ordered;
-    }
-
-    public Date getDate_completed() {
-        return date_completed;
-    }
-
-    public Date getDate_deleted() {
-        return date_deleted;
+    public String getStatus() {
+        return status;
     }
 }

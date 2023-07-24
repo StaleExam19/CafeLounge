@@ -3,6 +3,7 @@ package com.syntaxerror.cafelounge.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +25,15 @@ import com.syntaxerror.cafelounge.dto.MenuDto;
 import com.syntaxerror.cafelounge.model.MenuForm;
 import com.syntaxerror.cafelounge.service.MenuService;
 import com.syntaxerror.cafelounge.util.BtnLink;
+import com.syntaxerror.cafelounge.validator.AddMenuValidator;
 
 @Controller
 public class MenuController {
     @Autowired
     MenuService menuService;
+
+    @Autowired
+    AddMenuValidator validator;
 
     @ModelAttribute
     void init(Model model, HttpServletRequest request) {
@@ -45,18 +52,20 @@ public class MenuController {
         model.addAttribute("pageTitle", "Menu List");
         model.addAttribute("categories", categories);
         model.addAttribute("sideNavBtn", btns);
+        model.addAttribute("naaySearch", true);
     }
 
     @RequestMapping("/menulist")
     String menuList(Model model) {
-        return "redirect:/menulist/appetizer";
+        return "redirect:menulist/appetizer";
     }
 
     @RequestMapping("/menulist/{category}")
     String filteredMenuList(Model model,
             HttpSession session,
             @PathVariable("category") String category,
-            @RequestParam(value = "status", defaultValue = "live") String status) {
+            @RequestParam(value = "status", defaultValue = "live") String status,
+            @ModelAttribute("error") String error) {
 
         if (session.getAttribute("user") == null)
             return "redirect:/signin";
@@ -74,9 +83,21 @@ public class MenuController {
     @RequestMapping(value = "/addmenu", method = RequestMethod.POST)
     String addMenu(RedirectAttributes redirectAttributes,
             HttpSession session,
-            @ModelAttribute("menuForm") MenuForm menuForm) {
+            @ModelAttribute("menuForm") MenuForm menuForm,
+            BindingResult bindingResult) {
 
         ChefDto currentUser = (ChefDto) session.getAttribute("user");
+
+        // Validate menu form
+        validator.validate(menuForm, bindingResult);
+        FieldError fieldError = bindingResult.getFieldError();
+        String error = fieldError == null ? "" : fieldError.getDefaultMessage();
+
+        // Check if error exists
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("error", error);
+            return "redirect:/menulist";
+        }
 
         try {
             menuService.addMenu(menuForm, currentUser.getFirstname() + " " + currentUser.getLastname());
@@ -90,15 +111,11 @@ public class MenuController {
     String updateMenu(RedirectAttributes redirectAttributes,
             HttpSession session,
             @ModelAttribute("menuForm") MenuForm menuForm,
-            @PathVariable("id") int id) {
+            @PathVariable("id") int id) throws IOException {
         ChefDto currentUser = (ChefDto) session.getAttribute("user");
 
-        try {
-            menuService.addMenu(menuForm, currentUser.getFirstname() + " " + currentUser.getLastname());
-            return "redirect:/menulist";
-        } catch (IOException e) {
-            return "redirect:/addmenu";
-        }
+        menuService.updateMenuById(id, menuForm, currentUser.getFirstname() + " " + currentUser.getLastname());
+        return "redirect:/menulist";
     }
 
 }
