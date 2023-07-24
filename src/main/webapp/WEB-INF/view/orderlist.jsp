@@ -29,7 +29,7 @@
                             <h1>Customer Name: Louie Abad</h1>
                             <h1>Total Dish:</h1>
                             <h1 class="pl-5">Cedar-Plank Salmon ( ₱150 x 1)</h1>
-                            <h1 class="pl-5">Seabreeze Cocktail   ( ₱150 x 1)</h1><br>
+                            <h1 class="pl-5">Seabreeze Cocktail ( ₱150 x 1)</h1><br>
                             <h1>Total: ₱300.00 </h1>
                             <h1>Payment Method: CASH</h1><br>
                             <div class="flex justify-center">

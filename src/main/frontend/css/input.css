@@ -44,15 +44,25 @@
         h-screen w-full
     }
 
-    .addmenu-form {
+    .addmenu-form
+    {
         @apply fixed top-1/2 left-1/2 -translate-x-1/2
             -translate-y-1/2 justify-center items-center w-1/2
             bg-slate-100/50 p-10 z-10 rounded-2xl
              flex-col gap-5
     }
 
+    .update-form {
+        @apply fixed top-1/2 left-1/2 -translate-x-1/2
+        -translate-y-1/2 justify-center items-center w-1/2
+        bg-slate-100/50 p-10 z-10 rounded-2xl
+         flex-col gap-5
+    }
+
     .addmenu-form input,
     .addmenu-form textarea,
+    .update-form input,
+    .update-form textarea,
     .form input {
         @apply p-2 w-full items-start rounded-2xl
          text-slate-950

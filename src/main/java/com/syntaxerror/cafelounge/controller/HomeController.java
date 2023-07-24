@@ -25,13 +25,14 @@ public class HomeController {
 	MenuService menuService;
 
 	@ModelAttribute
-	void prepare(Model model, HttpSession session, HttpServletRequest request) {
+	void init(Model model, HttpSession session, HttpServletRequest request) {
 		List<BtnLink> btns = new ArrayList<BtnLink>();
 
 		btns.add(new BtnLink("/", "Dashboard", true));
 		btns.add(new BtnLink("/menulist", "Menu List"));
 		btns.add(new BtnLink("/orderlist", "Order List"));
 
+		model.addAttribute("pageTitle", "Dashboard");
 		model.addAttribute("sideNavBtn", btns);
 	}
 

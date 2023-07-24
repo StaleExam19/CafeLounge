@@ -9,6 +9,7 @@ public class MenuDto {
     private double price;
     private String category;
     private String status;
+    private int quantity;
     private String addedBy;
     private String updatedBy;
     private byte[] image;
@@ -37,6 +38,10 @@ public class MenuDto {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public void setImage(byte[] image) {
@@ -85,6 +90,10 @@ public class MenuDto {
 
     public String getCategory() {
         return category;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public String getStatus() {

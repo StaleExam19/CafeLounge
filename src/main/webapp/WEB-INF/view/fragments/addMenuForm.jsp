@@ -7,6 +7,7 @@
     <form:input type="text" path="name" placeholder="Menu Name"/>
     <form:textarea name="Description" path="description" placeholder="Description" class="" cols="30" rows="5"></form:textarea>
     <form:input type="number" path="price" placeholder="Price"/>
+    <form:input type="number" path="quantity" placeholder="Quantity"/>
     <form:select path="category" class="p-2 w-full items-start rounded-2xl border-none">
         <option disabled="" selected="">-Select Categories-</option>
         <option value="appetizer">Appetizer</option>

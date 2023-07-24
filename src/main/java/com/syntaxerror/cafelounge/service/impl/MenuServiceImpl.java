@@ -57,4 +57,14 @@ public class MenuServiceImpl implements MenuService{
 	public int countLiveMenu() {
 		return menuRepository.countLiveMenu();
 	}
+
+	@Override
+	public void deleteById(int id) {
+		menuRepository.deleteById(id);
+	}
+
+	@Override
+	public MenuDto getMenuById(int id) {
+		return menuRepository.findById(id);
+	}
 }

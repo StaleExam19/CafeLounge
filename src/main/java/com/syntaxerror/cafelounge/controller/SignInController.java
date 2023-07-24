@@ -25,6 +25,11 @@ public class SignInController {
     @Autowired
     ChefService userService;
 
+    @ModelAttribute
+    void init(Model model)  {
+        model.addAttribute("pageTitle", "Sign In");
+    }
+
     @RequestMapping("/signin")
     String signInPage(Model model, HttpSession session) {
         if (session.getAttribute("user") != null)

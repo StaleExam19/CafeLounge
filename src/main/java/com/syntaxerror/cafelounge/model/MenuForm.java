@@ -7,6 +7,7 @@ public class MenuForm {
     private String description;
     private double price;
     private String category;
+    private String quantity;
     private String status;
     private MultipartFile image;
 
@@ -35,6 +36,10 @@ public class MenuForm {
         this.category = category;
     }
 
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }
@@ -58,6 +63,10 @@ public class MenuForm {
 
     public String getCategory() {
         return category;
+    }
+
+    public String getQuantity() {
+        return quantity;
     }
 
     public String getStatus() {

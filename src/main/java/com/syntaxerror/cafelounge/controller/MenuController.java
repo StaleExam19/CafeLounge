@@ -29,7 +29,7 @@ public class MenuController {
     MenuService menuService;
 
     @ModelAttribute
-    void prepare(Model model, HttpServletRequest request) {
+    void init(Model model, HttpServletRequest request) {
         List<BtnLink> categories = new ArrayList<>();
         List<BtnLink> btns = new ArrayList<BtnLink>();
 
@@ -42,6 +42,7 @@ public class MenuController {
         btns.add(new BtnLink("/menulist", "Menu List", true));
         btns.add(new BtnLink("/orderlist", "Order List"));
 
+        model.addAttribute("pageTitle", "Menu List");
         model.addAttribute("categories", categories);
         model.addAttribute("sideNavBtn", btns);
     }
@@ -70,15 +71,6 @@ public class MenuController {
         return "menulist";
     }
 
-    @RequestMapping("/addmenu")
-    String addMenuPage(Model model, HttpSession session) {
-        if (session.getAttribute("user") == null)
-            return "redirect:/signin";
-
-        model.addAttribute("menuForm", new MenuForm());
-        return "addmenu";
-    }
-
     @RequestMapping(value = "/addmenu", method = RequestMethod.POST)
     String addMenu(RedirectAttributes redirectAttributes,
             HttpSession session,
@@ -92,7 +84,21 @@ public class MenuController {
         } catch (IOException e) {
             return "redirect:/addmenu";
         }
+    }
 
+    @RequestMapping(value = "/updateMenu/{id}", method = RequestMethod.POST)
+    String updateMenu(RedirectAttributes redirectAttributes,
+            HttpSession session,
+            @ModelAttribute("menuForm") MenuForm menuForm,
+            @PathVariable("id") int id) {
+        ChefDto currentUser = (ChefDto) session.getAttribute("user");
+
+        try {
+            menuService.addMenu(menuForm, currentUser.getFirstname() + " " + currentUser.getLastname());
+            return "redirect:/menulist";
+        } catch (IOException e) {
+            return "redirect:/addmenu";
+        }
     }
 
 }

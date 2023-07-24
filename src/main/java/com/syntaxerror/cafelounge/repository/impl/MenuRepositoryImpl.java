@@ -72,8 +72,38 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 
 	@Override
 	public int countLiveMenu() {
-		String sql = "SELECT COUNT(*) FROM cafelounge_db.menu WHERE status = \"live\"";
+		String sql = "SELECT COUNT(*) FROM cafelounge_db.menu WHERE status = \"live\" AND date_deleted IS NULL";
 		return getJdbcTemplate().queryForObject(sql, Integer.class);
+	}
+
+	@Override
+	public void deleteById(int id) {
+		String sql = "UPDATE cafelounge_db.menu SET date_deleted = CURRENT_TIMESTAMP, status = ? WHERE id = ?";
+		getJdbcTemplate().update(sql, "delisted", id);
+	}
+
+	@Override
+	public MenuDto getMenuById(int id) {
+		String sql = "SELECT * FROM cafelounge_db.menu WHERE id = ?";
+
+		try {
+			return getJdbcTemplate().queryForObject(sql, new Object[] { id }, new MenuMapper());
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	@Override
+	public void updateMenuById(int id, MenuDto menuDto) {
+		String sql = "UPDATE cafelounge_db.menu SET name = ?, quantity = ?, description = ?, category = ?, price = ?, status = ? WHERE id = ?";
+		getJdbcTemplate().update(sql, 
+		menuDto.getName(),
+		menuDto.getQuantity(),
+		menuDto.getDescription(),
+		menuDto.getCategory(),
+		menuDto.getPrice(),
+		menuDto.getStatus());
 	}
 
 }

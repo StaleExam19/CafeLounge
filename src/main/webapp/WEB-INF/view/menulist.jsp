@@ -25,12 +25,11 @@
                         <a href="${href}" class="btn">${item.label}</a>
                     </c:if>
                 </c:forEach>
-                <div class="btn flex justify-between relative" data-toggle="dropdown">
+                <div class="btn flex justify-between relative active" data-toggle="dropdown">
                     <span class="w-5"></span>
                     <span class="pointer-events-none">${status}</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi
-                    bi-chevron-down" viewBox="0 0 16 16">
-                        <path class="w-5 fill-black" fill-rule="evenodd"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="pointer-events-none" viewBox="0 0 16 16">
+                        <path class="w-5 fill-black pointer-events-none" fill-rule="evenodd"
                             d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z">
                         </path>
                     </svg>
@@ -42,7 +41,7 @@
                         <a href="?status=Delisted" class="hover:bg-orange-500 w-full text-center p-2">Delisted</a>
                     </div>
                 </div>
-                <div class="btn flex gap-2 addmenu-toggler">
+                <div class="btn bg-neutral-100/50 flex gap-2 addmenu-toggler">
                     <svg width="24" height="24" class="inline-flex " fill="none" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -58,7 +57,8 @@
     </div>
 
     <!-- Katu ning form sa addmenu, gilahi kay taas kaayo -->
-    <%@ include file="fragments/addmenuForm.jsp" %>
+    <%@ include file="fragments/addMenuForm.jsp" %>
+    <%@ include file="fragments/updateMenuForm.jsp" %>
 
     <!-- Menu Info Popup -->
     <%@ include file="fragments/menuInfo.jsp" %>

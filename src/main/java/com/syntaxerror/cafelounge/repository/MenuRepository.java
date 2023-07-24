@@ -10,7 +10,13 @@ public interface MenuRepository {
 
     List<MenuDto> getMenuByCategoryAndStatus(String category, String status);
     List<MenuDto> getMenuByStatus(String status);
+
     void addMenu(MenuDto menuDto);
+    void deleteById(int id);
+    void updateMenuById(int id, MenuDto menuDto);
 
     int countLiveMenu();
+    MenuDto getMenuById(int id);
 }
+
+

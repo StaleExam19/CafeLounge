@@ -1,7 +1,9 @@
 const formOverlay = document.querySelector(".form-overlay");
-const addmenuForm = document.querySelector(".addmenu-form");
 const addmenuToggler = document.querySelector(".addmenu-toggler");
 const infoPopup = document.querySelector(".info-popup");
+
+const addmenuForm = document.querySelector(".addmenu-form");
+const updatemenuForm = document.querySelector(".update-form")
 
 function showAddMenuForm() {
     formOverlay.classList.remove("hidden");
@@ -12,6 +14,18 @@ function hideAddMenuForm() {
     formOverlay.classList.add("hidden");
     addmenuForm.classList.replace("flex", "hidden");
 }
+
+function showUpdateForm() {
+    formOverlay.classList.remove("hidden");
+    updatemenuForm.classList.replace("hidden", "flex");
+}
+
+function hideUpdateForm() {
+    formOverlay.classList.add("hidden");
+    updatemenuForm.classList.replace("flex", "hidden");
+}
+
+
 
 /**
  * 
@@ -57,10 +71,15 @@ function generateBlobUrl(base64String) {
 }
 
 addmenuToggler.addEventListener("click", _ => showAddMenuForm());
-formOverlay.addEventListener("click", _ => hideAddMenuForm());
+formOverlay.addEventListener("click", _ => {
+    hideAddMenuForm();
+    hideUpdateForm();
+});
+
 
 document.addEventListener("click", async evt => {
     const target = evt.target;
+    const url = location.host;
 
     if (target.matches("[data-info-toggle]")) {
         const menuId = target.getAttribute("data-info-toggle");
@@ -73,4 +92,21 @@ document.addEventListener("click", async evt => {
     }
 
     if (target.matches("[data-close-info]")) hideInfoPopup();
+
+    if (target.matches("[data-menu-delete]")) {
+        const menuId = target.getAttribute("data-menu-delete");
+        await fetch(`/api/menu/${menuId}`, {
+            method: "delete"
+        });
+        location.reload();
+    }
+
+    if (target.matches("[data-update-menu-id]")) {
+        /**@type {HTMLFormElement} */
+        const form = document.querySelector(".update-form");
+        const id = target.getAttribute("data-update-menu-id");        
+
+        form.action = `/updateMenu/${id}`;
+        showUpdateForm();
+    }
 });
