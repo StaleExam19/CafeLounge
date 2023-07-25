@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.syntaxerror.cafelounge.service.ChefService;
 import com.syntaxerror.cafelounge.service.MenuService;
+import com.syntaxerror.cafelounge.service.OrderService;
 import com.syntaxerror.cafelounge.util.BtnLink;
 
 @Controller
@@ -23,6 +24,9 @@ public class HomeController {
 
 	@Autowired
 	MenuService menuService;
+
+	@Autowired
+	OrderService orderService;
 
 	@ModelAttribute
 	void init(Model model, HttpSession session, HttpServletRequest request) {
@@ -43,6 +47,9 @@ public class HomeController {
 	public String dashboard(Model model) {
 
 		model.addAttribute("liveMenu", menuService.countLiveMenu());
+		model.addAttribute("pendingOrder", orderService.countByStatus("pending"));
+		model.addAttribute("completedOrder", orderService.countByStatus("completed"));
+
 		return "dashboard";
 	}
 

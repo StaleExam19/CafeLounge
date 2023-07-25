@@ -7,4 +7,5 @@ import com.syntaxerror.cafelounge.model.Order;
 public interface OrderRepository {
     List<Order> getAllOrders();
     Order getOrderById(int id);
+    int countByStatus(String status);
 }

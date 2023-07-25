@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 24, 2023 at 04:11 PM
+-- Generation Time: Jul 25, 2023 at 04:40 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -129,7 +129,9 @@ CREATE TABLE `order` (
 
 INSERT INTO `order` (`id`, `customer_id`, `menu_id`, `quantity`, `status`, `date_ordered`, `date_completed`, `date_deleted`) VALUES
 (1, 1, 11, 2, 'pending', '2023-07-24 10:47:13', NULL, NULL),
-(2, 1, 12, 1, 'pending', '2023-07-24 10:48:30', NULL, NULL);
+(2, 1, 12, 1, 'pending', '2023-07-24 10:48:30', NULL, NULL),
+(3, 2, 13, 2, 'pending', '2023-07-25 11:07:31', NULL, NULL),
+(4, 2, 16, 2, 'pending', '2023-07-25 11:07:31', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -187,7 +189,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

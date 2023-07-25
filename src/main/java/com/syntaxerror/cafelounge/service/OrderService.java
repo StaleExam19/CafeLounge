@@ -9,4 +9,6 @@ public interface OrderService {
 
         Order getOrderById(int id);
 
+        int countByStatus(String status);
+
 }

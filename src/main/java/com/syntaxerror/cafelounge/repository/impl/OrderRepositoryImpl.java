@@ -72,4 +72,10 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
         return order;
     }
 
+    @Override
+    public int countByStatus(String status) {
+        String sql = "SELECT COUNT(*) FROM cafelounge_db.`order` WHERE status = ?";
+        return getJdbcTemplate().queryForObject(sql, new Object[] {status}, Integer.class);        
+    }
+
 }
