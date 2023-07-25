@@ -13,12 +13,15 @@ public class OrderMapper implements RowMapper<OrderDto> {
     public OrderDto mapRow(ResultSet rs, int rowNum) throws SQLException {
         OrderDto order = new OrderDto();
 
-        order.setCustomerName(rs.getString("customer_name"));
-        order.setMenuName(rs.getString("menu_name"));
+        order.setId(rs.getInt("id"));   
+        order.setCustomerId(rs.getInt("customer_id"));
+        order.setMenuId(rs.getInt("menu_id"));
         order.setQuantity(rs.getInt("quantity"));
         order.setStatus(rs.getString("status"));
         order.setDateOrdered(rs.getDate("date_ordered"));
-        
+        order.setDateCompleted(rs.getDate("date_completed"));
+        order.setDateDeleted(rs.getDate("date_deleted"));
+
         return order;
     }
     

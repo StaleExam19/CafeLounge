@@ -2,10 +2,11 @@ package com.syntaxerror.cafelounge.service;
 
 import java.util.List;
 
-import com.syntaxerror.cafelounge.dto.OrderDto;
+import com.syntaxerror.cafelounge.model.Order;
 
 public interface OrderService {
-    List<OrderDto> getAllOrders();
-    List<OrderDto> getOrdersByCustomerId(int customerId);
+        List<Order> getAllOrders();
+
+        Order getOrderById(int id);
 
 }

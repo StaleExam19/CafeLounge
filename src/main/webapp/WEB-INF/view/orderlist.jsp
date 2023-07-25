@@ -35,10 +35,11 @@
                         <tr>
                             <td>${order.customerName}</td>
                             <td>${order.dateOrdered}</td>
-                            <td>Cash</td>
+                            <td>${order.paymentMethod}</td>
                             <td style="text-transform: capitalize;">${order.status}</td>
                             <td>
-                                <a href="" class="underline">View Details</a>
+                                <c:url var="orderDetail" value="/orderlist/${order.id}"/>
+                                <a href="${orderDetail}" class="underline">View Details</a>
                             </td>
                         </tr>
                     </c:forEach>
