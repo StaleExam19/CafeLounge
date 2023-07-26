@@ -8,4 +8,6 @@ public interface OrderRepository {
     List<Order> getAllOrders();
     Order getOrderById(int id);
     int countByStatus(String status);
+    void updateStatusById(int id, String status);
+    List<Order> getOrdersByStatus(String status);
 }

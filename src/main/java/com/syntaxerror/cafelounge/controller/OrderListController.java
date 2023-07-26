@@ -47,10 +47,26 @@ public class OrderListController {
         return "orderlist";
     }
 
-    @RequestMapping("/orderlist/{id}")
+    @RequestMapping("/order/{id}")
     String orderDetails(Model model, @PathVariable("id") int id) {
         Order order = orderService.getOrderById(id);
         model.addAttribute("order", order);
         return "orderdetail";
+    }
+
+    @RequestMapping("/orderlist/{status}")
+    String orderFilteredByStatus(Model model, @PathVariable("status") String status) {
+        List<Order> orders = orderService.getOrdersByStatus(status);
+        model.addAttribute("orders", orders);
+        model.addAttribute("naaySearch", true);
+        
+        return "orderlist";
+    }
+
+    @RequestMapping("/updateOrder/{id}")
+    String updateOrder(Model model, @PathVariable("id") int id) {
+        orderService.updateStatusById(id, "completed");
+
+        return "redirect:/orderlist";
     }
 }

@@ -41,7 +41,10 @@
                 </div>
                 <br>    
                 <div class="flex">
-                    <button class="btn">Mark as Completed</button>
+                    <c:if test="${order.status == 'pending'}">
+                        <c:url var="updateOrder" value="/updateOrder/${order.id}" />
+                        <a href="${updateOrder}" class="btn">Mark as Completed</a>
+                    </c:if>
                 </div>
             </div>
         </div>

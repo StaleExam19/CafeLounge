@@ -28,5 +28,15 @@ public class OrderServiceImpl implements OrderService {
     public int countByStatus(String status) {
         return orderRepository.countByStatus(status);
     }
+
+    @Override
+    public void updateStatusById(int id, String status) {
+        orderRepository.updateStatusById(id, status);
+    }
+
+    @Override
+    public List<Order> getOrdersByStatus(String status) {
+        return orderRepository.getOrdersByStatus(status);
+    }
     
 }

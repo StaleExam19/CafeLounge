@@ -75,7 +75,46 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
     @Override
     public int countByStatus(String status) {
         String sql = "SELECT COUNT(*) FROM cafelounge_db.`order` WHERE status = ?";
-        return getJdbcTemplate().queryForObject(sql, new Object[] {status}, Integer.class);        
+        return getJdbcTemplate().queryForObject(sql, new Object[] { status }, Integer.class);
+    }
+
+    @Override
+    public void updateStatusById(int id, String status) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("UPDATE cafelounge_db.`order` SET status =  ?, date_completed = CURRENT_TIMESTAMP ")
+                .append("WHERE id = ?");
+
+        getJdbcTemplate().update(sql.toString(),
+                status, id);
+    }
+
+    @Override
+    public List<Order> getOrdersByStatus(String status) {
+        String sql = "SELECT * FROM cafelounge_db.`order` WHERE status = ?";
+        List<OrderDto> orderDtos = getJdbcTemplate().query(sql, new Object[] {status}, new OrderMapper());
+        List<Order> orders = new ArrayList<>();
+
+        for (int i = 0; i < orderDtos.size(); i++) {
+            OrderDto orderDto = orderDtos.get(i);
+            Customer customer = customerRepository.getCustomerById(orderDto.getCustomerId());
+            MenuDto menuDto = menuRepository.findById(orderDto.getMenuId());
+            Order order = new Order();
+
+            order.setId(orderDto.getId());
+            order.setCustomerName(customer.getFirstname() + " " + customer.getLastname());
+            order.setDateOrdered(orderDto.getDateOrdered());
+            order.setPaymentMethod("Cash");
+            order.setStatus(orderDto.getStatus());
+
+            order.setMenuName(menuDto.getName());
+            order.setMenuPrice(menuDto.getPrice());
+            order.setQuantity(orderDto.getQuantity());
+
+            orders.add(order);
+        }
+
+        return orders;
     }
 
 }

@@ -15,12 +15,12 @@
                         <div class="dashboard-card">
                             <h1 class="title">Total Pending</h1>
                             <span class="text-8xl font-bold">${pendingOrder}</span>
-                            <a href="" class="text-xl underline">See more</a>
+                            <a href="/orderlist/pending" class="text-xl underline">See more</a>
                         </div>
                         <div class="dashboard-card">
                             <h1 class="title">Total Completed</h1>
                             <span class="text-8xl font-bold">${completedOrder}</span>
-                            <a href="" class="text-xl underline">See more</a>
+                            <a href="/orderlist/completed" class="text-xl underline">See more</a>
                         </div>
                     </div>
             </div>
