@@ -1,0 +1,53 @@
+[
+    {
+        "orderNumber": 1,
+        "customerName": "John Ryan Baculpo",
+        "dateOrdered": 1690387200000,
+        "orders": [
+            {
+                "menuName": "Kupras",
+                "quantity": 2,
+                "price": 152.0
+            },
+            {
+                "menuName": "Ginamos",
+                "quantity": 3,
+                "price": 150.0
+            },
+            {
+                "menuName": "Linusak",
+                "quantity": 1,
+                "price": 150.0
+            }
+        ],
+        "status": "completed"
+    },
+    {
+        "orderNumber": 2,
+        "customerName": "Louie Abad",
+        "dateOrdered": 1690387200000,
+        "orders": [
+            {
+                "menuName": "Kupras",
+                "quantity": 4,
+                "price": 152.0
+            },
+            {
+                "menuName": "Ginamos",
+                "quantity": 2,
+                "price": 150.0
+            },
+            {
+                "menuName": "Linusak",
+                "quantity": 1,
+                "price": 150.0
+            },
+            {
+                "menuName": "Initing",
+                "quantity": 3,
+                "price": 150.0
+            }
+        ],
+        "status": "pending"
+    }
+]

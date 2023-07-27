@@ -15,28 +15,27 @@ public class OrderServiceImpl implements OrderService {
     OrderRepository orderRepository;
 
     @Override
-    public List<Order> getAllOrders() {
-        return orderRepository.getAllOrders();
-    }
-
-    @Override
-    public Order getOrderById(int id) {
-        return orderRepository.getOrderById(id);
-    }
-
-    @Override
     public int countByStatus(String status) {
         return orderRepository.countByStatus(status);
     }
 
     @Override
-    public void updateStatusById(int id, String status) {
-        orderRepository.updateStatusById(id, status);
+    public void updateStatusByOrderNumber(int id, String status) {
+        orderRepository.updateStatusByOrderNumber(id, status);
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+        return orderRepository.getAllOrders();        
+    }
+
+    @Override
+    public Order getOrderByOrderNumber(int orderNumber) {
+        return orderRepository.getOrderByOrderNumber(orderNumber);
     }
 
     @Override
     public List<Order> getOrdersByStatus(String status) {
         return orderRepository.getOrdersByStatus(status);
     }
-    
 }

@@ -1,47 +1,21 @@
 package com.syntaxerror.cafelounge.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
-    private int id;
+    private int orderNumber;
     private String customerName;
     private Date dateOrdered;
-    private String paymentMethod;
+    private List<OrderItem> orders;
     private String status;
-    private String menuName;
-    private double menuPrice;
-    private int quantity;
-    
-    public int getQuantity() {
-        return quantity;
+
+    public int getOrderNumber() {
+        return orderNumber;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getMenuName() {
-        return menuName;
-    }
-
-    public void setMenuName(String menuName) {
-        this.menuName = menuName;
-    }
-
-    public double getMenuPrice() {
-        return menuPrice;
-    }
-
-    public void setMenuPrice(double d) {
-        this.menuPrice = d;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public String getCustomerName() {
@@ -60,12 +34,12 @@ public class Order {
         this.dateOrdered = dateOrdered;
     }
 
-    public String getPaymentMethod() {
-        return paymentMethod;
+    public List<OrderItem> getOrders() {
+        return orders;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setOrders(List<OrderItem> orders) {
+        this.orders = orders;
     }
 
     public String getStatus() {

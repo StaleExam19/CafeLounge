@@ -127,4 +127,11 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 				id);
 	}
 
+	@Override
+	public void updateQuantity(int id, int quantity) {
+		String sql = "UPDATE cafelounge_db.menu SET quantity = ? WHERE id = ?";
+		MenuDto menu = getMenuById(id);
+		getJdbcTemplate().update(sql, menu.getPrice() - quantity, id);
+	}
+
 }

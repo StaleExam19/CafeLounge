@@ -12,25 +12,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.syntaxerror.cafelounge.model.Customer;
-import com.syntaxerror.cafelounge.repository.CustomerRepository;
+import com.syntaxerror.cafelounge.model.Order;
+import com.syntaxerror.cafelounge.repository.OrderRepository;
 
 @Controller
 @RequestMapping("/api")
 public class OrderRestController {
-
     @Autowired
-    CustomerRepository customerRepository;
+    OrderRepository orderRepository;
 
     @RequestMapping("/orders")
-    ResponseEntity<String> allOrders() {
+    ResponseEntity<String> allMenu() {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Customer> orders = customerRepository.getAllCustomersWithOrder();
+        List<Order> responses = orderRepository.getAllOrders();
 
         String jsonResponse;
 
         try {
-            jsonResponse = objectMapper.writeValueAsString(orders);
+            jsonResponse = objectMapper.writeValueAsString(responses);
         } catch (JsonProcessingException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

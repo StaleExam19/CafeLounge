@@ -8,10 +8,20 @@ public class OrderDto {
     private int menuId;
     private int quantity;
     private String status;
+    private int orderNum;
     private Date dateOrdered;
     private Date dateCompleted;
     private Date dateDeleted;
     
+
+    public void setOrderNum(int orderNum) {
+        this.orderNum = orderNum;
+    }
+
+    public int getOrderNum() {
+        return orderNum;
+    }
+
     public int getId() {
         return id;
     }

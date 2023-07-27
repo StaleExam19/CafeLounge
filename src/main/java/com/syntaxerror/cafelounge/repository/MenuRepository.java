@@ -17,6 +17,8 @@ public interface MenuRepository {
 
     int countLiveMenu();
     MenuDto getMenuById(int id);
+
+    void updateQuantity(int id, int quantity);
 }
 
 

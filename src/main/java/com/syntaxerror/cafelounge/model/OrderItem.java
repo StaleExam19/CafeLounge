@@ -1,11 +1,17 @@
 package com.syntaxerror.cafelounge.model;
 
-import java.util.Date;
-
-public class Menu {
+public class OrderItem {
     private String menuName;
     private int quantity;
-    private Date dateOrdered;
+    private double price;
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
+    }
 
     public String getMenuName() {
         return menuName;
@@ -23,11 +29,4 @@ public class Menu {
         this.quantity = quantity;
     }
 
-    public Date getDateOrdered() {
-        return dateOrdered;
-    }
-
-    public void setDateOrdered(Date dateOrdered) {
-        this.dateOrdered = dateOrdered;
-    }
 }

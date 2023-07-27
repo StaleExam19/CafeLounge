@@ -19,30 +19,23 @@
                 <h3 class="text-3xl">${order.customerName}</h3>
                 <p>Status: ${order.status}</p>
                 <br>
-                <p class="text-xl">${order.menuName}</p>
+
+                <c:forEach var="menu" items="${order.orders}">
+                    <div class="flex items-center justify-between">
+                        <p class="text-xl">${menu.menuName}</p>
+                        <p>Php ${menu.price} (${menu.quantity})</p>
+                    </div>
+                </c:forEach>
+
+                <div class="w-full bg-neutral-900 h-[2px] mb-3"></div>
+                <div class="flex justify-between items-center">
+                    <p>Total</p>
+                    <p>Php ${total}</p>
+                </div>
                 <br>
-
-                <p class="">Order summary</p>
-                <div class="bg-black mb-3 h-[2px] w-full"></div>
-
-                <div class="flex justify-between">
-                    <p>Base Price: </p>
-                    <div>Php ${order.menuPrice}</div>
-                </div>
-
-                <div class="flex justify-between">
-                    <p>Quantity: </p>
-                    <p>${order.quantity}</p>
-                </div>
-
-                <div class="flex justify-between">
-                    <p>Total: </p>
-                    <p>Php ${order.menuPrice * order.quantity}</p>
-                </div>
-                <br>    
                 <div class="flex">
                     <c:if test="${order.status == 'pending'}">
-                        <c:url var="updateOrder" value="/updateOrder/${order.id}" />
+                        <c:url var="updateOrder" value="/updateOrder/${order.orderNumber}" />
                         <a href="${updateOrder}" class="btn">Mark as Completed</a>
                     </c:if>
                 </div>

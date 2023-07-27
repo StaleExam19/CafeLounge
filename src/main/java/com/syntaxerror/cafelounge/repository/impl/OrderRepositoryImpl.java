@@ -1,16 +1,19 @@
 package com.syntaxerror.cafelounge.repository.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.syntaxerror.cafelounge.dto.CustomerDto;
 import com.syntaxerror.cafelounge.dto.MenuDto;
 import com.syntaxerror.cafelounge.dto.OrderDto;
 import com.syntaxerror.cafelounge.mapper.OrderMapper;
-import com.syntaxerror.cafelounge.model.Customer;
 import com.syntaxerror.cafelounge.model.Order;
+import com.syntaxerror.cafelounge.model.OrderItem;
 import com.syntaxerror.cafelounge.repository.CustomerRepository;
 import com.syntaxerror.cafelounge.repository.MenuRepository;
 import com.syntaxerror.cafelounge.repository.OrderRepository;
@@ -19,6 +22,7 @@ import com.syntaxerror.cafelounge.repository.OrderRepository;
 public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepository {
     @Autowired
     CustomerRepository customerRepository;
+
     @Autowired
     MenuRepository menuRepository;
 
@@ -26,95 +30,144 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
     public List<Order> getAllOrders() {
         String sql = "SELECT * FROM cafelounge_db.`order` WHERE 1";
         List<OrderDto> orderDtos = getJdbcTemplate().query(sql, new OrderMapper());
-        List<Order> orders = new ArrayList<>();
+        Map<Integer, Order> orderMap = new HashMap<>();
 
         for (int i = 0; i < orderDtos.size(); i++) {
             OrderDto orderDto = orderDtos.get(i);
-            Customer customer = customerRepository.getCustomerById(orderDto.getCustomerId());
-            MenuDto menuDto = menuRepository.findById(orderDto.getMenuId());
-            Order order = new Order();
+            Order order = orderMap.get(orderDto.getOrderNum());
 
-            order.setId(orderDto.getId());
-            order.setCustomerName(customer.getFirstname() + " " + customer.getLastname());
-            order.setDateOrdered(orderDto.getDateOrdered());
-            order.setPaymentMethod("Cash");
-            order.setStatus(orderDto.getStatus());
+            if (order == null) {
+                CustomerDto customer = customerRepository.getCustomerById(orderDto.getCustomerId());
+                order = new Order();
 
-            order.setMenuName(menuDto.getName());
-            order.setMenuPrice(menuDto.getPrice());
-            order.setQuantity(orderDto.getQuantity());
+                order.setCustomerName(customer.getFirstname() + " " + customer.getLastname());
+                order.setOrderNumber(orderDto.getOrderNum());
+                order.setStatus(orderDto.getStatus());
+                order.setDateOrdered(orderDto.getDateOrdered());
 
-            orders.add(order);
+                order.setOrders(new ArrayList<OrderItem>());
+
+                orderMap.put(orderDto.getOrderNum(), order);
+            }
+
+            if (orderDto.getMenuId() != 0) {
+                OrderItem orderItem = new OrderItem();
+                MenuDto menu = menuRepository.getMenuById(orderDto.getMenuId());
+
+                orderItem.setMenuName(menu.getName());
+                orderItem.setQuantity(orderDto.getQuantity());
+                orderItem.setPrice(menu.getPrice());
+
+                order.getOrders().add(orderItem);
+            }
         }
 
-        return orders;
+        return new ArrayList<>(orderMap.values());
+
     }
 
     @Override
-    public Order getOrderById(int id) {
-        Order order = new Order();
+    public Order getOrderByOrderNumber(int orderNumber) {
+        String sql = "SELECT * FROM cafelounge_db.`order` WHERE order_number = ?";
+        List<OrderDto> orderDtos = getJdbcTemplate().query(sql, new Object[] { orderNumber }, new OrderMapper());
+        Order order = null;
 
-        String sql = "SELECT * FROM cafelounge_db.`order` WHERE id = ?";
-        OrderDto orderDto = getJdbcTemplate().queryForObject(sql, new Object[] { id }, new OrderMapper());
-        Customer customer = customerRepository.getCustomerById(orderDto.getCustomerId());
-        MenuDto menuDto = menuRepository.findById(orderDto.getMenuId());
+        for (int i = 0; i < orderDtos.size(); i++) {
+            OrderDto orderDto = orderDtos.get(i);
+            if (order == null) {
+                CustomerDto customer = customerRepository.getCustomerById(orderDto.getCustomerId());
+                order = new Order();
 
-        order.setId(orderDto.getId());
-        order.setCustomerName(customer.getFirstname() + " " + customer.getLastname());
-        order.setDateOrdered(orderDto.getDateOrdered());
-        order.setPaymentMethod("Cash");
-        order.setStatus(orderDto.getStatus());
+                order.setCustomerName(customer.getFirstname() + " " + customer.getLastname());
+                order.setOrderNumber(orderDto.getOrderNum());
+                order.setStatus(orderDto.getStatus());
+                order.setDateOrdered(orderDto.getDateOrdered());
 
-        order.setMenuName(menuDto.getName());
-        order.setMenuPrice(menuDto.getPrice());
-        order.setQuantity(orderDto.getQuantity());
+                order.setOrders(new ArrayList<OrderItem>());
+            }
+
+            if (orderDto.getMenuId() != 0) {
+                OrderItem orderItem = new OrderItem();
+                MenuDto menu = menuRepository.getMenuById(orderDto.getMenuId());
+
+                orderItem.setMenuName(menu.getName());
+                orderItem.setQuantity(orderDto.getQuantity());
+                orderItem.setPrice(menu.getPrice());
+
+                order.getOrders().add(orderItem);
+            }
+        }
 
         return order;
     }
 
     @Override
-    public int countByStatus(String status) {
-        String sql = "SELECT COUNT(*) FROM cafelounge_db.`order` WHERE status = ?";
-        return getJdbcTemplate().queryForObject(sql, new Object[] { status }, Integer.class);
-    }
-
-    @Override
-    public void updateStatusById(int id, String status) {
-        StringBuilder sql = new StringBuilder();
-
-        sql.append("UPDATE cafelounge_db.`order` SET status =  ?, date_completed = CURRENT_TIMESTAMP ")
-                .append("WHERE id = ?");
-
-        getJdbcTemplate().update(sql.toString(),
-                status, id);
-    }
-
-    @Override
     public List<Order> getOrdersByStatus(String status) {
         String sql = "SELECT * FROM cafelounge_db.`order` WHERE status = ?";
-        List<OrderDto> orderDtos = getJdbcTemplate().query(sql, new Object[] {status}, new OrderMapper());
-        List<Order> orders = new ArrayList<>();
+        List<OrderDto> orderDtos = getJdbcTemplate().query(sql, new Object[] { status }, new OrderMapper());
+        Map<Integer, Order> orderMap = new HashMap<>();
 
         for (int i = 0; i < orderDtos.size(); i++) {
             OrderDto orderDto = orderDtos.get(i);
-            Customer customer = customerRepository.getCustomerById(orderDto.getCustomerId());
-            MenuDto menuDto = menuRepository.findById(orderDto.getMenuId());
-            Order order = new Order();
+            Order order = orderMap.get(orderDto.getOrderNum());
 
-            order.setId(orderDto.getId());
-            order.setCustomerName(customer.getFirstname() + " " + customer.getLastname());
-            order.setDateOrdered(orderDto.getDateOrdered());
-            order.setPaymentMethod("Cash");
-            order.setStatus(orderDto.getStatus());
+            if (order == null) {
+                CustomerDto customer = customerRepository.getCustomerById(orderDto.getCustomerId());
+                order = new Order();
 
-            order.setMenuName(menuDto.getName());
-            order.setMenuPrice(menuDto.getPrice());
-            order.setQuantity(orderDto.getQuantity());
+                order.setCustomerName(customer.getFirstname() + " " + customer.getLastname());
+                order.setOrderNumber(orderDto.getOrderNum());
+                order.setStatus(orderDto.getStatus());
+                order.setDateOrdered(orderDto.getDateOrdered());
 
-            orders.add(order);
+                order.setOrders(new ArrayList<OrderItem>());
+
+                orderMap.put(orderDto.getOrderNum(), order);
+            }
+
+            if (orderDto.getMenuId() != 0) {
+                OrderItem orderItem = new OrderItem();
+                MenuDto menu = menuRepository.getMenuById(orderDto.getMenuId());
+
+                orderItem.setMenuName(menu.getName());
+                orderItem.setQuantity(orderDto.getQuantity());
+                orderItem.setPrice(menu.getPrice());
+
+                order.getOrders().add(orderItem);
+            }
         }
 
-        return orders;
+        return new ArrayList<>(orderMap.values());
+
+    }
+
+    @Override
+    public int countByStatus(String status) {
+        return getOrdersByStatus(status).size();
+    }
+
+    @Override
+    public void updateStatusByOrderNumber(int orderNumber, String status) {
+        String sql = "UPDATE cafelounge_db.`order` SET status = ? ";
+
+        if (status == "completed")
+            sql += ", date_completed = CURRENT_TIMESTAMP ";
+
+        sql += "WHERE order_number = ?";
+        getJdbcTemplate().update(sql, status, orderNumber);
+
+        // Update quantity
+        // List<OrderDto> orderDtos = getJdbcTemplate().query(
+        //         "SELECT * FROM cafelounge_db.`order` WHERE order_number = ? AND status = ?",
+        //         new Object[] { orderNumber, status },
+        //         new OrderMapper());
+
+        // for (OrderDto order : orderDtos) {
+        //     MenuDto menu = menuRepository.getMenuById(order.getMenuId());
+        //     System.out.println(menu.getQuantity());
+        //     menuRepository.updateQuantity(order.getMenuId(),
+        //             menu.getQuantity() - order.getQuantity());
+        // }
     }
 
 }

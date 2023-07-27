@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.syntaxerror.cafelounge.model.Order;
+import com.syntaxerror.cafelounge.model.OrderItem;
 import com.syntaxerror.cafelounge.service.CustomerService;
 import com.syntaxerror.cafelounge.service.OrderService;
 import com.syntaxerror.cafelounge.util.BtnLink;
@@ -41,16 +42,20 @@ public class OrderListController {
     String orderListPage(Model model) {
         List<Order> orders = orderService.getAllOrders();
         model.addAttribute("orders", orders);
-
-        model.addAttribute("naaySearch", true);
-
         return "orderlist";
     }
 
-    @RequestMapping("/order/{id}")
-    String orderDetails(Model model, @PathVariable("id") int id) {
-        Order order = orderService.getOrderById(id);
+    @RequestMapping("/order/{orderNumber}")
+    String orderDetails(Model model, @PathVariable("orderNumber") int id) {
+        Order order = orderService.getOrderByOrderNumber(id);
+        double total = 0;
+
+        for (OrderItem item : order.getOrders()) {
+            total += item.getPrice() * item.getQuantity();
+        }
+
         model.addAttribute("order", order);
+        model.addAttribute("total", total);
         return "orderdetail";
     }
 
@@ -58,15 +63,12 @@ public class OrderListController {
     String orderFilteredByStatus(Model model, @PathVariable("status") String status) {
         List<Order> orders = orderService.getOrdersByStatus(status);
         model.addAttribute("orders", orders);
-        model.addAttribute("naaySearch", true);
-        
         return "orderlist";
     }
 
     @RequestMapping("/updateOrder/{id}")
     String updateOrder(Model model, @PathVariable("id") int id) {
-        orderService.updateStatusById(id, "completed");
-
+        orderService.updateStatusByOrderNumber(id, "completed");
         return "redirect:/orderlist";
     }
 }
