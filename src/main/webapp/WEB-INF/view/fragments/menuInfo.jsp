@@ -15,6 +15,8 @@
             <br>
             <p>Added by: <span class="added-by">Jacklord Bongo</span></p>
             <br>
+            <p>Servings Left: <span class="remaining-servings"></span></p>
+            <br>
             <p class="menu-description">Ginamos is a Filipino style of fermented fish. Ginamos is typically made with anchovies or lancelet. Ginamos has a great fishy and salty flavor, making it the perfect condiment or side for sweet and spicy food alike!</p>
         </div>
     </div>

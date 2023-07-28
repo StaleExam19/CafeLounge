@@ -157,17 +157,17 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
         getJdbcTemplate().update(sql, status, orderNumber);
 
         // Update quantity
-        // List<OrderDto> orderDtos = getJdbcTemplate().query(
-        //         "SELECT * FROM cafelounge_db.`order` WHERE order_number = ? AND status = ?",
-        //         new Object[] { orderNumber, status },
-        //         new OrderMapper());
+        List<OrderDto> orderDtos = getJdbcTemplate().query(
+                "SELECT * FROM cafelounge_db.`order` WHERE order_number = ? AND status = ?",
+                new Object[] { orderNumber, status },
+                new OrderMapper());
 
-        // for (OrderDto order : orderDtos) {
-        //     MenuDto menu = menuRepository.getMenuById(order.getMenuId());
-        //     System.out.println(menu.getQuantity());
-        //     menuRepository.updateQuantity(order.getMenuId(),
-        //             menu.getQuantity() - order.getQuantity());
-        // }
+        for (OrderDto order : orderDtos) {
+            MenuDto menu = menuRepository.getMenuById(order.getMenuId());
+            
+            System.out.println(menu.getQuantity());
+            menuRepository.updateQuantity(order.getMenuId(), order.getQuantity());
+        }
     }
 
 }

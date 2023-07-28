@@ -131,7 +131,16 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 	public void updateQuantity(int id, int quantity) {
 		String sql = "UPDATE cafelounge_db.menu SET quantity = ? WHERE id = ?";
 		MenuDto menu = getMenuById(id);
-		getJdbcTemplate().update(sql, menu.getPrice() - quantity, id);
+		getJdbcTemplate().update(sql, menu.getQuantity() - quantity, id);
 	}
 
+	@Override
+	public List<MenuDto> searchMenu(String search) {
+		String sql = "SELECT * FROM cafelounge_db.menu WHERE name LIKE ?";
+		try {
+			return getJdbcTemplate().query(sql, new Object[] { "%" + search + "%" }, new MenuMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null; // Return null or any other value to indicate no matching rows
+		}
+	}
 }

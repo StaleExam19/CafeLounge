@@ -20,4 +20,6 @@ public interface MenuService {
     MenuDto getMenuById(int id);
 
     int countLiveMenu();
+
+    List<MenuDto> searchMenu(String search);
 }

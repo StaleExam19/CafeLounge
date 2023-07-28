@@ -58,13 +58,15 @@ function showInfoPopup(data) {
     const menuName = document.querySelector(".info-popup .menu-name");
     const addedBy = document.querySelector(".added-by");
     const menuDescription = document.querySelector(".menu-description");
+    const remainingServings = document.querySelector(".remaining-servings");
 
-    const imageUrl = generateBlobUrl(data.image);
+    const imageUrl = `/myImage?id=${data.id}`;
 
     image.src = imageUrl;
     menuName.innerText = data.name;
     addedBy.innerText = data.addedBy;
     menuDescription.innerText = data.description;
+    remainingServings.innerText = data.quantity;
 
     infoPopup.classList.replace("hidden", "flex");
 }
@@ -78,19 +80,19 @@ function hideInfoPopup() {
  * 
  * @param {string} base64String 
  */
-function generateBlobUrl(base64String) {
-    const byteChars = atob(base64String);
-    const byteNumbers = new Array(byteChars.length);
+// function generateBlobUrl(base64String) {
+//     const byteChars = atob(base64String);
+//     const byteNumbers = new Array(byteChars.length);
 
-    for (let i = 0; i < byteChars.length; i++)
-        byteNumbers[i] = byteChars.charCodeAt(i);
+//     for (let i = 0; i < byteChars.length; i++)
+//         byteNumbers[i] = byteChars.charCodeAt(i);
 
-    const bytes = new Uint8Array(byteNumbers);
-    const blob = new Blob([bytes]);
-    const blobUrl = URL.createObjectURL(blob);
+//     const bytes = new Uint8Array(byteNumbers);
+//     const blob = new Blob([bytes]);
+//     const blobUrl = URL.createObjectURL(blob);
 
-    return blobUrl;
-}
+//     return blobUrl;
+// }
 
 addmenuToggler.addEventListener("click", _ => showAddMenuForm());
 formOverlay.addEventListener("click", _ => {

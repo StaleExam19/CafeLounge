@@ -66,9 +66,6 @@ public class MenuController {
             @RequestParam(value = "status", defaultValue = "live") String status,
             @ModelAttribute("error") String error) {
 
-        if (session.getAttribute("user") == null)
-            return "redirect:/signin";
-
         List<MenuDto> menuList = menuService.getMenuByCategoryAndStatus(category, status);
 
         model.addAttribute("menuList", menuList);

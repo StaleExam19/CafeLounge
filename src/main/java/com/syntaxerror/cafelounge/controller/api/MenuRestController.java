@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,9 +25,16 @@ public class MenuRestController {
     MenuService menuService;
 
     @RequestMapping("/menu")
-    ResponseEntity<String> allMenu() {
+    ResponseEntity<String> allMenu(@RequestParam(value = "search", defaultValue = "") String search) {
+
         ObjectMapper objectMapper = new ObjectMapper();
-        List<MenuDto> responses = menuService.getAllMenu();
+        List<MenuDto> responses;
+
+        if (search.isEmpty()) responses = menuService.getAllMenu();
+        else responses = menuService.searchMenu(search);
+        
+        System.out.println(search);
+        System.out.println(search.isEmpty());
 
         String jsonResponse;
 

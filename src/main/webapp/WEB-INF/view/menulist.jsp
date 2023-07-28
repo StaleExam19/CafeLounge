@@ -64,7 +64,8 @@
     <%@ include file="fragments/menuInfo.jsp" %>
     <c:url var="js" value="/resources/js/menulist.js"/>
     <script defer="" src="${js}"></script>
-
+    <c:url var="menuSearchJs" value="/resources/js/menuSearch.js"/>
+    <script defer src="${menuSearchJs}"></script>
 
 </body>
 

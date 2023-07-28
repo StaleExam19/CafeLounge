@@ -33,6 +33,7 @@
                             <c:url var="orderStatusLink" value="/orderlist"/>
                             <a href="${orderStatusLink}" class="hover:bg-orange-500 w-full text-center p-2">All</a>
                             <a href="${orderStatusLink}/pending" class="hover:bg-orange-500 w-full text-center p-2">Pending</a>
+                            <a href="${orderStatusLink}/canceled" class="hover:bg-orange-500 w-full text-center p-2">Canceled</a>
                             <a href="${orderStatusLink}/completed" class="hover:bg-orange-500 w-full text-center p-2">Completed</a>
                         </div>
                         </th>

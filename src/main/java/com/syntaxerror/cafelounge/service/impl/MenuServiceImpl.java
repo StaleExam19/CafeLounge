@@ -89,4 +89,9 @@ public class MenuServiceImpl implements MenuService{
 		
 		menuRepository.updateMenuById(id, menu, updatedBy);
 	}
+
+	@Override
+	public List<MenuDto> searchMenu(String search) {
+		return menuRepository.searchMenu(search);
+	}
 }

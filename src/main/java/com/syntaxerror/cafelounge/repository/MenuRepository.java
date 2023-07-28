@@ -19,6 +19,8 @@ public interface MenuRepository {
     MenuDto getMenuById(int id);
 
     void updateQuantity(int id, int quantity);
+
+    List<MenuDto> searchMenu(String search);
 }
 
 
