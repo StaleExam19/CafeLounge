@@ -2,10 +2,11 @@ package com.syntaxerror.cafelounge.repository;
 
 import java.util.List;
 
+import com.syntaxerror.cafelounge.dto.MenuApiDto;
 import com.syntaxerror.cafelounge.dto.MenuDto;
 
 public interface MenuRepository {
-    List<MenuDto> getAllMenu();
+    List<MenuApiDto> getAllMenu();
     MenuDto findById(int id);
 
     List<MenuDto> getMenuByCategoryAndStatus(String category, String status);
@@ -20,7 +21,7 @@ public interface MenuRepository {
 
     void updateQuantity(int id, int quantity);
 
-    List<MenuDto> searchMenu(String search);
+    List<MenuApiDto> searchMenuByName(String search);
 }
 
 

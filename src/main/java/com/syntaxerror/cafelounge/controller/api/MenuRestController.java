@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.syntaxerror.cafelounge.dto.MenuApiDto;
 import com.syntaxerror.cafelounge.dto.MenuDto;
 import com.syntaxerror.cafelounge.service.MenuService;
 
@@ -28,10 +29,10 @@ public class MenuRestController {
     ResponseEntity<String> allMenu(@RequestParam(value = "search", defaultValue = "") String search) {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        List<MenuDto> responses;
+        List<MenuApiDto> responses;
 
         if (search.isEmpty()) responses = menuService.getAllMenu();
-        else responses = menuService.searchMenu(search);
+        else responses = menuService.searchMenuByName(search);
         
         System.out.println(search);
         System.out.println(search.isEmpty());

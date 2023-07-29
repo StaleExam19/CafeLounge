@@ -15,4 +15,6 @@ public interface OrderRepository {
     Order getOrderByOrderNumber(int orderNumber);
 
     List<Order> getOrdersByStatus(String status);
+
+    List<Order> searchOrderByCustomerName(String search);
 }

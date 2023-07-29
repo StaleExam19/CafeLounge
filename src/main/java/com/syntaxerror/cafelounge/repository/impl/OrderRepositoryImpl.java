@@ -28,7 +28,7 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
 
     @Override
     public List<Order> getAllOrders() {
-        String sql = "SELECT * FROM cafelounge_db.`order` WHERE 1";
+        String sql = "SELECT * FROM cafelounge_db.`order` WHERE DATE(date_ordered) = CURDATE()";
         List<OrderDto> orderDtos = getJdbcTemplate().query(sql, new OrderMapper());
         Map<Integer, Order> orderMap = new HashMap<>();
 
@@ -68,7 +68,8 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
 
     @Override
     public Order getOrderByOrderNumber(int orderNumber) {
-        String sql = "SELECT * FROM cafelounge_db.`order` WHERE order_number = ?";
+        String sql = "SELECT * FROM cafelounge_db.`order` " + 
+                     "WHERE order_number = ? AND DATE(date_ordered) = CURDATE()";
         List<OrderDto> orderDtos = getJdbcTemplate().query(sql, new Object[] { orderNumber }, new OrderMapper());
         Order order = null;
 
@@ -103,7 +104,7 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
 
     @Override
     public List<Order> getOrdersByStatus(String status) {
-        String sql = "SELECT * FROM cafelounge_db.`order` WHERE status = ?";
+        String sql = "SELECT * FROM cafelounge_db.`order` WHERE status = ? AND DATE(date_ordered) = CURDATE()";
         List<OrderDto> orderDtos = getJdbcTemplate().query(sql, new Object[] { status }, new OrderMapper());
         Map<Integer, Order> orderMap = new HashMap<>();
 
@@ -152,6 +153,8 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
 
         if (status == "completed")
             sql += ", date_completed = CURRENT_TIMESTAMP ";
+        else if (status == "canceled")
+            sql += ", date_canceled = CURRENT_TIMESTAMP ";
 
         sql += "WHERE order_number = ?";
         getJdbcTemplate().update(sql, status, orderNumber);
@@ -168,6 +171,12 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
             System.out.println(menu.getQuantity());
             menuRepository.updateQuantity(order.getMenuId(), order.getQuantity());
         }
+    }
+
+    @Override
+    public List<Order> searchOrderByCustomerName(String search) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'searchOrderByCustomerName'");
     }
 
 }

@@ -66,9 +66,15 @@ public class OrderListController {
         return "orderlist";
     }
 
-    @RequestMapping("/updateOrder/{id}")
-    String updateOrder(Model model, @PathVariable("id") int id) {
+    @RequestMapping("/completeOrder/{id}")
+    String completeOrder(Model model, @PathVariable("id") int id) {
         orderService.updateStatusByOrderNumber(id, "completed");
+        return "redirect:/orderlist";
+    }
+
+    @RequestMapping("/cancelOrder/{id}")
+    String cancelOrder(Model model, @PathVariable("id") int id) {
+        orderService.updateStatusByOrderNumber(id, "canceled");
         return "redirect:/orderlist";
     }
 }

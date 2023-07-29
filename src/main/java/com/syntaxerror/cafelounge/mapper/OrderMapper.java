@@ -21,7 +21,7 @@ public class OrderMapper implements RowMapper<OrderDto> {
         order.setOrderNum(rs.getInt("order_number"));
         order.setDateOrdered(rs.getDate("date_ordered"));
         order.setDateCompleted(rs.getDate("date_completed"));
-        order.setDateDeleted(rs.getDate("date_deleted"));
+        order.setDateCanceled(rs.getDate("date_canceled"));
 
         return order;
     }

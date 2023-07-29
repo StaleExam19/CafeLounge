@@ -33,10 +33,13 @@
                     <p>Php ${total}</p>
                 </div>
                 <br>
-                <div class="flex">
+                <div class="flex gap-5">
                     <c:if test="${order.status == 'pending'}">
-                        <c:url var="updateOrder" value="/updateOrder/${order.orderNumber}" />
-                        <a href="${updateOrder}" class="btn">Mark as Completed</a>
+                        <c:url var="completeOrder" value="/completeOrder/${order.orderNumber}" />
+                        <a href="${completeOrder}" class="btn bg-orange-500">Mark as Completed</a>
+
+                        <c:url var="cancelOrder" value="/cancelOrder/${order.orderNumber}" />
+                        <a href="${cancelOrder}" class="btn">Cancel Order</a>
                     </c:if>
                 </div>
             </div>

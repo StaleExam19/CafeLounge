@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.syntaxerror.cafelounge.dto.MenuApiDto;
 import com.syntaxerror.cafelounge.dto.MenuDto;
 import com.syntaxerror.cafelounge.model.MenuForm;
 import com.syntaxerror.cafelounge.repository.MenuRepository;
@@ -17,7 +18,7 @@ public class MenuServiceImpl implements MenuService{
 	MenuRepository menuRepository;
 
 	@Override
-	public List<MenuDto> getAllMenu() {
+	public List<MenuApiDto> getAllMenu() {
 		return menuRepository.getAllMenu();
 	}
 
@@ -91,7 +92,7 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public List<MenuDto> searchMenu(String search) {
-		return menuRepository.searchMenu(search);
+	public List<MenuApiDto> searchMenuByName(String search) {
+		return menuRepository.searchMenuByName(search);
 	}
 }

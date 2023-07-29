@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +23,8 @@ public class OrderRestController {
     OrderRepository orderRepository;
 
     @RequestMapping("/orders")
-    ResponseEntity<String> allMenu() {
+    ResponseEntity<String> allMenu(@RequestParam("search") String search) {
+
         ObjectMapper objectMapper = new ObjectMapper();
         List<Order> responses = orderRepository.getAllOrders();
 

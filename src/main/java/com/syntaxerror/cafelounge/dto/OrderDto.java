@@ -11,7 +11,7 @@ public class OrderDto {
     private int orderNum;
     private Date dateOrdered;
     private Date dateCompleted;
-    private Date dateDeleted;
+    private Date dateCanceled;
     
 
     public void setOrderNum(int orderNum) {
@@ -64,11 +64,11 @@ public class OrderDto {
     public void setDateCompleted(Date completed) {
         this.dateCompleted = completed;
     }
-    public Date getDateDeleted() {
-        return dateDeleted;
+    public Date getDateCanceled() {
+        return dateCanceled;
     }
-    public void setDateDeleted(Date dateDeleted) {
-        this.dateDeleted = dateDeleted;
+    public void setDateCanceled(Date dateDeleted) {
+        this.dateCanceled = dateDeleted;
     }
 
     

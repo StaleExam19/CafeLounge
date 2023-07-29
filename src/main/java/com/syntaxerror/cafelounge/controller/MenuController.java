@@ -64,10 +64,16 @@ public class MenuController {
             HttpSession session,
             @PathVariable("category") String category,
             @RequestParam(value = "status", defaultValue = "live") String status,
+            @RequestParam(value = "id", defaultValue = "") String id,
             @ModelAttribute("error") String error) {
 
-        List<MenuDto> menuList = menuService.getMenuByCategoryAndStatus(category, status);
+        List<MenuDto> menuList = new ArrayList<>();
 
+        if (id.isEmpty())
+            menuList = menuService.getMenuByCategoryAndStatus(category, status);
+        else
+            menuList.add(menuService.getMenuById(Integer.parseInt(id)));
+            
         model.addAttribute("menuList", menuList);
         model.addAttribute("menuForm", new MenuForm());
         model.addAttribute("category", category);

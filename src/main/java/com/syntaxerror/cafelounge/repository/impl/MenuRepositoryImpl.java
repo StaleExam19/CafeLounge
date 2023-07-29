@@ -5,17 +5,20 @@ import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.syntaxerror.cafelounge.dto.MenuApiDto;
 import com.syntaxerror.cafelounge.dto.MenuDto;
+import com.syntaxerror.cafelounge.mapper.MenuApiMapper;
 import com.syntaxerror.cafelounge.mapper.MenuMapper;
 import com.syntaxerror.cafelounge.repository.MenuRepository;
 
 @Repository
 public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuRepository {
 	@Override
-	public List<MenuDto> getAllMenu() {
-		String sql = "SELECT * FROM cafelounge_db.menu WHERE 1";
+	public List<MenuApiDto> getAllMenu() {
+		String sql = "SELECT id, name, category, description, quantity, status " + 
+					 "FROM cafelounge_db.menu WHERE 1";
 		try {
-			return getJdbcTemplate().query(sql, new MenuMapper());
+			return getJdbcTemplate().query(sql, new MenuApiMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null; // Return null or any other value to indicate no matching rows
 		}
@@ -135,12 +138,13 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 	}
 
 	@Override
-	public List<MenuDto> searchMenu(String search) {
-		String sql = "SELECT * FROM cafelounge_db.menu WHERE name LIKE ?";
+	public List<MenuApiDto> searchMenuByName(String search) {
+		String sql = "SELECT id, name, category, description, quantity, status " +
+ 					 "FROM cafelounge_db.menu WHERE name LIKE ?";
 		try {
-			return getJdbcTemplate().query(sql, new Object[] { "%" + search + "%" }, new MenuMapper());
+			return getJdbcTemplate().query(sql, new Object[] { "%" + search + "%" }, new MenuApiMapper());
 		} catch (EmptyResultDataAccessException e) {
-			return null; // Return null or any other value to indicate no matching rows
+			return null;
 		}
 	}
 }

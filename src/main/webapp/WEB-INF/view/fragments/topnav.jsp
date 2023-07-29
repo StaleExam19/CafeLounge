@@ -12,22 +12,22 @@
             <div class="flex gap-5">
                 <c:if test="${naaySearch}">
                     <div>
-                        <form class="bg-white border-2 flex items-center relative  px-2 border-black rounded-2xl">
+                        <div class="bg-white border-2 flex items-center relative  px-2 border-black rounded-2xl">
                                 <input type="text" placeholder="Search" id="menu-search-input"
                                 class="p-2 w-96 rounded-2xl outline-none placeholder:text-black">
-                            <button>
+                            <div>
                                 <svg width="24" height="24" fill="none" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M10 2.5a7.5 7.5 0 0 1 5.964 12.048l4.743 4.745a1 1 0 0 1-1.32 1.497l-.094-.083-4.745-4.743A7.5 7.5 0 1 1 10 2.5Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"
                                         fill="#212121" />
                                 </svg>
-                            </button>
+                            </div>
 
                             <div id="search-result" class="w-full max-h-72 overflow-auto z-30 left-0 absolute top-full bg-neutral-900 hidden flex-col">
                                 
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </c:if>
                 <div class="">
