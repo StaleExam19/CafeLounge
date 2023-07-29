@@ -1,5 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<!-- Replace "en_US" with your desired locale -->
+<fmt:setLocale value="en_US" />
+<fmt:setBundle basename="com.syntaxerror.cafelounge" />
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +51,7 @@
                         <tr>
                             <td>${order.orderNumber}</td>
                             <td>${order.customerName}</td>
-                            <td>${order.dateOrdered}</td>
+                            <td><fmt:formatDate value="${order.dateOrdered}" pattern="MMM dd, yyyy HH:mm:ss"/></td>
                             <td>Cash</td>
                             <td style="text-transform: capitalize;">${order.status}</td>
                             <td>

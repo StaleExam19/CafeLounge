@@ -23,7 +23,7 @@ public class OrderRestController {
     OrderRepository orderRepository;
 
     @RequestMapping("/orders")
-    ResponseEntity<String> allMenu(@RequestParam("search") String search) {
+    ResponseEntity<String> allMenu(@RequestParam(value = "search", defaultValue = "") String search) {
 
         ObjectMapper objectMapper = new ObjectMapper();
         List<Order> responses = orderRepository.getAllOrders();

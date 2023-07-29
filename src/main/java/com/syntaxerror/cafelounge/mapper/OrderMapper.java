@@ -19,9 +19,9 @@ public class OrderMapper implements RowMapper<OrderDto> {
         order.setQuantity(rs.getInt("quantity"));
         order.setStatus(rs.getString("status"));
         order.setOrderNum(rs.getInt("order_number"));
-        order.setDateOrdered(rs.getDate("date_ordered"));
-        order.setDateCompleted(rs.getDate("date_completed"));
-        order.setDateCanceled(rs.getDate("date_canceled"));
+        order.setDateOrdered(rs.getTimestamp("date_ordered"));
+        order.setDateCompleted(rs.getTimestamp("date_completed"));
+        order.setDateCanceled(rs.getTimestamp("date_canceled"));
 
         return order;
     }
