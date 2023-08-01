@@ -15,7 +15,7 @@
                     </svg>
                 </div>
 
-                <c:url var="imageController" value="/myImage" />
+                <c:url var="imageController" value="/images" />
 
                 <div class="h-52 flex justify-center items-center bg-neutral-800">
                     <img src="${imageController}?id=${item.id}" class="h-full">

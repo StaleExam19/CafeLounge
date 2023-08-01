@@ -62,7 +62,10 @@ public class OrderListController {
     @RequestMapping("/orderlist/{status}")
     String orderFilteredByStatus(Model model, @PathVariable("status") String status) {
         List<Order> orders = orderService.getOrdersByStatus(status);
+
         model.addAttribute("orders", orders);
+        model.addAttribute("pageTitle", "Order List | " + status);
+        
         return "orderlist";
     }
 

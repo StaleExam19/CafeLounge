@@ -26,7 +26,8 @@ menuSearchInput.addEventListener("keyup", async evt => {
         const result = data[i];
 
         searchResult.innerHTML += `
-        <a href="/menulist/${result.category}?id=${result.id}&status=${result.status}" class="flex justify-between items-center p-5 h-20 hover:bg-neutral-800">
+        <a href="/menulist/${result.category}?id=${result.id}&status=${result.status}" 
+        class="flex justify-between items-center p-5 h-20 hover:bg-neutral-800">
             <h3 class="text-white">${result.name}</h3>
             <div>
                 <p class="text-neutral-400 text-sm">Category: ${result.category}</p>

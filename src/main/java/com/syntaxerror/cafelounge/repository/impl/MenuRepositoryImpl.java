@@ -15,8 +15,8 @@ import com.syntaxerror.cafelounge.repository.MenuRepository;
 public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuRepository {
 	@Override
 	public List<MenuApiDto> getAllMenu() {
-		String sql = "SELECT id, name, category, description, quantity, status " + 
-					 "FROM cafelounge_db.menu WHERE 1";
+		String sql = "SELECT id, name, category, description, quantity, status " +
+				"FROM cafelounge_db.menu WHERE 1";
 		try {
 			return getJdbcTemplate().query(sql, new MenuApiMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -132,15 +132,25 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 
 	@Override
 	public void updateQuantity(int id, int quantity) {
-		String sql = "UPDATE cafelounge_db.menu SET quantity = ? WHERE id = ?";
 		MenuDto menu = getMenuById(id);
-		getJdbcTemplate().update(sql, menu.getQuantity() - quantity, id);
+		int newQuantity = menu.getQuantity() - quantity;
+
+		if (newQuantity == 0)
+			getJdbcTemplate().update(
+					"UPDATE cafelounge_db.menu SET quantity = ?, status = \"sold out\" WHERE id = ?",
+					newQuantity,
+					id);
+		else
+			getJdbcTemplate().update(
+					"UPDATE cafelounge_db.menu SET quantity = ? WHERE id = ?",
+					0, // zero lang diretso ang quantity para dili ma negative ang value
+					id);
 	}
 
 	@Override
 	public List<MenuApiDto> searchMenuByName(String search) {
 		String sql = "SELECT id, name, category, description, quantity, status " +
- 					 "FROM cafelounge_db.menu WHERE name LIKE ?";
+				"FROM cafelounge_db.menu WHERE name LIKE ?";
 		try {
 			return getJdbcTemplate().query(sql, new Object[] { "%" + search + "%" }, new MenuApiMapper());
 		} catch (EmptyResultDataAccessException e) {

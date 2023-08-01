@@ -18,7 +18,7 @@ public class ImageController {
     @Autowired
     MenuService menuService;
     
-    @RequestMapping("/myImage")
+    @RequestMapping("/images")
     public void showImage(@RequestParam("id") int id, HttpServletResponse response) throws IOException {
         MenuDto menu = menuService.findById(id);
         response.setContentType("image/jpeg, image/jpg, image/png, image/gif"); 

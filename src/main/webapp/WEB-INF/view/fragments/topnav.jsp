@@ -10,6 +10,8 @@
             <img src="${logo}" alt="" class="h-56 pt-5">
 
             <div class="flex gap-5">
+
+                <!-- Search section -->
                 <c:if test="${naaySearch}">
                     <div>
                         <div class="bg-white border-2 flex items-center relative  px-2 border-black rounded-2xl">
@@ -30,8 +32,60 @@
                         </div>
                     </div>
                 </c:if>
-                <div class="">
-                    <img src="${notifIcon}" alt="" class="h-10 cursor-pointer hover:scale-105">
+
+                <!-- Notification section -->
+                <div class="relative">
+                    <img src="${notifIcon}" alt="" class="h-10 cursor-pointer hover:scale-105" data-toggle="notification">
+
+                    <div class="absolute top-full right-0  z-30 hidden flex-col max-h-80 overflow-y-auto overflow-x-hidden" id="notification">
+                        <div class="w-80 p-3 bg-white hover:bg-neutral-200">
+                            <p class="font-bold">New order from</p>
+                            <div class="flex justify-between">
+                                <p>John Ryan Baculpo</p>
+                                <p class="text-neutral-500">Jul 30, 2023 18:27</p>
+                            </div>                            
+                        </div>
+
+                        <div class="w-80 p-3 bg-white hover:bg-neutral-200">
+                            <p class="font-bold">New order from</p>
+                            <div class="flex justify-between">
+                                <p>Louie Abad</p>
+                                <p class="text-neutral-500">Jul 30, 2023 18:27</p>
+                            </div>                            
+                        </div>
+
+                        <div class="w-80 p-3 bg-white hover:bg-neutral-200">
+                            <p class="font-bold">Out of Stock</p>
+                            <div class="flex justify-between">
+                                <p>Ginamos with Lemonsito</p>
+                                <p class="text-neutral-500">Jul 30, 2023 18:27</p>
+                            </div>                            
+                        </div>
+
+                        <div class="w-80 p-3 bg-white hover:bg-neutral-200">
+                            <p class="font-bold">New order from</p>
+                            <div class="flex justify-between">
+                                <p>John Ryan Baculpo</p>
+                                <p class="text-neutral-500">Jul 30, 2023 18:27</p>
+                            </div>                            
+                        </div>
+
+                        <div class="w-80 p-3 bg-white hover:bg-neutral-200">
+                            <p class="font-bold">New order from</p>
+                            <div class="flex justify-between">
+                                <p>John Ryan Baculpo</p>
+                                <p class="text-neutral-500">Jul 30, 2023 18:27</p>
+                            </div>                            
+                        </div>
+
+                        <div class="w-80 p-3 bg-white hover:bg-neutral-200">
+                            <p class="font-bold">Out of Stock</p>
+                            <div class="flex justify-between">
+                                <p>John Ryan Baculpo</p>
+                                <p class="text-neutral-500">Jul 30, 2023 18:27</p>
+                            </div>                            
+                        </div>
+                    </div>
                 </div>
 
                 <div class="relative">

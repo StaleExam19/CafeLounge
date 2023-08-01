@@ -79,6 +79,7 @@ public class MenuController {
         model.addAttribute("category", category);
         model.addAttribute("status", status);
 
+        model.addAttribute("pageTitle", "Menu List | " + category);
         return "menulist";
     }
 

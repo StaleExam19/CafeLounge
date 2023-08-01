@@ -34,8 +34,8 @@ public class MenuRestController {
         if (search.isEmpty()) responses = menuService.getAllMenu();
         else responses = menuService.searchMenuByName(search);
         
-        System.out.println(search);
-        System.out.println(search.isEmpty());
+        // System.out.println(search);
+        // System.out.println(search.isEmpty());
 
         String jsonResponse;
 
