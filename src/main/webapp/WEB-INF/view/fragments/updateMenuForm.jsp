@@ -17,7 +17,6 @@
     <form:select path="status" class="p-2 w-full items-start rounded-2xl border-none status">
         <option disabled="" selected="">-Status-</option>
         <option value="live">Live</option>
-        <option value="sold out">Sold Out</option>
         <option value="delisted">Delisted</option>
     </form:select>
     <form:input path="image" type="file" value="Choose File" placeholder="Choose file" class=" bg-white"/>

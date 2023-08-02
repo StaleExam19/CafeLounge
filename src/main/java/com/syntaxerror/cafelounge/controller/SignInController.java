@@ -58,7 +58,7 @@ public class SignInController {
 
         if (matchedUser.getDateUpdated() == null) {
             redirectAttributes.addFlashAttribute("message",
-                    "You logged for the first time, please update your profile");
+                    "You signed in for the first time, please update your profile");
             return "redirect:/updateProfile";
         }
 

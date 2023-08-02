@@ -3,6 +3,8 @@ package com.syntaxerror.cafelounge.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.syntaxerror.cafelounge.dto.ChefDto;
 import com.syntaxerror.cafelounge.model.Order;
 import com.syntaxerror.cafelounge.model.OrderItem;
 import com.syntaxerror.cafelounge.service.CustomerService;
@@ -26,7 +29,7 @@ public class OrderListController {
     OrderService orderService;
 
     @ModelAttribute
-    void init(Model model) {
+    void init(Model model, HttpSession session) {
         List<BtnLink> btns = new ArrayList<BtnLink>();
 
         btns.add(new BtnLink("/", "Dashboard"));
@@ -35,6 +38,10 @@ public class OrderListController {
 
         model.addAttribute("pageTitle", "Order List");
         model.addAttribute("sideNavBtn", btns);
+
+        ChefDto user = (ChefDto) session.getAttribute("user");
+		model.addAttribute("firstLetter", user.getFirstname().charAt(0));
+
 
     }
 

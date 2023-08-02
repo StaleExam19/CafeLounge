@@ -6,7 +6,7 @@
 
 <div class="info-popup fixed top-0 left-0 h-screen w-full bg-black/50 hidden justify-center items-center">
     <div class="w-7/12 h-96 flex relative rounded-xl bg-neutral-900 z-10 text-white">
-        <div class="absolute top-3 right-3 w-10 hover:scale-110 cursor-pointer" data-close-info>
+        <div class="absolute top-1 right-1 w-10 hover:scale-110 cursor-pointer" data-close-info>
             <img src="${closeIcon}" alt="" data-close-info>
         </div>
         <img src="${image}" alt="" class="menu-image h-full flex-1 rounded-tl-xl rounded-bl-xl">

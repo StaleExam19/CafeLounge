@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,7 @@ public class MenuController {
     AddMenuValidator validator;
 
     @ModelAttribute
-    void init(Model model, HttpServletRequest request) {
+    void init(Model model, HttpSession session) {
         List<BtnLink> categories = new ArrayList<>();
         List<BtnLink> btns = new ArrayList<BtnLink>();
 
@@ -52,6 +51,10 @@ public class MenuController {
         model.addAttribute("categories", categories);
         model.addAttribute("sideNavBtn", btns);
         model.addAttribute("naaySearch", true);
+
+        ChefDto user = (ChefDto) session.getAttribute("user");
+		model.addAttribute("firstLetter", user.getFirstname().charAt(0));
+
     }
 
     @RequestMapping("/menulist")

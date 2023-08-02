@@ -92,8 +92,16 @@
                     <img src="${profileIcon}" alt="" class="h-10 cursor-pointer hover:scale-105"
                         data-toggle="profile-dropdown">
 
-                    <div class="bg-white w-40 absolute top-full right-0 z-30 p-2 hidden flex-col" id="profile-dropdown">
-                        <p>${user.firstname} ${user.lastname}</p>
+                    <div class="bg-white w-52 absolute top-full right-0 z-30 p-2 hidden flex-col" id="profile-dropdown">
+                        <div class="p-1 flex w-full gap-4">
+                            <div class="h-10 w-10 rounded-full bg-orange-500 flex justify-center items-center">
+                                ${firstLetter}
+                            </div>
+                            <div>
+                                <p>${user.firstname} ${user.lastname}</p>
+                                <p class="text-sm text-neutral-500">Chef</p>
+                            </div>
+                        </div>
                         <hr>
                         <c:url var="logout" value="/logout" />
                         <a href="${logout}" class="flex gap-2 p-2 hover:bg-orange-500 hover:text-white group">
