@@ -26,7 +26,7 @@
         <option value="appetizer">Appetizer</option>
         <option value="main course">Main Course</option>
         <option value="dessert">Dessert</option>
-        <option value="drinks">Drinks</option>
+        <option value="drink">Drinks</option>
     </form:select>
     <form:select path="status" class="p-2 w-full items-start rounded-2xl border-none">
         <option disabled="" selected="">-Status-</option>

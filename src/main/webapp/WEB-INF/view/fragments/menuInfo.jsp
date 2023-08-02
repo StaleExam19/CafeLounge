@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<c:url var="image" value="/myImage?id=12"/>
+<c:url var="image" value="/images?id=12"/>
 <c:url var="closeIcon" value="/resources/image/circle-close.png" />
 
 <div class="info-popup fixed top-0 left-0 h-screen w-full bg-black/50 hidden justify-center items-center">

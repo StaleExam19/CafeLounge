@@ -60,7 +60,7 @@ function showInfoPopup(data) {
     const menuDescription = document.querySelector(".menu-description");
     const remainingServings = document.querySelector(".remaining-servings");
 
-    const imageUrl = `/myImage?id=${data.id}`;
+    const imageUrl = `/images?id=${data.id}`;
 
     image.src = imageUrl;
     menuName.innerText = data.name;
