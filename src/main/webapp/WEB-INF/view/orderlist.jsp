@@ -61,8 +61,11 @@
                         </tr>
                     </c:forEach>
                 </tbody>
-
             </table>
+
+            <c:if test="${empty orders}">
+                <div class="h-full w-full flex justify-center items-center">No orders</div>
+            </c:if>
         </div>
     </div>
 </body>

@@ -5,6 +5,9 @@ const infoPopup = document.querySelector(".info-popup");
 const addmenuForm = document.querySelector(".addmenu-form");
 const updatemenuForm = document.querySelector(".update-form")
 
+const updateMenuCancelBtn = document.getElementById("updatemenu-cancel");
+const addMenuCancelBtn = document.getElementById("addmenu-cancel");
+
 function showAddMenuForm() {
     formOverlay.classList.remove("hidden");
     addmenuForm.classList.replace("hidden", "flex");
@@ -46,7 +49,6 @@ function hideUpdateForm() {
     formOverlay.classList.add("hidden");
     updatemenuForm.classList.replace("flex", "hidden");
 }
-
 
 
 /**
@@ -99,6 +101,10 @@ formOverlay.addEventListener("click", _ => {
     hideAddMenuForm();
     hideUpdateForm();
 });
+
+// Cancel buttons
+addMenuCancelBtn.addEventListener("click", _ => hideAddMenuForm());
+updateMenuCancelBtn.addEventListener("click", _ => hideUpdateForm()); 
 
 
 document.addEventListener("click", async evt => {

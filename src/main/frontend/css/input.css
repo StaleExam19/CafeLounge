@@ -49,19 +49,12 @@
         h-screen w-full
     }
 
-    .addmenu-form
-    {
-        @apply fixed top-1/2 left-1/2 -translate-x-1/2
-            -translate-y-1/2 justify-center items-center w-1/2
-            bg-slate-100/50 p-10 z-10 rounded-2xl
-             flex-col gap-5
-    }
-
+    .addmenu-form,
     .update-form {
         @apply fixed top-1/2 left-1/2 -translate-x-1/2
-        -translate-y-1/2 justify-center items-center w-1/2
-        bg-slate-100/50 p-10 z-10 rounded-2xl
-         flex-col gap-5
+            -translate-y-1/2 justify-center items-center w-1/2
+            bg-slate-100/50 p-5 z-10 rounded-2xl
+             flex-col
     }
 
     .addmenu-form input,

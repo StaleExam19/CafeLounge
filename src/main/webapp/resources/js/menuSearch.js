@@ -30,8 +30,8 @@ menuSearchInput.addEventListener("keyup", async evt => {
         class="flex justify-between items-center p-5 h-20 hover:bg-neutral-800">
             <h3 class="text-white">${result.name}</h3>
             <div>
-                <p class="text-neutral-400 text-sm">Category: ${result.category}</p>
-                <p class="text-neutral-400 text-sm">Status: ${result.status}</p>
+                <p class="text-neutral-400 text-sm">Category: <span style="text-transform: capitalize">${result.category}</span></p>
+                <p class="text-neutral-400 text-sm">Status: <span style="text-transform: capitalize">${result.status}</span></p>
             </div>
         </a>
         `

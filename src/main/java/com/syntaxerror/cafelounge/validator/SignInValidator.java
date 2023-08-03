@@ -23,11 +23,27 @@ public class SignInValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		// Check if form has an empty field
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", null, "Please fill all the required fields");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", null, "Please fill all the required fields");
-
 		ChefForm user = (ChefForm) target;
 		ChefDto matchedUser = userService.searchUserByUsername(user.getUsername());
+
+		// Check if both fields are blank
+		if (user.getUsername().isBlank() && user.getPassword().isBlank()) {
+			errors.rejectValue("username", null, "Please fill all the required fields");
+			return;
+		}
+
+		if (user.getUsername().isBlank() || user.getPassword().isBlank()) {
+			if (user.getUsername().isBlank()) {
+				errors.rejectValue("username", null, "Username is required");
+				return;
+			}
+
+			if (user.getPassword().isBlank()) {
+				errors.rejectValue("password", null, "Password is required");
+				return;
+			}
+		}
+
 
 		if (matchedUser != null) {
 			if (!matchedUser.getPassword().equals(user.getPassword()))

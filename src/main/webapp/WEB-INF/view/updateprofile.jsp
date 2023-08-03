@@ -18,6 +18,7 @@
     <div class="h-[calc(97vh-96px)] w-full gap-5 px-12 flex justify-center items-center">
         <form:form action="/updateProfile" method="post" modelAttribute="userForm" class="form w-96">
             <h1 class="text-3xl text-white text-center">Update Profile</h1>
+
             <c:if test="${not empty error}">
                 <div class="bg-red-500 text-white rounded p-3">
                     ${error}

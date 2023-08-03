@@ -7,6 +7,10 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,12 +22,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.syntaxerror.cafelounge.dto.ChefDto;
 import com.syntaxerror.cafelounge.dto.MenuDto;
 import com.syntaxerror.cafelounge.model.MenuForm;
 import com.syntaxerror.cafelounge.service.MenuService;
 import com.syntaxerror.cafelounge.util.BtnLink;
 import com.syntaxerror.cafelounge.validator.AddMenuValidator;
+import com.syntaxerror.cafelounge.validator.UpdateMenuValidator;
 
 @Controller
 public class MenuController {
@@ -31,7 +38,10 @@ public class MenuController {
     MenuService menuService;
 
     @Autowired
-    AddMenuValidator validator;
+    AddMenuValidator addMenuValidator;
+
+    @Autowired
+    UpdateMenuValidator updateMenuValidator;
 
     @ModelAttribute
     void init(Model model, HttpSession session) {
@@ -53,7 +63,7 @@ public class MenuController {
         model.addAttribute("naaySearch", true);
 
         ChefDto user = (ChefDto) session.getAttribute("user");
-		model.addAttribute("firstLetter", user.getFirstname().charAt(0));
+        model.addAttribute("firstLetter", user.getFirstname().charAt(0));
 
     }
 
@@ -68,7 +78,8 @@ public class MenuController {
             @PathVariable("category") String category,
             @RequestParam(value = "status", defaultValue = "live") String status,
             @RequestParam(value = "id", defaultValue = "") String id,
-            @ModelAttribute("error") String error) {
+            @ModelAttribute("addMenuError") String addMenuError,
+            @ModelAttribute("updateMenuError") String updateMenuError) {
 
         List<MenuDto> menuList = new ArrayList<>();
 
@@ -76,7 +87,7 @@ public class MenuController {
             menuList = menuService.getMenuByCategoryAndStatus(category, status);
         else
             menuList.add(menuService.getMenuById(Integer.parseInt(id)));
-            
+
         model.addAttribute("menuList", menuList);
         model.addAttribute("menuForm", new MenuForm());
         model.addAttribute("category", category);
@@ -95,13 +106,13 @@ public class MenuController {
         ChefDto currentUser = (ChefDto) session.getAttribute("user");
 
         // Validate menu form
-        validator.validate(menuForm, bindingResult);
+        addMenuValidator.validate(menuForm, bindingResult);
         FieldError fieldError = bindingResult.getFieldError();
         String error = fieldError == null ? "" : fieldError.getDefaultMessage();
 
         // Check if error exists
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("error", error);
+            redirectAttributes.addFlashAttribute("addMenuError", error);
             return "redirect:/menulist";
         }
 
@@ -117,11 +128,32 @@ public class MenuController {
     String updateMenu(RedirectAttributes redirectAttributes,
             HttpSession session,
             @ModelAttribute("menuForm") MenuForm menuForm,
-            @PathVariable("id") int id) throws IOException {
+            @PathVariable("id") int id,
+            BindingResult bindingResult) throws IOException {
         ChefDto currentUser = (ChefDto) session.getAttribute("user");
+
+        // Validate menu form
+        updateMenuValidator.validate(menuForm, bindingResult);
+
+        FieldError fieldError = bindingResult.getFieldError();
+        String error = fieldError == null ? "" : fieldError.getDefaultMessage();
+
+        // Check if error exists
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("updateMenuError", error);
+            return "redirect:/menulist";
+        }
 
         menuService.updateMenuById(id, menuForm, currentUser.getFirstname() + " " + currentUser.getLastname());
         return "redirect:/menulist";
+    }
+
+    @RequestMapping("/deleteMenu/{id}")
+    String deleteById(@PathVariable("id") int id) {
+        MenuDto matchedMenu = menuService.findById(id);
+        menuService.deleteById(id);
+
+        return "redirect:/menulist/" + matchedMenu.getCategory();
     }
 
 }

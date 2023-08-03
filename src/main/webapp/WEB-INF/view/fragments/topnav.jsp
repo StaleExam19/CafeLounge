@@ -92,7 +92,7 @@
                     <img src="${profileIcon}" alt="" class="h-10 cursor-pointer hover:scale-105"
                         data-toggle="profile-dropdown">
 
-                    <div class="bg-white w-52 absolute top-full right-0 z-30 p-2 hidden flex-col" id="profile-dropdown">
+                    <div class="bg-white w-56 absolute top-full right-0 z-30 p-2 hidden flex-col" id="profile-dropdown">
                         <div class="p-1 flex w-full gap-4">
                             <div class="h-10 w-10 rounded-full bg-orange-500 flex justify-center items-center">
                                 ${firstLetter}

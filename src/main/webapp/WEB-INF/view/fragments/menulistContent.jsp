@@ -34,25 +34,38 @@
                         </svg>
                     </div>
 
-                    <div class="group delete">
+                    <c:url var="delete" value="/deleteMenu"/>
+                    <a href="${delete}/${item.id}" data-verify-delete>
                         <c:if test="${item.status != 'delisted'}">
-                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg" data-menu-delete="${item.id}">
-                                <path data-menu-delete="${item.id}" class="fill-white group-hover:fill-orange-500"
+                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" class="pointer-events-none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path class="fill-white group-hover:fill-orange-500 pointer-events-none"
                                     d="M21.5 6a1 1 0 0 1-.883.993L20.5 7h-.845l-1.231 12.52A2.75 2.75 0 0 1 15.687 22H8.313a2.75 2.75 0 0 1-2.737-2.48L4.345 7H3.5a1 1 0 0 1 0-2h5a3.5 3.5 0 1 1 7 0h5a1 1 0 0 1 1 1Zm-7.25 3.25a.75.75 0 0 0-.743.648L13.5 10v7l.007.102a.75.75 0 0 0 1.486 0L15 17v-7l-.007-.102a.75.75 0 0 0-.743-.648Zm-4.5 0a.75.75 0 0 0-.743.648L9 10v7l.007.102a.75.75 0 0 0 1.486 0L10.5 17v-7l-.007-.102a.75.75 0 0 0-.743-.648ZM12 3.5A1.5 1.5 0 0 0 10.5 5h3A1.5 1.5 0 0 0 12 3.5Z"
                                     fill="#212121" />
                             </svg>
 
                         </c:if>
-                    </div>
+                    </a>
                 </div>
             </div>
         </c:forEach>
     </div>
 </c:if>
 
+<!-- Verification popup -->
+<div class="fixed top-0 left-0 h-screen w-full hidden items-center verification justify-center bg-neutral-900/50">
+    <div class="bg-neutral-900 p-5 text-white rounded-md ">
+        <p class="text-xl">Are you sure you want to delist this item?</p>
+        <div class="flex mt-4 gap-4">
+            <a href="" class="p-3 text-center bg-red-500 flex-1 rounded-md yes-btn">Yes</a>
+
+            <button class="flex-1 bg-neutral-500 rounded-md no-btn">No</button>
+        </div>
+    </div>
+</div>
+
 <c:if test="${empty menuList}">
     <div class="empty-menulist">
-        No Data Shown
+        No menu for today
     </div>
 </c:if>

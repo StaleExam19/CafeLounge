@@ -69,6 +69,7 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 		sql.append("INSERT INTO cafelounge_db.menu (name, description, price, status, category, image, added_by) ")
 				.append("VALUES (?, ?, ?, ?, ?, ?, ?)");
 
+
 		getJdbcTemplate().update(sql.toString(),
 				menu.getName(),
 				menu.getDescription(),
@@ -105,29 +106,39 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 
 	@Override
 	public void updateMenuById(int id, MenuDto menuDto, String updatedBy) {
-		StringBuilder sql = new StringBuilder();
+		menuDto.setUpdatedBy(updatedBy);
+		
+		if (menuDto.getStatus().equals("delisted")) {
+			String sql = "UPDATE cafelounge_db.menu " +
+					"SET name = ?, quantity = ?, description = ?, " +
+					"category = ?, price = ?, status = ?, updated_by = ?, date_delisted = CURRENT_TIMESTAMP " +
+					"WHERE id = ?";
 
-		sql.append("UPDATE cafelounge_db.menu")
-				.append(" SET name = ?, quantity = ?, description = ?, ");
+			getJdbcTemplate().update(sql,
+					menuDto.getName(),
+					menuDto.getQuantity(),
+					menuDto.getDescription(),
+					menuDto.getCategory(),
+					menuDto.getPrice(),
+					menuDto.getStatus(),
+					menuDto.getUpdatedBy(),
+					id);
+		} else {
+			String sql = "UPDATE cafelounge_db.menu " +
+					"SET name = ?, quantity = ?, description = ?, " +
+					"category = ?, price = ?, status = ?, updated_by = ?, date_delisted = NULL " +
+					"WHERE id = ?";
 
-		// Update the date_delisted if user set the status to delisted
-		if (menuDto.getStatus() == "delisted")
-			sql.append("date_delisted = CURRENT_TIMESTAMP, ");
-		else
-			sql.append("date_delisted = NULL, ");
-
-		sql.append("category = ?, price = ?, status = ?, updated_by = ? ")
-				.append("WHERE id = ?");
-
-		getJdbcTemplate().update(sql.toString(),
-				menuDto.getName(),
-				menuDto.getQuantity(),
-				menuDto.getDescription(),
-				menuDto.getCategory(),
-				menuDto.getPrice(),
-				menuDto.getStatus(),
-				menuDto.getUpdatedBy(),
-				id);
+			getJdbcTemplate().update(sql,
+					menuDto.getName(),
+					menuDto.getQuantity(),
+					menuDto.getDescription(),
+					menuDto.getCategory(),
+					menuDto.getPrice(),
+					menuDto.getStatus(),
+					menuDto.getUpdatedBy(),
+					id);
+		}
 	}
 
 	@Override
