@@ -7,10 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.syntaxerror.cafelounge.dto.ChefDto;
 import com.syntaxerror.cafelounge.dto.MenuDto;
 import com.syntaxerror.cafelounge.model.MenuForm;
@@ -60,7 +54,7 @@ public class MenuController {
         model.addAttribute("pageTitle", "Menu List");
         model.addAttribute("categories", categories);
         model.addAttribute("sideNavBtn", btns);
-        model.addAttribute("naaySearch", true);
+        model.addAttribute("menuSearch", true);
 
         ChefDto user = (ChefDto) session.getAttribute("user");
         model.addAttribute("firstLetter", user.getFirstname().charAt(0));

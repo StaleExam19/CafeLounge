@@ -21,7 +21,7 @@
         <%@ include file="fragments/sidenav.jsp" %>
 
         <div class="flex-1 flex flex-col bg-slate-100/50 overflow-y-auto relative">
-            <table class="">
+            <table class="order-table">
                 <thead class="sticky top-0 bg-neutral-900 text-white">
                     <tr>
                         <th>Order #</th>
@@ -51,9 +51,19 @@
                         <tr>
                             <td>${order.orderNumber}</td>
                             <td>${order.customerName}</td>
-                            <td><fmt:formatDate value="${order.dateOrdered}" pattern="MMM dd, yyyy HH:mm:ss"/></td>
+                            <td><fmt:formatDate value="${order.dateOrdered}" pattern="MMM dd, yyyy HH:mm"/></td>
                             <td>Cash</td>
-                            <td style="text-transform: capitalize;">${order.status}</td>
+                            <td>
+                                <c:if test="${order.status == 'pending'}">
+                                    <span class="capitalize text-amber-500 px-2 rounded-2xl">${order.status}</span>
+                                </c:if>
+                                <c:if test="${order.status == 'completed'}">
+                                    <span class="capitalize text-green-500 px-2 rounded-2xl">${order.status}</span>
+                                </c:if>
+                                <c:if test="${order.status == 'canceled'}">
+                                    <span class="capitalize text-red-500 px-2 rounded-2xl">${order.status}</span>
+                                </c:if>
+                            </td>
                             <td>
                                 <c:url var="orderDetail" value="/order/${order.orderNumber}"/>
                                 <a href="${orderDetail}" class="underline">View Details</a>
@@ -68,5 +78,8 @@
             </c:if>
         </div>
     </div>
+
+    <c:url var="orderSearch" value="/resources/js/orderSearch.js"/>
+    <script defer src="${orderSearch}"></script>
 </body>
 </html>

@@ -16,4 +16,7 @@ public interface OrderService {
 
         List<Order> getOrdersByStatus(String status);
 
+        List<Order> paginateOrder(int pageNumber);
+
+        List<Order> paginateOrderWithStatus(int pageNumber, String status);
 }

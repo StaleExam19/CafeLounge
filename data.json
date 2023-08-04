@@ -1,21 +1,175 @@
 [
     {
         "orderNumber": 1,
-        "customerName": "John Ryan Baculpo",
-        "dateOrdered": 1690387200000,
+        "customerName": "Louie Abad",
+        "dateOrdered": 1691102165000,
         "orders": [
             {
-                "menuName": "Kupras",
-                "quantity": 2,
-                "price": 152.0
-            },
-            {
-                "menuName": "Ginamos",
-                "quantity": 3,
+                "menuName": "Figs with Bacon & Chile",
+                "quantity": 1,
                 "price": 150.0
             },
             {
-                "menuName": "Linusak",
+                "menuName": "Cedar-Plank salmon",
+                "quantity": 2,
+                "price": 150.0
+            },
+            {
+                "menuName": "Seabreeze Cocktail",
+                "quantity": 1,
+                "price": 150.0
+            }
+        ],
+        "status": "canceled"
+    },
+    {
+        "orderNumber": 2,
+        "customerName": "John Ryan Baculpo",
+        "dateOrdered": 1691103069000,
+        "orders": [
+            {
+                "menuName": "Braised Chicken legs",
+                "quantity": 1,
+                "price": 150.0
+            },
+            {
+                "menuName": "Chocolate Sheet Cake",
+                "quantity": 1,
+                "price": 150.0
+            },
+            {
+                "menuName": "Milk Shake",
+                "quantity": 1,
+                "price": 100.0
+            }
+        ],
+        "status": "completed"
+    },
+    {
+        "orderNumber": 3,
+        "customerName": "Louie Abad",
+        "dateOrdered": 1691104822000,
+        "orders": [
+            {
+                "menuName": "Grilled Coconut Shrimp",
+                "quantity": 1,
+                "price": 150.0
+            },
+            {
+                "menuName": "Basil Lemonade",
+                "quantity": 1,
+                "price": 100.0
+            }
+        ],
+        "status": "completed"
+    },
+    {
+        "orderNumber": 4,
+        "customerName": "John Doe",
+        "dateOrdered": 1691104937000,
+        "orders": [
+            {
+                "menuName": "Beef Enchiladas",
+                "quantity": 1,
+                "price": 150.0
+            },
+            {
+                "menuName": "Stawberry Lemonade",
+                "quantity": 2,
+                "price": 150.0
+            }
+        ],
+        "status": "pending"
+    },
+    {
+        "orderNumber": 5,
+        "customerName": "John Ryan Baculpo",
+        "dateOrdered": 1691105139000,
+        "orders": [
+            {
+                "menuName": "Al Lago wines",
+                "quantity": 1,
+                "price": 100.0
+            },
+            {
+                "menuName": "Seared scallops",
+                "quantity": 2,
+                "price": 100.0
+            },
+            {
+                "menuName": "Mint Oreo Cake",
+                "quantity": 2,
+                "price": 100.0
+            }
+        ],
+        "status": "pending"
+    },
+    {
+        "orderNumber": 6,
+        "customerName": "John Doe",
+        "dateOrdered": 1691105630000,
+        "orders": [
+            {
+                "menuName": "Mushroom puff",
+                "quantity": 2,
+                "price": 150.0
+            },
+            {
+                "menuName": "Braised Chicken legs",
+                "quantity": 2,
+                "price": 150.0
+            },
+            {
+                "menuName": "Tiramisu Sundae",
+                "quantity": 2,
+                "price": 150.0
+            },
+            {
+                "menuName": "Triple Berry Sparklers",
+                "quantity": 2,
+                "price": 100.0
+            }
+        ],
+        "status": "pending"
+    },
+    {
+        "orderNumber": 7,
+        "customerName": "John Doe",
+        "dateOrdered": 1691105752000,
+        "orders": [
+            {
+                "menuName": "Seared scallops",
+                "quantity": 2,
+                "price": 100.0
+            }
+        ],
+        "status": "pending"
+    },
+    {
+        "orderNumber": 8,
+        "customerName": "John Ryan Baculpo",
+        "dateOrdered": 1691106268000,
+        "orders": [
+            {
+                "menuName": "Milk Shake",
+                "quantity": 2,
+                "price": 100.0
+            },
+            {
+                "menuName": "Chocolate Sheet Cake",
+                "quantity": 1,
+                "price": 150.0
+            }
+        ],
+        "status": "pending"
+    },
+    {
+        "orderNumber": 9,
+        "customerName": "Paulina De Ma-ila",
+        "dateOrdered": 1691106340000,
+        "orders": [
+            {   
+                "menuName": "Chocolate Sheet Cake",
                 "quantity": 1,
                 "price": 150.0
             }
@@ -23,29 +177,14 @@
         "status": "completed"
     },
     {
-        "orderNumber": 2,
-        "customerName": "Louie Abad",
-        "dateOrdered": 1690387200000,
+        "orderNumber": 10,
+        "customerName": "Paulina De Ma-ila",
+        "dateOrdered": 1691106753000,
         "orders": [
             {
-                "menuName": "Kupras",
-                "quantity": 4,
-                "price": 152.0
-            },
-            {
-                "menuName": "Ginamos",
-                "quantity": 2,
-                "price": 150.0
-            },
-            {
-                "menuName": "Linusak",
+                "menuName": "Caramel Pretzel Skillet",
                 "quantity": 1,
-                "price": 150.0
-            },
-            {
-                "menuName": "Initing",
-                "quantity": 3,
-                "price": 150.0
+                "price": 100.0
             }
         ],
         "status": "pending"

@@ -69,7 +69,6 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 		sql.append("INSERT INTO cafelounge_db.menu (name, description, price, status, category, image, added_by) ")
 				.append("VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-
 		getJdbcTemplate().update(sql.toString(),
 				menu.getName(),
 				menu.getDescription(),
@@ -107,7 +106,31 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 	@Override
 	public void updateMenuById(int id, MenuDto menuDto, String updatedBy) {
 		menuDto.setUpdatedBy(updatedBy);
-		
+
+
+		System.out.println("Menu Repo");
+		System.out.println(menuDto.getImage().length);
+		System.out.println(menuDto.getImage() != null);
+
+		if (menuDto.getImage().length != 0) {
+			String sql = "UPDATE cafelounge_db.menu " +
+					"SET name = ?, quantity = ?, description = ?, " +
+					"category = ?, price = ?, status = ?, updated_by = ?, image = ?, date_delisted = CURRENT_TIMESTAMP "
+					+
+					"WHERE id = ?";
+
+			getJdbcTemplate().update(sql,
+					menuDto.getName(),
+					menuDto.getQuantity(),
+					menuDto.getDescription(),
+					menuDto.getCategory(),
+					menuDto.getPrice(),
+					menuDto.getStatus(),
+					menuDto.getUpdatedBy(),
+					menuDto.getImage(),
+					id);
+		}
+
 		if (menuDto.getStatus().equals("delisted")) {
 			String sql = "UPDATE cafelounge_db.menu " +
 					"SET name = ?, quantity = ?, description = ?, " +
@@ -149,12 +172,12 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 		if (newQuantity == 0)
 			getJdbcTemplate().update(
 					"UPDATE cafelounge_db.menu SET quantity = ?, status = \"sold out\" WHERE id = ?",
-					newQuantity,
+					newQuantity, // zero lang diretso ang quantity para dili ma negative ang value
 					id);
 		else
 			getJdbcTemplate().update(
 					"UPDATE cafelounge_db.menu SET quantity = ? WHERE id = ?",
-					0, // zero lang diretso ang quantity para dili ma negative ang value
+					newQuantity, 
 					id);
 	}
 

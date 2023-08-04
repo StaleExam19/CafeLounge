@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.syntaxerror.cafelounge.dto.ChefDto;
 import com.syntaxerror.cafelounge.model.Order;
@@ -40,20 +41,24 @@ public class OrderListController {
         model.addAttribute("sideNavBtn", btns);
 
         ChefDto user = (ChefDto) session.getAttribute("user");
-		model.addAttribute("firstLetter", user.getFirstname().charAt(0));
-
+        model.addAttribute("firstLetter", user.getFirstname().charAt(0));
 
     }
 
     @RequestMapping("/orderlist")
-    String orderListPage(Model model) {
-        List<Order> orders = orderService.getAllOrders();
+    String orderListPage(Model model,
+            @RequestParam(value = "page", defaultValue = "1") int page) {
+        List<Order> orders = orderService.paginateOrder(page);
+
         model.addAttribute("orders", orders);
+        model.addAttribute("orderSearch", true);
+
         return "orderlist";
     }
 
     @RequestMapping("/order/{orderNumber}")
-    String orderDetails(Model model, @PathVariable("orderNumber") int id) {
+    String orderDetails(Model model,
+            @PathVariable("orderNumber") int id) {
         Order order = orderService.getOrderByOrderNumber(id);
         double total = 0;
 
@@ -63,16 +68,20 @@ public class OrderListController {
 
         model.addAttribute("order", order);
         model.addAttribute("total", total);
+
         return "orderdetail";
     }
 
     @RequestMapping("/orderlist/{status}")
-    String orderFilteredByStatus(Model model, @PathVariable("status") String status) {
-        List<Order> orders = orderService.getOrdersByStatus(status);
+    String orderFilteredByStatus(Model model,
+            @PathVariable("status") String status,
+            @RequestParam(value = "page", defaultValue = "1") int page) {
+        List<Order> orders = orderService.paginateOrderWithStatus(page, status);
 
         model.addAttribute("orders", orders);
         model.addAttribute("pageTitle", "Order List | " + status);
-        
+        model.addAttribute("orderSearch", true);
+
         return "orderlist";
     }
 

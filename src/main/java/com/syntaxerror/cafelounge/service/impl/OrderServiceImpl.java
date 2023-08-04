@@ -26,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getAllOrders() {
-        return orderRepository.getAllOrders();        
+        return orderRepository.getAllOrders();
     }
 
     @Override
@@ -37,5 +37,29 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getOrdersByStatus(String status) {
         return orderRepository.getOrdersByStatus(status);
+    }
+
+    @Override
+    public List<Order> paginateOrder(int pageNumber) {
+        List<Order> orders = orderRepository.getAllOrders();
+
+        int limit = 10;
+        int start = (limit * pageNumber) - limit;
+        int end = limit * pageNumber;
+        end = end > orders.size() ? orders.size() : end;
+        return orders.subList(start, end);
+    }
+
+    @Override
+    public List<Order> paginateOrderWithStatus(int pageNumber, String status) {
+        List<Order> orders = orderRepository.getOrdersByStatus(status);
+
+        int limit = 10;
+        int start = (limit * pageNumber) - limit;
+        int end = limit * pageNumber;
+
+        end = end > orders.size() ? orders.size() : end;
+
+        return orders.subList(start, end);
     }
 }

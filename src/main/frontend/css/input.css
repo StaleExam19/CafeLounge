@@ -67,16 +67,16 @@
     }
 
 
-    table tr td,
+    table.order-table tr td,
     table tr th {
         @apply text-center p-3
     }
 
-    tbody tr {
+    .order-table tbody tr {
         @apply text-xl font-bold
     }
 
-    tbody tr:nth-child(even) {
+    .order-table tbody tr:nth-child(even) {
         @apply bg-neutral-900/25
     }
 
