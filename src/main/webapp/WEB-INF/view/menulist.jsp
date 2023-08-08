@@ -64,12 +64,14 @@
 
     <!-- Menu Info Popup -->
     <%@ include file="fragments/menuInfo.jsp" %>
-    <c:url var="js" value="/resources/js/menulist.js"/>
-    <script defer="" src="${js}"></script>
-    <c:url var="menuSearchJs" value="/resources/js/menuSearch.js"/>
-    <script defer src="${menuSearchJs}"></script>
-    <c:url var="verifyDeleteJs" value="/resources/js/verifyDelete.js"/>
-    <script defer src="${verifyDeleteJs}"></script>
+    <c:url var="js" value="/resources/js"/>
+    <script defer="" src="${js}/menulist.js"></script>
+    <script defer src="${js}/menuSearch.js"></script>
+    <script defer src="${js}/verifyDelete.js"></script>
+
+    <c:if test="${user.role == 'headchef'}">
+        <script defer src="${js}/menuForm.js"></script>
+    </c:if>
 </body>
 
 </html>
