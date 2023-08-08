@@ -19,4 +19,8 @@ public interface OrderService {
         List<Order> paginateOrder(int pageNumber);
 
         List<Order> paginateOrderWithStatus(int pageNumber, String status);
+
+        int countPage();
+
+        int countOrderWithStatus(String status);
 }

@@ -1,192 +1,170 @@
 [
     {
-        "orderNumber": 1,
-        "customerName": "Louie Abad",
-        "dateOrdered": 1691102165000,
-        "orders": [
-            {
-                "menuName": "Figs with Bacon & Chile",
-                "quantity": 1,
-                "price": 150.0
-            },
-            {
-                "menuName": "Cedar-Plank salmon",
-                "quantity": 2,
-                "price": 150.0
-            },
-            {
-                "menuName": "Seabreeze Cocktail",
-                "quantity": 1,
-                "price": 150.0
-            }
-        ],
-        "status": "canceled"
+        "id": 20,
+        "name": "Figs with Bacon & Chile",
+        "category": "appetizer",
+        "description": "It's made with roasted fresh figs tossed in maple syrup, a touch of Cinnamon, Thyme, Garlic, Balsamic vinegar and olive oil. IT'S SUPER FLAVORFUL!.",
+        "quantity": 25,
+        "status": "live"
     },
     {
-        "orderNumber": 2,
-        "customerName": "John Ryan Baculpo",
-        "dateOrdered": 1691103069000,
-        "orders": [
-            {
-                "menuName": "Braised Chicken legs",
-                "quantity": 1,
-                "price": 150.0
-            },
-            {
-                "menuName": "Chocolate Sheet Cake",
-                "quantity": 1,
-                "price": 150.0
-            },
-            {
-                "menuName": "Milk Shake",
-                "quantity": 1,
-                "price": 100.0
-            }
-        ],
-        "status": "completed"
+        "id": 22,
+        "name": "Phyllo Cup",
+        "category": "appetizer",
+        "description": "Phyllo cups are light, buttery and extra flaky. Now you can make restaurant-ready-looking appetizers and desserts easily at home. Fill them with almost anything; sweet or savory",
+        "quantity": 25,
+        "status": "delisted"
     },
     {
-        "orderNumber": 3,
-        "customerName": "Louie Abad",
-        "dateOrdered": 1691104822000,
-        "orders": [
-            {
-                "menuName": "Grilled Coconut Shrimp",
-                "quantity": 1,
-                "price": 150.0
-            },
-            {
-                "menuName": "Basil Lemonade",
-                "quantity": 1,
-                "price": 100.0
-            }
-        ],
-        "status": "completed"
+        "id": 24,
+        "name": "Al Lago wines",
+        "category": "appetizer",
+        "description": "Taste our premier vine and enjoy the views, fell in love with a breath taking places.",
+        "quantity": 25,
+        "status": "live"
     },
     {
-        "orderNumber": 4,
-        "customerName": "John Doe",
-        "dateOrdered": 1691104937000,
-        "orders": [
-            {
-                "menuName": "Beef Enchiladas",
-                "quantity": 1,
-                "price": 150.0
-            },
-            {
-                "menuName": "Stawberry Lemonade",
-                "quantity": 2,
-                "price": 150.0
-            }
-        ],
-        "status": "pending"
+        "id": 25,
+        "name": "Mushroom puff",
+        "category": "appetizer",
+        "description": "This crispy, bite size mushroom puffs are perfect snack or appetizer. The bites with gruyere and mustard are crowd pleasing appetizer perfect for parties and holidays.",
+        "quantity": 25,
+        "status": "live"
     },
     {
-        "orderNumber": 5,
-        "customerName": "John Ryan Baculpo",
-        "dateOrdered": 1691105139000,
-        "orders": [
-            {
-                "menuName": "Al Lago wines",
-                "quantity": 1,
-                "price": 100.0
-            },
-            {
-                "menuName": "Seared scallops",
-                "quantity": 2,
-                "price": 100.0
-            },
-            {
-                "menuName": "Mint Oreo Cake",
-                "quantity": 2,
-                "price": 100.0
-            }
-        ],
-        "status": "pending"
+        "id": 26,
+        "name": "Cedar-Plank salmon",
+        "category": "main course",
+        "description": "Cedar-plank salmon is a fish delicacy that involves cooking salmon on cedar planks, a unique method of cooking which is believed to have been originally practiced by Native Americans who mostly used Western red cedar (a type of cypress).",
+        "quantity": 25,
+        "status": "live"
     },
     {
-        "orderNumber": 6,
-        "customerName": "John Doe",
-        "dateOrdered": 1691105630000,
-        "orders": [
-            {
-                "menuName": "Mushroom puff",
-                "quantity": 2,
-                "price": 150.0
-            },
-            {
-                "menuName": "Braised Chicken legs",
-                "quantity": 2,
-                "price": 150.0
-            },
-            {
-                "menuName": "Tiramisu Sundae",
-                "quantity": 2,
-                "price": 150.0
-            },
-            {
-                "menuName": "Triple Berry Sparklers",
-                "quantity": 2,
-                "price": 100.0
-            }
-        ],
-        "status": "pending"
+        "id": 28,
+        "name": "Braised Chicken legs",
+        "category": "main course",
+        "description": "Braised Chicken Legs: Tender, succulent, and full of flavor. Seared to perfection, slow-braised in aromatic herbs and spices, these chicken legs offer a tantalizing experience. Each bite unveils a harmonious blend of moist tenderness and rich, robust sauce. A culinary delight that promises a memorable dining experience.",
+        "quantity": 25,
+        "status": "live"
     },
     {
-        "orderNumber": 7,
-        "customerName": "John Doe",
-        "dateOrdered": 1691105752000,
-        "orders": [
-            {
-                "menuName": "Seared scallops",
-                "quantity": 2,
-                "price": 100.0
-            }
-        ],
-        "status": "pending"
+        "id": 29,
+        "name": "Seared scallops",
+        "category": "main course",
+        "description": "Seared Scallops: Golden-brown perfection meets oceanic sweetness. Delicately seared for a crispy exterior, these succulent treasures burst with elegant flavors. A visual and culinary masterpiece, offering an unforgettable taste of the sea.",
+        "quantity": 25,
+        "status": "live"
     },
     {
-        "orderNumber": 8,
-        "customerName": "John Ryan Baculpo",
-        "dateOrdered": 1691106268000,
-        "orders": [
-            {
-                "menuName": "Milk Shake",
-                "quantity": 2,
-                "price": 100.0
-            },
-            {
-                "menuName": "Chocolate Sheet Cake",
-                "quantity": 1,
-                "price": 150.0
-            }
-        ],
-        "status": "pending"
+        "id": 30,
+        "name": "Grilled Coconut Shrimp",
+        "category": "main course",
+        "description": "Grilled Coconut Shrimp: Juicy shrimp, kissed by the grill and coated in tropical coconut goodness. A harmony of smoky flavors and sweet succulence that transports you to a beachside paradise. Unleash the taste of the tropics on your plate.",
+        "quantity": 25,
+        "status": "live"
     },
     {
-        "orderNumber": 9,
-        "customerName": "Paulina De Ma-ila",
-        "dateOrdered": 1691106340000,
-        "orders": [
-            {   
-                "menuName": "Chocolate Sheet Cake",
-                "quantity": 1,
-                "price": 150.0
-            }
-        ],
-        "status": "completed"
+        "id": 31,
+        "name": "Chocolate Sheet Cake",
+        "category": "dessert",
+        "description": "Chocolate Sheet Cake: A cocoa lover's paradise. Moist, velvety cake cloaked in luscious chocolate ganache. Each bite a symphony of indulgence, a perfect harmony of flavors and textures. Elevate your dessert experience with pure chocolate decadence.",
+        "quantity": 24,
+        "status": "live"
     },
     {
-        "orderNumber": 10,
-        "customerName": "Paulina De Ma-ila",
-        "dateOrdered": 1691106753000,
-        "orders": [
-            {
-                "menuName": "Caramel Pretzel Skillet",
-                "quantity": 1,
-                "price": 100.0
-            }
-        ],
-        "status": "pending"
+        "id": 32,
+        "name": "Caramel Pretzel Skillet",
+        "category": "dessert",
+        "description": "Caramel Pretzel Skillet: A harmony of gooey caramel and golden pretzel crunch. Sweet meets salty in a tempting dance of flavors and textures. Indulge in a captivating dessert experience that satisfies your cravings for both.",
+        "quantity": 25,
+        "status": "live"
+    },
+    {
+        "id": 33,
+        "name": "Mint Oreo Cake",
+        "category": "dessert",
+        "description": "Mint Oreo Cake: Refreshing mint-infused layers meet chocolatey Oreo crunch. Elegantly finished with velvety mint frosting. A divine balance of cool, rich, and delightful, redefining dessert indulgence.",
+        "quantity": 25,
+        "status": "live"
+    },
+    {
+        "id": 34,
+        "name": "Gooey Brownies",
+        "category": "dessert",
+        "description": "Gooey Brownies. These indulgent squares are a symphony of fudgy richness and irresistible sweetness. With every bite, you'll succumb to the luscious gooey center, a dessert masterpiece that ignites cravings and satisfies chocolate lovers' dreams.",
+        "quantity": 0,
+        "status": "sold out"
+    },
+    {
+        "id": 35,
+        "name": "Seabreeze Cocktail",
+        "category": "drink",
+        "description": "Seabreeze Cocktail. A tantalizing fusion of vodka, cranberry, and grapefruit, perfectly balanced to transport you to sandy shores and sun-kissed waves. Refreshing, invigorating, and a sip of pure relaxation.",
+        "quantity": 0,
+        "status": "live"
+    },
+    {
+        "id": 36,
+        "name": "Triple Berry Sparklers",
+        "category": "drink",
+        "description": "Triple Berry Sparklers. A dazzling medley of strawberries, blueberries, and raspberries, mingling harmoniously in effervescent splendor. Each sip is a burst of vibrant flavors, a celebration of fruity indulgence that ignites your taste buds.",
+        "quantity": 25,
+        "status": "live"
+    },
+    {
+        "id": 37,
+        "name": "Milk Shake",
+        "category": "drink",
+        "description": "Milkshake. Velvety smoothness meets tantalizing flavors, creating a sip-worthy treat that transports you to dessert paradise. Satisfy your cravings with each luscious, refreshing gulp.",
+        "quantity": 0,
+        "status": "live"
+    },
+    {
+        "id": 38,
+        "name": "Stawberry Lemonade",
+        "category": "drink",
+        "description": "Strawberry Lemonade. A symphony of flavors that dances on your palate, quenching your thirst with a delightful burst of tangy-sweet refreshment. A sip of sunshine that captures the essence of summer in every glass.",
+        "quantity": 25,
+        "status": "live"
+    },
+    {
+        "id": 39,
+        "name": "Potato Skin Bites",
+        "category": "appetizer",
+        "description": "Potato Skin Bites. Crispy potato skins, perfectly seasoned and loaded with mouthwatering toppings. Each bite is a burst of savory delight, a tantalizing treat that redefines comfort food.",
+        "quantity": 25,
+        "status": "live"
+    },
+    {
+        "id": 40,
+        "name": "Beef Enchiladas",
+        "category": "main course",
+        "description": "Beef Enchiladas: Tender shredded beef, seasoned to perfection, wrapped in soft tortillas and smothered in zesty enchilada sauce. A satisfying blend of spices and textures, creating a hearty dish that embodies the essence of Mexican cuisine.",
+        "quantity": 25,
+        "status": "live"
+    },
+    {
+        "id": 41,
+        "name": "Tiramisu Sundae",
+        "category": "dessert",
+        "description": " The classic creamy, coffee-soaked Italian dessert is transformed into a frosty layered sundae.",
+        "quantity": 25,
+        "status": "live"
+    },
+    {
+        "id": 42,
+        "name": "Basil Lemonade",
+        "category": "drink",
+        "description": "A unique blend of lemonade and muddled basil leaves, offering a hint of herbal sophistication.",
+        "quantity": 0,
+        "status": "live"
+    },
+    {
+        "id": 43,
+        "name": "Bruschetta",
+        "category": "appetizer",
+        "description": "Toasted baguette slices topped with diced tomatoes, garlic, basil, and a hint of olive oil.",
+        "quantity": 25,
+        "status": "live"
     }
 ]

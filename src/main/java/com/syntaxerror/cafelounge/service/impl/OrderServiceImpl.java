@@ -11,6 +11,9 @@ import com.syntaxerror.cafelounge.service.OrderService;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+
+    private int limit = 10;
+
     @Autowired
     OrderRepository orderRepository;
 
@@ -43,10 +46,12 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> paginateOrder(int pageNumber) {
         List<Order> orders = orderRepository.getAllOrders();
 
-        int limit = 10;
         int start = (limit * pageNumber) - limit;
         int end = limit * pageNumber;
+
+        start = start > orders.size() ? 0 : start;
         end = end > orders.size() ? orders.size() : end;
+
         return orders.subList(start, end);
     }
 
@@ -54,12 +59,30 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> paginateOrderWithStatus(int pageNumber, String status) {
         List<Order> orders = orderRepository.getOrdersByStatus(status);
 
-        int limit = 10;
         int start = (limit * pageNumber) - limit;
         int end = limit * pageNumber;
-
+        
+        start = start > orders.size() ? 0 : start;
         end = end > orders.size() ? orders.size() : end;
 
         return orders.subList(start, end);
+    }
+
+    @Override
+    public int countPage() {
+        int orders = orderRepository.getAllOrders().size();
+        int count = (orders / limit);
+        int remainder = orders % limit;
+        
+        return remainder == 0 ? count : count + 1;
+    }
+
+    @Override
+    public int countOrderWithStatus(String status) {
+        int orders = orderRepository.getOrdersByStatus(status).size();
+        int count = (orders / limit);
+        int remainder = orders % limit;
+        
+        return remainder == 0 ? count : count + 1;
     }
 }

@@ -19,20 +19,22 @@ public class AddMenuValidator implements Validator {
     public void validate(Object target, Errors errors) {
         MenuForm menuForm = (MenuForm) target;
 
-        ValidationUtils.rejectIfEmpty(errors, "name", null, "Please fill all the required fields");
-        ValidationUtils.rejectIfEmpty(errors, "price", null, "Please fill all the required fields");
-        ValidationUtils.rejectIfEmpty(errors, "category", null, "Please fill all the required fields");
+        ValidationUtils.rejectIfEmpty(errors, "name", null, "Menu name is required");
+        ValidationUtils.rejectIfEmpty(errors, "description", null, "Description is required");
+        ValidationUtils.rejectIfEmpty(errors, "price", null, "Menu price is required");
+        ValidationUtils.rejectIfEmpty(errors, "category", null, "Category is required");
         ValidationUtils.rejectIfEmpty(errors, "quantity", null, "Please fill all the required fields");
         ValidationUtils.rejectIfEmpty(errors, "image", null, "Please fill all the required fields");
 
-        System.out.println("From validator");
-        System.out.println(menuForm.getImage().isEmpty());
 
         if (menuForm.getImage() == null || menuForm.getImage().isEmpty())
             errors.rejectValue("image", null, "Image field is required");
 
         if (menuForm.getStatus() == null)
             menuForm.setStatus("live");
+
+        if (menuForm.getQuantity().isEmpty())
+            menuForm.setQuantity("0");
 
         if (menuForm.getQuantity() == null || Integer.parseInt(menuForm.getQuantity()) == 0)
             menuForm.setQuantity("25");

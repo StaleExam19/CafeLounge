@@ -9,6 +9,7 @@ public class ChefDto {
 	private String lastname;
 	private String username;
 	private String password;
+	private String role;
 	private Date dateCreated;
 	private Date dateUpdated;
 	private Date dateDeleted;
@@ -78,6 +79,14 @@ public class ChefDto {
 
 	public Date getDateDeleted() {
 		return dateDeleted;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 		
 }

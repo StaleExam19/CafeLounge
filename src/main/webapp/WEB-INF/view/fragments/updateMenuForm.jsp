@@ -1,19 +1,21 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:if test="${not empty updateMenuError}">
-    <c:set var="visibility" value="flex"/>
+    <c:set var="updateMenuVisibility" value="flex"/>
 </c:if>
 
 <c:if test="${empty updateMenuError}">
-    <c:set var="visibility" value="hidden"/>
+    <c:set var="updateMenuVisibility" value="hidden"/>
 </c:if>
 
+<div class="updatemenu-form-overlay ${updateMenuVisibility}"></div>
+
 <!-- Add Menu Form -->
-<form:form action="/update " method="post" enctype="multipart/form-data" modelAttribute="menuForm" class="update-form ${visibility}">
+<form:form action="/updateMenu/${menuId}" method="post" enctype="multipart/form-data" modelAttribute="menuForm" class="update-form ${updateMenuVisibility}">
     <h1 class="text-3xl font-bold text-center">UPDATE MENU</h1>
     <c:if test="${not empty updateMenuError}">
         <div class="text-red-900">
-            ${error}
+            ${updateMenuError}
         </div>
     </c:if>
     <div class="w-full">
@@ -61,7 +63,7 @@
     </div>
     <br>
     <div class="w-full flex gap-2">
-        <input type="submit" value="update menu" class="btn bg-orange-500">
+        <input type="submit" value="update" class="btn bg-orange-500">
         <button type="button" class="btn" id="updatemenu-cancel">Cancel</button>
     </div>
 </form:form>

@@ -26,7 +26,8 @@ public class UpdateProfileValidator implements Validator {
     public void validate(Object target, Errors errors) {
         // Check if form has an empty field
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", null, "Please fill all the required fields");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", null, "Please fill all the required fields");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", null,
+                "Please fill all the required fields");
 
         ChefForm user = (ChefForm) target;
         ChefDto matchedUser = userService.searchUserByUsername(user.getUsername());
@@ -36,5 +37,9 @@ public class UpdateProfileValidator implements Validator {
 
         if (user.getPassword().equals(matchedUser.getPassword()))
             errors.rejectValue("password", null, "You entered the old password");
+
+        if (user.getPassword().length() < 8)
+            errors.rejectValue("password", null, "Password must be at least 8 characters long");
+
     }
 }

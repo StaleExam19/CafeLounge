@@ -121,7 +121,7 @@
                             </div>
                             <div>
                                 <p>${user.firstname} ${user.lastname}</p>
-                                <p class="text-sm text-neutral-500">Chef</p>
+                                <p class="text-sm text-neutral-500" style="text-transform: capitalize;">${user.role}</p>
                             </div>
                         </div>
                         <hr>

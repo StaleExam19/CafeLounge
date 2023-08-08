@@ -52,7 +52,8 @@ public class OrderListController {
 
         model.addAttribute("orders", orders);
         model.addAttribute("orderSearch", true);
-
+        model.addAttribute("numOfPages", orderService.countPage());
+        model.addAttribute("currentPage", page);
         return "orderlist";
     }
 
@@ -78,17 +79,20 @@ public class OrderListController {
             @RequestParam(value = "page", defaultValue = "1") int page) {
         List<Order> orders = orderService.paginateOrderWithStatus(page, status);
 
+
         model.addAttribute("orders", orders);
         model.addAttribute("pageTitle", "Order List | " + status);
         model.addAttribute("orderSearch", true);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("numOfPages", orderService.countOrderWithStatus(status));
 
         return "orderlist";
     }
 
-    @RequestMapping("/completeOrder/{id}")
-    String completeOrder(Model model, @PathVariable("id") int id) {
-        orderService.updateStatusByOrderNumber(id, "completed");
-        return "redirect:/orderlist";
+    @RequestMapping("/completeOrder/{orderNumber}")
+    String completeOrder(Model model, @PathVariable("orderNumber") int orderNumber) {
+        orderService.updateStatusByOrderNumber(orderNumber, "completed");
+        return "redirect:/order/" + orderNumber;
     }
 
     @RequestMapping("/cancelOrder/{id}")

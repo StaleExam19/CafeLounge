@@ -16,5 +16,4 @@ public interface OrderRepository {
 
     List<Order> getOrdersByStatus(String status);
 
-    List<Order> searchOrderByCustomerName(String search);
 }

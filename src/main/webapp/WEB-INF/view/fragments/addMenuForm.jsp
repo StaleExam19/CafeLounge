@@ -1,20 +1,21 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<%@ include file="formOverlay.jsp" %>
+
 <c:if test="${not empty addMenuError}">
-    <c:set var="visibility" value="flex"/>
+    <c:set var="addMenuVisibility" value="flex"/>
 </c:if>
 
 <c:if test="${empty addMenuError}">
-    <c:set var="visibility" value="hidden"/>
+    <c:set var="addMenuVisibility" value="hidden"/>
 </c:if>
+<div class="addmenu-form-overlay ${addMenuVisibility}"></div>
 
-<!-- Add Menu Form -->
-<div class="form-overlay ${visibility}"></div>
-<form:form action="/addmenu " method="post" enctype="multipart/form-data" modelAttribute="menuForm" class="addmenu-form ${visibility}">
+<form:form action="/addmenu " method="post" enctype="multipart/form-data" modelAttribute="menuForm" class="addmenu-form ${addMenuVisibility}">
     <h1 class="text-3xl font-bold text-center">ADD MENU</h1>
     <c:if test="${not empty addMenuError}">
-        <div class="text-red-900">
-            ${error}
+        <div class="bg-red-500 p-2 rounded">
+            ${addMenuError}
         </div>
     </c:if>
     <div class="w-full">
@@ -52,7 +53,6 @@
         <form:select path="status" class="p-2 w-full items-start rounded-2xl border-none">
             <option disabled="" selected="">-Status-</option>
             <option value="live">Live</option>
-            <option value="sold out">Sold Out</option>
             <option value="delisted">Delisted</option>
         </form:select>
     </div>
@@ -63,7 +63,7 @@
     </div>
     <br>
     <div class="w-full flex gap-2">
-        <input type="submit" value="add menu" class="btn bg-orange-500">
+        <input type="submit" value="add" class="btn bg-orange-500">
         <button type="button" class="btn" id="addmenu-cancel">Cancel</button>
     </div>
 </form:form>

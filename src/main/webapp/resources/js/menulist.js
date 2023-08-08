@@ -1,55 +1,4 @@
-const formOverlay = document.querySelector(".form-overlay");
-const addmenuToggler = document.querySelector(".addmenu-toggler");
 const infoPopup = document.querySelector(".info-popup");
-
-const addmenuForm = document.querySelector(".addmenu-form");
-const updatemenuForm = document.querySelector(".update-form")
-
-const updateMenuCancelBtn = document.getElementById("updatemenu-cancel");
-const addMenuCancelBtn = document.getElementById("addmenu-cancel");
-
-function showAddMenuForm() {
-    formOverlay.classList.remove("hidden");
-    addmenuForm.classList.replace("hidden", "flex");
-}
-
-function hideAddMenuForm() {
-    formOverlay.classList.add("hidden");
-    addmenuForm.classList.replace("flex", "hidden");
-}
-
-/**
- * 
- * @param {Menu} data 
- */
-function showUpdateForm(data) {
-    formOverlay.classList.remove("hidden");
-    updatemenuForm.classList.replace("hidden", "flex");
-
-    const menuName = document.querySelector(".update-form .menu-name");
-    const description = document.querySelector(".update-form .description");
-    const price = document.querySelector(".update-form .price");
-    const quantity = document.querySelector(".update-form .quantity");
-
-    /**@type {HTMLSelectElement} */
-    const category = document.querySelector(".update-form .category");
-    /**@type {HTMLSelectElement} */
-    const status = document.querySelector(".update-form .status");
-    
-    menuName.value = data.name;
-    description.value = data.description;
-    price.value = data.price;
-    quantity.value = data.quantity;
-
-    category.value = data.category;
-    status.value = data.status;
-}
-
-function hideUpdateForm() {
-    formOverlay.classList.add("hidden");
-    updatemenuForm.classList.replace("flex", "hidden");
-}
-
 
 /**
  * 
@@ -76,36 +25,6 @@ function showInfoPopup(data) {
 function hideInfoPopup() {
     infoPopup.classList.replace("flex", "hidden");
 }
-
-
-/**
- * 
- * @param {string} base64String 
- */
-// function generateBlobUrl(base64String) {
-//     const byteChars = atob(base64String);
-//     const byteNumbers = new Array(byteChars.length);
-
-//     for (let i = 0; i < byteChars.length; i++)
-//         byteNumbers[i] = byteChars.charCodeAt(i);
-
-//     const bytes = new Uint8Array(byteNumbers);
-//     const blob = new Blob([bytes]);
-//     const blobUrl = URL.createObjectURL(blob);
-
-//     return blobUrl;
-// }
-
-addmenuToggler.addEventListener("click", _ => showAddMenuForm());
-formOverlay.addEventListener("click", _ => {
-    hideAddMenuForm();
-    hideUpdateForm();
-});
-
-// Cancel buttons
-addMenuCancelBtn.addEventListener("click", _ => hideAddMenuForm());
-updateMenuCancelBtn.addEventListener("click", _ => hideUpdateForm()); 
-
 
 document.addEventListener("click", async evt => {
     const target = evt.target;

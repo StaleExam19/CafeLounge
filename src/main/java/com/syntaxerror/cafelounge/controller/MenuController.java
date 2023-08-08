@@ -73,7 +73,8 @@ public class MenuController {
             @RequestParam(value = "status", defaultValue = "live") String status,
             @RequestParam(value = "id", defaultValue = "") String id,
             @ModelAttribute("addMenuError") String addMenuError,
-            @ModelAttribute("updateMenuError") String updateMenuError) {
+            @ModelAttribute("updateMenuError") String updateMenuError,
+            @ModelAttribute("menuForm") MenuForm menuForm) {
 
         List<MenuDto> menuList = new ArrayList<>();
 
@@ -83,7 +84,7 @@ public class MenuController {
             menuList.add(menuService.getMenuById(Integer.parseInt(id)));
 
         model.addAttribute("menuList", menuList);
-        model.addAttribute("menuForm", new MenuForm());
+        model.addAttribute("menuForm", menuForm == null ? new MenuForm() : menuForm);
         model.addAttribute("category", category);
         model.addAttribute("status", status);
 
@@ -107,6 +108,8 @@ public class MenuController {
         // Check if error exists
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addMenuError", error);
+            redirectAttributes.addFlashAttribute("menuForm", menuForm);
+
             return "redirect:/menulist";
         }
 
@@ -135,11 +138,16 @@ public class MenuController {
         // Check if error exists
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("updateMenuError", error);
-            return "redirect:/menulist";
+            redirectAttributes.addFlashAttribute("menuForm", menuForm);
+            redirectAttributes.addFlashAttribute("menuId", id);
+
+            System.out.println("naay error sa update");
+            return "redirect:/menulist/appetizer";
         }
 
         menuService.updateMenuById(id, menuForm, currentUser.getFirstname() + " " + currentUser.getLastname());
-        return "redirect:/menulist";
+        System.out.println("walay error sa update");
+        return "redirect:/menulist/appetizer";
     }
 
     @RequestMapping("/deleteMenu/{id}")

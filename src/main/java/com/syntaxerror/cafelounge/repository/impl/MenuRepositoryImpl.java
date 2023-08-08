@@ -41,7 +41,7 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 		String sql;
 
 		if (status == "sold out") {
-			sql = "SELECT * FROM cafelounge_db.menu WHERE category = ? AND status = ? AND quantity = 0";
+			sql = "SELECT * FROM cafelounge_db.menu WHERE category = ? AND (status = ? OR quantity = 0)";
 		} else {
 			sql = "SELECT * FROM cafelounge_db.menu WHERE category = ? AND status = ?";
 		}
@@ -107,11 +107,6 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 	public void updateMenuById(int id, MenuDto menuDto, String updatedBy) {
 		menuDto.setUpdatedBy(updatedBy);
 
-
-		System.out.println("Menu Repo");
-		System.out.println(menuDto.getImage().length);
-		System.out.println(menuDto.getImage() != null);
-
 		if (menuDto.getImage().length != 0) {
 			String sql = "UPDATE cafelounge_db.menu " +
 					"SET name = ?, quantity = ?, description = ?, " +
@@ -169,10 +164,10 @@ public class MenuRepositoryImpl extends BaseRepositoryImpl implements MenuReposi
 		MenuDto menu = getMenuById(id);
 		int newQuantity = menu.getQuantity() - quantity;
 
-		if (newQuantity == 0)
+		if (newQuantity <= 0)
 			getJdbcTemplate().update(
 					"UPDATE cafelounge_db.menu SET quantity = ?, status = \"sold out\" WHERE id = ?",
-					newQuantity, // zero lang diretso ang quantity para dili ma negative ang value
+					0, // zero lang diretso ang quantity para dili ma negative ang value
 					id);
 		else
 			getJdbcTemplate().update(

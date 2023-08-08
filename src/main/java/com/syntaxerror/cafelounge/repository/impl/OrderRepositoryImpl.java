@@ -44,6 +44,7 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
                 order.setOrderNumber(orderDto.getOrderNum());
                 order.setStatus(orderDto.getStatus());
                 order.setDateOrdered(orderDto.getDateOrdered());
+                order.setDateCompleted(orderDto.getDateCompleted());
 
                 order.setOrders(new ArrayList<OrderItem>());
 
@@ -83,6 +84,7 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
                 order.setOrderNumber(orderDto.getOrderNum());
                 order.setStatus(orderDto.getStatus());
                 order.setDateOrdered(orderDto.getDateOrdered());
+                order.setDateCompleted(orderDto.getDateCompleted());
 
                 order.setOrders(new ArrayList<OrderItem>());
             }
@@ -120,6 +122,7 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
                 order.setOrderNumber(orderDto.getOrderNum());
                 order.setStatus(orderDto.getStatus());
                 order.setDateOrdered(orderDto.getDateOrdered());
+                order.setDateCompleted(orderDto.getDateCompleted());
 
                 order.setOrders(new ArrayList<OrderItem>());
 
@@ -166,17 +169,13 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
                 new OrderMapper());
 
         for (OrderDto order : orderDtos) {
-            MenuDto menu = menuRepository.getMenuById(order.getMenuId());
+            // MenuDto menu = menuRepository.getMenuById(order.getMenuId());
             
-            System.out.println(menu.getQuantity());
+            // System.out.println(menu.getQuantity());
             menuRepository.updateQuantity(order.getMenuId(), order.getQuantity());
         }
     }
 
-    @Override
-    public List<Order> searchOrderByCustomerName(String search) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'searchOrderByCustomerName'");
-    }
+
 
 }

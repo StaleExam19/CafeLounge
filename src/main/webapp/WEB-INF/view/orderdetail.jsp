@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,12 +30,16 @@
                         <span class="capitalize bg-red-500/50 px-2 rounded-2xl">${order.status}</span>
                     </c:if>
                 </p>
+                <c:if test="${not empty order.dateCompleted}">
+                    <p>Time Completed: <fmt:formatDate value="${order.dateCompleted}" pattern="HH:mm"/></p> 
+                </c:if>
                 <br>
                     <table class="w-full">
                         <tr>
                             <td class="font-semibold">Menu name</td>
                             <td class="text-center font-semibold">Base price</td>
                             <td class="text-center font-semibold">Quantity</td>
+                            <td class="text-center font-semibold">Sub Total</td>
                         </tr>
                         
                         <c:forEach var="menu" items="${order.orders}">
@@ -41,13 +47,14 @@
                             <td>${menu.menuName}</td>
                             <td class="text-center">Php ${menu.price}</td>
                             <td class="text-center">${menu.quantity}</td>
+                            <td class="text-center">${menu.quantity * menu.price}</td>
                         </tr>
                         </c:forEach>
                     </table>
 
                 <div class="w-full bg-neutral-900 h-[2px] mb-3"></div>
                 <div class="flex justify-between items-center">
-                    <p class="font-semibold">Total</p>
+                    <p class="font-semibold">Total Price</p>
                     <p>Php ${total}</p>
                 </div>
                 <br>

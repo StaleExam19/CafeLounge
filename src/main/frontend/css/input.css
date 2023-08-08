@@ -44,7 +44,8 @@
         text-white flex flex-col justify-between
     }
 
-    .form-overlay {
+    .addmenu-form-overlay,
+    .updatemenu-form-overlay {
         @apply fixed top-0 left-0 bg-black/50
         h-screen w-full
     }
@@ -80,4 +81,16 @@
         @apply bg-neutral-900/25
     }
 
+
+    .page-button {
+        @apply text-white p-1 px-4 bg-neutral-950 text-xl rounded hover:bg-orange-500
+    }
+
+    .page-button.active {
+        @apply bg-orange-500
+    }
+
+    .page-button.disabled {
+        @apply bg-neutral-950/75 text-neutral-200 pointer-events-none;
+    }
 }

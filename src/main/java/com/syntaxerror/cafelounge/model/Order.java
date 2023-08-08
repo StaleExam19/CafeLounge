@@ -7,6 +7,16 @@ public class Order {
     private int orderNumber;
     private String customerName;
     private Date dateOrdered;
+    private Date dateCompleted;
+
+    public Date getDateCompleted() {
+        return dateCompleted;
+    }
+
+    public void setDateCompleted(Date dateCompleted) {
+        this.dateCompleted = dateCompleted;
+    }
+
     private List<OrderItem> orders;
     private String status;
 

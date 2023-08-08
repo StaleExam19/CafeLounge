@@ -17,11 +17,15 @@ public class UpdateMenuValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        ValidationUtils.rejectIfEmpty(errors, "name", null, "Please fill all the required fields");
-        ValidationUtils.rejectIfEmpty(errors, "price", null, "Please fill all the required fields");
-        ValidationUtils.rejectIfEmpty(errors, "category", null, "Please fill all the required fields");
+        ValidationUtils.rejectIfEmpty(errors, "name", null, "Menu name is required");
+        ValidationUtils.rejectIfEmpty(errors, "description", null, "Description is required");
+        ValidationUtils.rejectIfEmpty(errors, "price", null, "Menu price is required");
+        ValidationUtils.rejectIfEmpty(errors, "category", null, "Category is required");
         ValidationUtils.rejectIfEmpty(errors, "quantity", null, "Please fill all the required fields");
         ValidationUtils.rejectIfEmpty(errors, "image", null, "Please fill all the required fields");
+
+                ValidationUtils.rejectIfEmpty(errors, "status", null, "Status is required");
+
 
         // MenuForm menu = (MenuForm) target;
 
